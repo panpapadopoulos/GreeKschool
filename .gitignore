@@ -1,0 +1,10 @@
+# Full-size original photos (web copies are in images/gallery)
+images/Photos/
+
+# OS files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Temporary test pages
+_test.html
