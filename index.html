@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>St. George Greek School | Schererville, Indiana</title>
+<meta name="description" content="The Greek School of St. George Greek Orthodox Church in Schererville, Indiana. Greek language, culture and faith for students K–6.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2a6aa0;        /* church site banner blue */
+    --navy: #1d3f7a;        /* seal navy */
+    --navy-dark: #142d58;
+    --sky: #e9f1f8;
+    --gold: #c9a227;
+    --text: #22303f;
+    --muted: #5b6878;
+    --white: #ffffff;
+    --radius: 14px;
+    --key: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M0 19H20M2 19V1H18V15H6V5H14V11H10' fill='none' stroke='%23ffffff' stroke-opacity='.55' stroke-width='2'/%3E%3C/svg%3E");
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Open Sans", system-ui, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.65;
+  }
+  h1, h2, h3 { font-family: "Libre Baskerville", Georgia, serif; color: var(--navy); line-height: 1.25; }
+  a { color: var(--blue); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Header ---------- */
+  header {
+    background: var(--blue);
+    color: var(--white);
+    position: sticky; top: 0; z-index: 10;
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+  }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 20px; max-width: 1080px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 12px; color: var(--white); text-decoration: none; }
+  .bar, .brand img, .brand strong { transition: all .3s ease; }
+  .brand img { width: 72px; height: 72px; border-radius: 50%; }
+  header.shrink .bar { padding-top: 6px; padding-bottom: 6px; }
+  header.shrink .brand img { width: 44px; height: 44px; }
+  header.shrink .brand strong { font-size: 1rem; }
+  .brand strong { font-family: "Libre Baskerville", serif; font-weight: 400; font-size: 1.1rem; letter-spacing: .03em; display: block; text-transform: uppercase; }
+  .brand span { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav a { color: var(--white); text-decoration: none; font-weight: 600; font-size: .92rem; padding: 8px 10px; border-radius: 8px; }
+  nav a:hover { background: rgba(255,255,255,.15); }
+  nav a.cta { background: var(--white); color: var(--blue); }
+  nav a.cta:hover { background: var(--sky); }
+  .menu-btn { display: none; background: none; border: 1px solid rgba(255,255,255,.6); color: #fff; border-radius: 8px; padding: 6px 10px; font-size: 1.1rem; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background:
+      radial-gradient(ellipse 55% 60% at 50% 55%, rgba(20,45,88,.55) 0%, rgba(20,45,88,0) 100%),
+      linear-gradient(180deg, rgba(20,45,88,.45) 0%, rgba(20,45,88,.15) 40%, rgba(20,45,88,.65) 100%),
+      url("images/hero.jpg") center 35% / cover no-repeat var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 56px 0 76px;
+    min-height: min(78vh, 720px);
+    display: flex; align-items: center;
+    position: relative;
+  }
+  .hero h1, .hero p { text-shadow: 0 2px 4px rgba(0,0,0,.5), 0 2px 18px rgba(0,0,0,.55); }
+  .hero .wrap { position: relative; width: 100%; }
+  .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 20px; background: var(--key) repeat-x; }
+  .hero img { width: 180px; height: 180px; border-radius: 50%; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+  .hero h1 { color: var(--white); font-size: clamp(1.9rem, 4.5vw, 3rem); margin: 24px 0 6px; }
+  .hero .greek { font-family: "Libre Baskerville", serif; font-size: 1.15rem; opacity: .9; margin: 0; letter-spacing: .04em; }
+  .hero p.lead { max-width: 640px; margin: 18px auto 30px; font-size: 1.08rem; opacity: .95; }
+  .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 13px 26px; border-radius: 999px; font-weight: 700; text-decoration: none; transition: transform .15s, box-shadow .15s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.2); }
+  .btn-gold { background: var(--gold); color: var(--navy-dark); }
+  .btn-white { background: var(--white); color: var(--navy); }
+  .btn-outline { border: 2px solid var(--white); color: var(--white); }
+  .btn-blue { background: var(--blue); color: var(--white); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 72px 0; scroll-margin-top: 70px; }
+  section.alt { background: var(--sky); }
+  .section-title { text-align: center; margin: 0 0 8px; font-size: clamp(1.6rem, 3vw, 2.1rem); }
+  .section-sub { text-align: center; color: var(--muted); margin: 0 auto 40px; max-width: 620px; }
+  .grid { display: grid; gap: 22px; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .card { background: var(--white); border-radius: var(--radius); padding: 26px; box-shadow: 0 4px 18px rgba(29,63,122,.08); border-top: 4px solid var(--blue); }
+  .card h3 { margin: 0 0 8px; font-size: 1.15rem; }
+  .card p { margin: 0; color: var(--muted); }
+  .subjects .card { text-align: center; display: flex; flex-direction: column; align-items: center; padding: 32px 26px; }
+  .icon { width: 64px; height: 64px; border-radius: 50%; background: var(--sky); color: var(--blue); display: grid; place-items: center; margin-bottom: 16px; }
+  .icon svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .resources .card { text-decoration: none; text-align: center; border-top-color: var(--gold); transition: transform .15s, box-shadow .15s; }
+  .resources .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(29,63,122,.15); }
+  .resources h3 { font-size: 1.4rem; }
+  .more-link { display: inline-block; margin-top: 14px; font-weight: 700; color: var(--blue); font-size: .92rem; }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
+  .about p { font-size: 1.05rem; }
+  .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .facts li { background: var(--sky); border-radius: 10px; padding: 14px 18px; display: flex; gap: 14px; align-items: center; }
+  .facts b { color: var(--navy); display: block; }
+  .facts small { color: var(--muted); font-size: .92rem; }
+  .facts .n { flex: none; width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-weight: 700; }
+
+  /* Tuition */
+  .price { font-family: "Libre Baskerville", serif; font-size: 2.2rem; color: var(--navy); margin: 6px 0; }
+  .price small { font-family: "Open Sans", sans-serif; font-size: .95rem; color: var(--muted); }
+  .note { font-size: .88rem; color: var(--muted); margin-top: 10px !important; font-style: italic; }
+  .steps { counter-reset: s; list-style: none; padding: 0; margin: 40px 0 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .steps li { counter-increment: s; background: var(--white); border-radius: var(--radius); padding: 22px 22px 22px 70px; position: relative; box-shadow: 0 4px 18px rgba(29,63,122,.08); }
+  .steps li::before { content: counter(s); position: absolute; left: 20px; top: 20px; width: 34px; height: 34px; border-radius: 50%; background: var(--gold); color: var(--navy-dark); font-weight: 700; display: grid; place-items: center; }
+  .steps b { color: var(--navy); display: block; margin-bottom: 4px; }
+  .steps p { margin: 0 0 10px; color: var(--muted); font-size: .95rem; }
+  .steps a.small { font-weight: 700; font-size: .92rem; }
+  .deadline { margin: 30px auto 0; text-align: center; background: var(--white); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 16px; max-width: 640px; }
+
+  /* Calendar */
+  .dates { list-style: none; padding: 0; margin: 0 auto; max-width: 760px; }
+  .dates li { display: grid; grid-template-columns: 120px 1fr auto; gap: 16px; align-items: center; padding: 14px 18px; border-bottom: 1px solid #dbe5ef; }
+  .dates li:last-child { border-bottom: 0; }
+  .dates time { font-weight: 700; color: var(--navy); }
+  .tag { font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+  .tag.class { background: #fff3c4; color: #7a5b00; }
+  .tag.event { background: #d4eef5; color: #0f5566; }
+  .tag.off { background: #e6e6e6; color: #444; }
+  .tag.feast { background: #e6ecf8; color: var(--navy); }
+  .tag.fund { background: #dcf3d6; color: #2d6a1f; }
+  .tag.trip { background: #efe3f7; color: #6b3d8a; }
+  .dates li.month { display: block; padding: 22px 18px 6px; border-bottom: 2px solid var(--blue); font-family: "Libre Baskerville", serif; font-weight: 700; color: var(--blue); font-size: 1.05rem; }
+  .dates li.month:first-child { padding-top: 10px; }
+  .cal-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+  .cal-box { background: var(--white); border-radius: var(--radius); box-shadow: 0 4px 18px rgba(29,63,122,.08); padding: 10px 6px; }
+  .cal-note { text-align: center; color: var(--muted); font-size: .92rem; margin-top: 18px; }
+
+  /* Photos */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .gallery a { display: block; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 14px rgba(29,63,122,.12); }
+  .gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .3s; }
+  .gallery a:hover img { transform: scale(1.05); }
+  .gallery:not(.all) a.more { display: none; }
+  button.btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+  .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(10,20,40,.92); display: none; align-items: center; justify-content: center; flex-direction: column; padding: 20px; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: calc(100vh - 40px); border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+  .lb-btn { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 50px; height: 50px; border-radius: 50%; font-size: 1.6rem; cursor: pointer; display: grid; place-items: center; }
+  .lb-btn:hover { background: rgba(255,255,255,.25); }
+  .lb-close { top: 16px; left: 16px; }
+  .lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
+
+  /* Contact */
+  .contact { text-align: center; }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; max-width: 820px; margin: 0 auto; }
+  .map { display: block; width: 100%; max-width: 820px; height: 320px; margin: 22px auto 0; border: 0; border-radius: var(--radius); box-shadow: 0 4px 18px rgba(29,63,122,.1); }
+  .director { display: flex; flex-direction: column; justify-content: center; background: var(--white); border-radius: var(--radius); padding: 34px 40px; box-shadow: 0 4px 18px rgba(29,63,122,.1); border-top: 4px solid var(--gold); }
+  .director .role { text-transform: uppercase; letter-spacing: .1em; font-size: .8rem; color: var(--muted); font-weight: 700; }
+  .director h3 { font-size: 1.5rem; margin: 6px 0 14px; }
+  .director a { font-weight: 700; font-size: 1.05rem; }
+  .director p { margin: 6px 0; }
+
+  /* Footer */
+  footer { background: var(--navy-dark); color: rgba(255,255,255,.85); text-align: center; padding: 40px 20px 30px; position: relative; font-size: .92rem; }
+  footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 20px; background: var(--key) repeat-x; opacity: .6; }
+  footer a { color: #fff; }
+  .copyright { margin: 22px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.15); max-width: 720px; font-size: .82rem; opacity: .75; }
+  .footer-logos { display: flex; justify-content: center; align-items: center; gap: 24px; margin: 10px 0 14px; flex-wrap: wrap; }
+  .footer-logos { gap: 40px; }
+  .footer-logos img { height: 110px; display: block; }
+  .footer-logos .seal { width: 110px; }
+  .footer-logos .church { width: 110px; }
+  .footer-logos a { transition: opacity .15s; }
+  .footer-logos a:hover { opacity: .8; }
+
+  @media (max-width: 900px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .grid-3 { grid-template-columns: 1fr; } .gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; } .lb-prev, .lb-next { top: auto; bottom: 16px; transform: none; } }
+  @media (max-width: 1100px) {
+    .menu-btn { display: block; }
+    nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--blue); flex-direction: column; padding: 8px 16px 16px; box-shadow: 0 8px 16px rgba(0,0,0,.15); }
+    nav.open { display: flex; }
+    nav a.cta { align-self: flex-start; }
+  }
+  @media (max-width: 820px) {
+    .about { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .brand strong, header.shrink .brand strong { font-size: .95rem; }
+    .brand img { width: 56px; height: 56px; }
+    .dates li { grid-template-columns: 1fr auto; }
+    .dates li span.what { grid-column: 1 / -1; grid-row: 2; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="brand" href="#top">
+      <img src="images/logo-white.png" alt="">
+      <div><strong>St. George Greek School</strong><span>Schererville, Indiana</span></div>
+    </a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+    <nav onclick="if(event.target.tagName==='A')this.classList.remove('open')">
+      <a href="#about">About</a>
+      <a href="#registration">Registration</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#photos">Photos</a>
+      <a href="#contact">Contact</a>
+      <a href="https://stgeorgenwi.org" target="_blank" rel="noopener">Our Church ↗</a>
+      <a class="cta" href="https://stgeorgedonation.square.site/product/greek-school-tuition/15?cs=true&cst=custom" target="_blank" rel="noopener">Pay Tuition</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero" id="top">
+  <div class="wrap">
+    <img src="images/logo-color.png" alt="Ελληνικό Σχολείο Αγίου Γεωργίου – St. George Greek School seal">
+    <h1>St. George Greek School</h1>
+    <p class="greek">Ελληνικό Σχολείο Αγίου Γεωργίου</p>
+    <p class="lead">Discover your heritage through the Greek language, culture and faith of our ancestors. Classes for students K–6, Tuesday evenings at St. George Greek Orthodox Church.</p>
+    <div class="btns">
+      <a class="btn btn-gold" href="#registration">Enroll Now</a>
+      <a class="btn btn-outline" href="#contact">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <h2>Καλώς ήρθατε! Welcome!</h2>
+        <p>The St. George Greek School offers a nurturing and engaging learning environment where students can discover their heritage as they study the Greek language and culture of our ancestors.</p>
+        <p>We offer Greek education from <b>Kindergarten to 6th grade</b> learning level. Students are placed according to their level of Greek language ability, so every child learns at the right pace.</p>
+      </div>
+      <ul class="facts">
+        <li><span class="n">K–6</span><div><b>Grade Levels</b><small>Placed by Greek language ability</small></div></li>
+        <li><span class="n">Τρ</span><div><b>Tuesday Evenings</b><small>6:00 – 7:45 pm</small></div></li>
+        <li><span class="n">⛪</span><div><b>September – May</b><small>At St. George Greek Orthodox Church</small></div></li>
+      </ul>
+    </div>
+
+    <h2 class="section-title" style="margin-top:64px">What Our Students Learn</h2>
+    <p class="section-sub">Taught at all levels throughout the school year.</p>
+    <div class="grid grid-3 subjects">
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></svg></div><h3>Alphabet &amp; Reading</h3><p>From first letters to confident reading of Greek words and stories.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"/><path d="M14.5 5.5l3 3"/></svg></div><h3>Writing &amp; Grammar</h3><p>Building strong writing skills and an understanding of Greek grammar.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M17 9h3a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-4-3h-3"/></svg></div><h3>Conversation &amp; Vocabulary</h3><p>Speaking practice through everyday conversations, plus the words and expressions to talk in Greek with family and friends.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M9 4.5h6M7 9h10M9 15.5l6-1.5"/></svg></div><h3>Faith &amp; Traditions</h3><p>Religious and cultural traditions of the Greek Orthodox Church.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5M4 9h16M6 9v8M10 9v8M14 9v8M18 9v8M3 20h18M4 17h16"/></svg></div><h3>History</h3><p>Lessons on Greek history and the stories of our ancestors.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></div><h3>Programs</h3><p>Students perform at the OXI Day, Christmas and March 25th programs.</p></div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:64px">Our Learning Resources</h2>
+    <p class="section-sub">In class and at home, our students learn with the books and online platforms of two trusted Greek-language programs.</p>
+    <div class="grid grid-2 resources">
+      <a class="card" href="https://www.greek123.com" target="_blank" rel="noopener">
+        <h3>Greek123</h3>
+        <p>A proven step-by-step method to Greek fluency, combining books with a digital learning platform.</p>
+        <span class="more-link">Visit greek123.com ↗</span>
+      </a>
+      <a class="card" href="https://www.ellinopoula.com" target="_blank" rel="noopener">
+        <h3>Ellinopoula</h3>
+        <p>An e-learning platform that makes Greek exciting for kids with interactive lessons, games, videos and culture.</p>
+        <span class="more-link">Visit ellinopoula.com ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REGISTRATION ================= -->
+<section id="registration" class="alt">
+  <div class="wrap">
+    <h2 class="section-title">Registration &amp; Tuition</h2>
+    <p class="section-sub">2026–2027 School Year · September 15, 2026 – May 18, 2027</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Orthodox Church Members</h3>
+        <div class="price">$400 <small>per child</small></div>
+        <p class="note">If your membership is with a parish other than St. George, please submit a letter of good standing to the church office upon registration.</p>
+      </div>
+      <div class="card">
+        <h3>Non-Members</h3>
+        <div class="price">$550 <small>first child</small></div>
+        <p>$350 for each additional child</p>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>Fill out the form</b>
+        <p>Download and complete the enrollment form for each family.</p>
+        <a class="small" href="registration-form.pdf" download>⬇ Download Enrollment Form</a>
+      </li>
+      <li>
+        <b>Pay tuition</b>
+        <p>Pay online, by phone at <a href="tel:2193226165">219-322-6165</a>, or in person at the church office.</p>
+        <a class="small" href="https://stgeorgedonation.square.site/product/greek-school-tuition/15?cs=true&cst=custom" target="_blank" rel="noopener">💳 Pay Tuition Online</a>
+      </li>
+      <li>
+        <b>Submit the form</b>
+        <p>Email the completed form to the Greek School or drop it off at the church office.</p>
+        <a class="small" href="mailto:greekschool@stgeorgenwi.org?subject=Greek%20School%20Enrollment">✉ Email the Form</a>
+      </li>
+    </ol>
+
+    <p class="deadline"><b>Enrollment deadline: September 6, 2026.</b><br>Missed the deadline? <a href="mailto:greekschool@stgeorgenwi.org">Contact the director</a> — we're happy to help.</p>
+  </div>
+</section>
+
+<!-- ================= CALENDAR ================= -->
+<!-- To update each year: edit the dates below. -->
+<section id="calendar">
+  <div class="wrap">
+    <h2 class="section-title">School Calendar 2026–2027</h2>
+    <p class="section-sub">Classes meet Tuesday evenings, 6:00 – 7:45 pm.</p>
+
+    <div class="cal-box">
+      <ul class="dates">
+        <li class="month">September 2026</li>
+        <li><time>Sep 6</time><span class="what">Enrollment deadline</span><span class="tag class">Registration</span></li>
+        <li><time>Sep 13</time><span class="what">Veneration of the Holy Cross</span><span class="tag feast">Feast</span></li>
+        <li><time>Sep 15</time><span class="what">First Day of Classes</span><span class="tag class">Classes</span></li>
+        <li><time>Sep 29</time><span class="what">Student Fundraiser begins (runs through Oct 27)</span><span class="tag fund">Fundraiser</span></li>
+        <li class="month">October 2026</li>
+        <li><time>Oct 25</time><span class="what">OXI Day Program</span><span class="tag event">Program</span></li>
+        <li><time>Oct 27</time><span class="what">Student Fundraiser ends</span><span class="tag fund">Fundraiser</span></li>
+        <li><time>Oct 28</time><span class="what">OXI Day</span><span class="tag feast">Feast</span></li>
+        <li class="month">November 2026</li>
+        <li><time>Nov 3</time><span class="what">Voting Day</span><span class="tag off">No Classes</span></li>
+        <li><time>Nov 10</time><span class="what">Fundraiser pick-up after class</span><span class="tag fund">Fundraiser</span></li>
+        <li class="month">December 2026</li>
+        <li><time>Dec 20</time><span class="what">Christmas Program</span><span class="tag event">Program</span></li>
+        <li><time>Dec 22 &amp; 29</time><span class="what">Winter Break</span><span class="tag off">No Classes</span></li>
+        <li><time>Dec 25</time><span class="what">Nativity of our Lord &amp; Savior Jesus Christ</span><span class="tag feast">Feast</span></li>
+        <li class="month">March 2027</li>
+        <li><time>Mar 28</time><span class="what">March 25th Program</span><span class="tag event">Program</span></li>
+        <li><time>Mar 30</time><span class="what">Spring Break</span><span class="tag off">No Classes</span></li>
+        <li class="month">April 2027</li>
+        <li><time>Apr 27</time><span class="what">Holy Tuesday</span><span class="tag off">No Classes</span></li>
+        <li class="month">May 2027</li>
+        <li><time>May 2</time><span class="what">Great &amp; Holy Pascha</span><span class="tag feast">Feast</span></li>
+        <li><time>May 18</time><span class="what">Last Day of Classes</span><span class="tag class">Classes</span></li>
+        <li><time>End of May</time><span class="what">Class Field Trip (date TBD)</span><span class="tag trip">Field Trip</span></li>
+      </ul>
+    </div>
+    <div class="cal-actions">
+      <a class="btn btn-blue" href="academic-calendar-2026-2027.pdf" target="_blank" rel="noopener">📅 View Original Calendar (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PHOTOS ================= -->
+<!-- To add a photo: put a large copy in images/gallery/ and a small copy in images/gallery/thumbs/, then add a line like the ones below -->
+<section id="photos">
+  <div class="wrap">
+    <h2 class="section-title">Photos</h2>
+    <p class="section-sub">Moments from our classes, programs and celebrations.</p>
+    <div class="gallery" id="gallery">
+      <a href="images/gallery/photo-01.jpg"><img src="images/gallery/thumbs/photo-01.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-02.jpg"><img src="images/gallery/thumbs/photo-02.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-03.jpg"><img src="images/gallery/thumbs/photo-03.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-04.jpg"><img src="images/gallery/thumbs/photo-04.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-05.jpg"><img src="images/gallery/thumbs/photo-05.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-06.jpg"><img src="images/gallery/thumbs/photo-06.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-07.jpg"><img src="images/gallery/thumbs/photo-07.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-08.jpg"><img src="images/gallery/thumbs/photo-08.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-09.jpg"><img src="images/gallery/thumbs/photo-09.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-10.jpg"><img src="images/gallery/thumbs/photo-10.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-11.jpg"><img src="images/gallery/thumbs/photo-11.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-12.jpg"><img src="images/gallery/thumbs/photo-12.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-13.jpg" class="more"><img src="images/gallery/thumbs/photo-13.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-14.jpg" class="more"><img src="images/gallery/thumbs/photo-14.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-15.jpg" class="more"><img src="images/gallery/thumbs/photo-15.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-16.jpg" class="more"><img src="images/gallery/thumbs/photo-16.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-17.jpg" class="more"><img src="images/gallery/thumbs/photo-17.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-18.jpg" class="more"><img src="images/gallery/thumbs/photo-18.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-19.jpg" class="more"><img src="images/gallery/thumbs/photo-19.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-20.jpg" class="more"><img src="images/gallery/thumbs/photo-20.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-21.jpg" class="more"><img src="images/gallery/thumbs/photo-21.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-22.jpg" class="more"><img src="images/gallery/thumbs/photo-22.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-23.jpg" class="more"><img src="images/gallery/thumbs/photo-23.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+      <a href="images/gallery/photo-24.jpg" class="more"><img src="images/gallery/thumbs/photo-24.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+    </div>
+    <div class="cal-actions"><button class="btn btn-blue" id="showAll" type="button">Show all 24 photos</button></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="alt contact">
+  <div class="wrap">
+    <h2 class="section-title">Questions? We'd love to hear from you.</h2>
+    <p class="section-sub">Please contact our director with any questions about classes, placement or registration.</p>
+    <div class="contact-grid">
+      <div class="director">
+        <div class="role">Greek School Director</div>
+        <h3>Dr. Angela Fauth</h3>
+        <p><a href="mailto:greekschool@stgeorgenwi.org">greekschool@stgeorgenwi.org</a></p>
+        <p>Church office: <a href="tel:2193226165">(219) 322-6165</a></p>
+      </div>
+      <div class="director">
+        <div class="role">Address</div>
+        <h3>St. George Greek Orthodox Church</h3>
+        <p>528 West 77th Avenue<br>Schererville, Indiana 46375</p>
+        <p><a href="tel:2193226165">(219) 322-6165</a></p>
+        <p><a href="https://www.google.com/maps/search/?api=1&query=528+West+77th+Avenue+Schererville+IN+46375" target="_blank" rel="noopener">📍 Get Directions</a></p>
+      </div>
+    </div>
+    <iframe class="map" title="Map to St. George Greek Orthodox Church" loading="lazy" src="https://www.google.com/maps?q=528+West+77th+Avenue,+Schererville,+IN+46375&output=embed"></iframe>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logos">
+    <a href="https://stgeorgenwi.org" target="_blank" rel="noopener"><img class="church" src="images/church-logo.png" alt="St. George Greek Orthodox Church, Schererville, Indiana"></a>
+    <img class="seal" src="images/logo-white.png" alt="St. George Greek School seal">
+    <a href="https://chicago.goarch.org/" target="_blank" rel="noopener"><img class="metro" src="images/metropolis-logo.png" alt="Greek Orthodox Metropolis of Chicago"></a>
+  </div>
+  <p><b>St. George Greek School</b> · St. George Greek Orthodox Church</p>
+  <p>528 West 77th Avenue, Schererville, Indiana 46375 · <a href="tel:2193226165">(219) 322-6165</a></p>
+  <p>Metropolis of Chicago · Greek Orthodox Archdiocese of America</p>
+  <p><a href="https://stgeorgenwi.org" target="_blank" rel="noopener">stgeorgenwi.org</a></p>
+  <p class="copyright">© <span id="year">2026</span> St. George Greek Orthodox Church, Schererville, Indiana. All rights reserved.</p>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-btn lb-close" type="button" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">‹</button>
+  <img alt="">
+  <button class="lb-btn lb-next" type="button" aria-label="Next photo">›</button>
+</div>
+
+<script>
+  // Photo gallery: "show all" button + full-size viewer
+  (function () {
+    var gallery = document.getElementById('gallery');
+    var links = Array.prototype.slice.call(gallery.querySelectorAll('a'));
+    var box = document.getElementById('lightbox');
+    var img = box.querySelector('img');
+    var current = 0;
+    document.getElementById('showAll').addEventListener('click', function () {
+      gallery.classList.add('all');
+      this.parentNode.style.display = 'none';
+    });
+    function show(i) {
+      current = (i + links.length) % links.length;
+      img.src = links[current].href;
+      img.alt = 'St. George Greek School photo ' + (current + 1) + ' of ' + links.length;
+    }
+    function close() { box.classList.remove('open'); document.body.style.overflow = ''; }
+    links.forEach(function (a, i) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        show(i);
+        box.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    box.querySelector('.lb-close').addEventListener('click', close);
+    box.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
+    box.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!box.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
+
+  // Shrink the header logo once the visitor scrolls past the hero
+  (function () {
+    var header = document.querySelector('header');
+    var hero = document.querySelector('.hero');
+    function update() {
+      header.classList.toggle('shrink', window.scrollY > hero.offsetHeight - header.offsetHeight);
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    document.getElementById('year').textContent = new Date().getFullYear();
+  })();
+</script>
+
+<!-- UserWay accessibility widget: replace YOUR_USERWAY_ACCOUNT_ID with the ID from your free account at userway.org -->
+<script src="https://cdn.userway.org/widget.js" data-account="YOUR_USERWAY_ACCOUNT_ID" async></script>
+
+</body>
+</html>
