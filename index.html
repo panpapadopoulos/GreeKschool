@@ -496,7 +496,17 @@
 </script>
 
 <!-- UserWay accessibility widget: replace YOUR_USERWAY_ACCOUNT_ID with the ID from your free account at userway.org -->
-<script src="https://cdn.userway.org/widget.js" data-account="YOUR_USERWAY_ACCOUNT_ID" async></script>
+<script>
+  // When the menu collapses to ☰ (≤1100px), move the UserWay button to the bottom-left corner
+  (function () {
+    var s = document.createElement('script');
+    s.src = 'https://cdn.userway.org/widget.js';
+    s.async = true;
+    s.setAttribute('data-account', 'YOUR_USERWAY_ACCOUNT_ID');
+    if (window.matchMedia('(max-width: 1100px)').matches) s.setAttribute('data-position', '5');
+    document.body.appendChild(s);
+  })();
+</script>
 
 </body>
 </html>
