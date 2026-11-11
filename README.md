@@ -19,43 +19,77 @@ It is a single, static page with no build step and no server code. Open `index.h
 
 ## Page sections
 
-The page has these sections, in order: About, What Our Students Learn, Learning Resources (Greek123 and Ellinopoula), Registration & Tuition, School Calendar, Photos, Contact (with map), and the footer.
+In order: News & Announcements (shown only when there is a current announcement), About, What Our Students Learn, Learning Resources, Registration & Tuition, School Calendar, Documents & Forms, Photos, Contact (with map), and the footer.
 
-## Files
+## How the site works
+
+The site is plain HTML, CSS and JavaScript. GitHub Pages builds it with Jekyll automatically, so there is no build step to run and no server code.
+
+- `index.html` is the page template. It reads its content from the YAML files in `_data/`.
+- Content is edited in **[Pages CMS](https://app.pagescms.org)**. Each save is a commit to `main`, and GitHub Pages republishes the site in 1–2 minutes.
+- Some content depends on the date: announcement publish and expiry dates, the "next event" marker, the registration badge, and the seasonal schedule. These are checked in the visitor's browser, so they change on the right day without a rebuild.
 
 ```
-index.html                        The whole website (HTML, CSS and JavaScript)
-academic-calendar-2026-2027.pdf   Original academic calendar (linked from the Calendar section)
-registration-form.pdf             Enrollment form (linked from the Registration section)
-images/
-  logo.png                        School seal, blue (browser tab icon)
-  logo-color.png                  School seal, color (hero)
-  logo-white.png                  School seal, white (header and footer)
-  church-logo.png                 St. George church logo, white (footer)
-  metropolis-logo.png             Metropolis of Chicago logo, white (footer)
-  hero.jpg                        Church photo behind the hero
-  gallery/photo-NN.jpg            Web-sized gallery photos (max 1600px)
-  gallery/thumbs/photo-NN.jpg     Gallery thumbnails (max 700px)
-  Photos/                         Full-size originals (not published, see .gitignore)
+index.html                   Page template (Jekyll/Liquid)
+_config.yml                  Jekyll settings (site URL, excluded files)
+.pages.yml                   Pages CMS configuration (editing forms)
+_data/
+  announcements.yml          News & announcements
+  events.yml                 School calendar events
+  registration.yml           Registration status, tuition, steps, form PDF
+  documents.yml              Documents & Forms library
+  gallery.yml                Photo gallery (order, captions, approval)
+  school.yml                 School information, contact, descriptions
+  season.yml                 Seasonal theme settings and schedule
+assets/
+  css/site.css               Styles
+  js/site.js                 Menu, gallery viewer, date-based content
+  js/seasonal.js             Seasonal themes and snow/leaf/petal effects
+  uploads/                   Images uploaded through the CMS
+  documents/                 PDFs uploaded through the CMS
+images/                      Logos, hero photo, original gallery photos
+academic-calendar-2026-2027.pdf, registration-form.pdf   Original PDFs
+.github/workflows/optimize-images.yml   Resizes CMS photo uploads, strips EXIF/GPS
+scripts/optimize_images.py   Used by the workflow above
+docs/ADMIN-GUIDE.md          How-to guide for the school director
 ```
+
+`images/Photos/` holds local full-size copies and is not committed (see `.gitignore`).
+
+## Content editing (Pages CMS)
+
+### One-time setup
+
+1. Sign in at **https://app.pagescms.org** with the GitHub account that owns this repository.
+2. When asked, install the **Pages CMS GitHub App** and grant it access to **only** the `GreeKschool` repository.
+3. Open the repository and choose the `main` branch. The editing sections from `.pages.yml` appear.
+4. To add school staff, use the collaborator settings in Pages CMS and invite them by email. They do not need a GitHub account. They can edit content and media, but not the configuration.
+
+### Security
+
+- Visitors never see any editing tools. Editing happens only on app.pagescms.org, after signing in.
+- No tokens or passwords are stored in this repository or on the website. Pages CMS uses the GitHub App's short-lived tokens on its own servers.
+- Access can be removed at any time. Remove a collaborator in Pages CMS, or uninstall the app under GitHub → Settings → Applications.
+
+Staff instructions are in **[docs/ADMIN-GUIDE.md](docs/ADMIN-GUIDE.md)**.
+
+### Previewing locally
+
+```
+docker run --rm -p 4000:4000 -v "$PWD:/site" -w /site ruby:3.3   bash -c "gem install github-pages webrick && jekyll serve --host 0.0.0.0"
+```
+
+Add `?season=christmas` (or `autumn`, `independence`, `oxi`, `easter`, `backtoschool`) to the address to preview a seasonal theme.
 
 ## Updating the site
 
-All edits are made in `index.html`.
+Use Pages CMS for everyday changes (see the guide). Code changes, such as layout and styles, are made in `index.html` and `assets/`.
 
-- **New school year.** Update the dates in the Registration section and the list in the Calendar section. Then replace `registration-form.pdf` and the calendar PDF, and update the PDF link if the file name changes.
-- **Tuition.** Edit the prices in the Registration & Tuition section.
-- **Photos.**
-  1. Put the original in `images/Photos/`.
-  2. Make a web copy (about 1600px wide) in `images/gallery/` and a thumbnail (about 700px) in `images/gallery/thumbs/`, both with the same file name.
-  3. Add a line for the photo inside `<div class="gallery">` in `index.html`.
-
-  The first 12 photos show by default, and lines with `class="more"` appear after "Show all". Update the photo count on the button.
-- **Accessibility widget.** Replace `YOUR_USERWAY_ACCOUNT_ID` near the bottom of `index.html` with the account ID from [userway.org](https://userway.org).
+- **Accessibility widget.** Replace `YOUR_USERWAY_ACCOUNT_ID` near the bottom of `index.html` with the account ID from [userway.org](https://userway.org). The widget does not load until this is set.
 
 ## Hosting
 
-Upload `index.html`, the two PDFs and the `images/` folder, without `images/Photos/`, to any static web host. Options include GitHub Pages, Netlify, or the church's existing web host.
+GitHub Pages serves the site from the `main` branch with the custom domain in `CNAME`. Pages must stay in **Deploy from a branch** mode, which builds with Jekyll. Do not add a `.nojekyll` file.
 
 ## Permissions and credits
 

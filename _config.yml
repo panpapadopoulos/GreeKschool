@@ -1,0 +1,15 @@
+# GitHub Pages builds this site with Jekyll automatically on every change to main.
+# Content lives in _data/ and is edited with Pages CMS (https://app.pagescms.org).
+title: St. George Greek School
+url: https://greekschool.stgeorgenwi.org
+baseurl: ""
+timezone: America/Chicago
+markdown: kramdown
+exclude:
+  - README.md
+  - docs/
+  - scripts/
+  - images/Photos/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/

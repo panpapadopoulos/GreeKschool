@@ -1,0 +1,37 @@
+# Resizes and compresses photos uploaded through Pages CMS, and strips
+# EXIF/GPS data. Commits the smaller files back; GitHub Pages then republishes.
+name: Optimize uploaded images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/uploads/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimize-images
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet "Pillow==11.0.0"
+      - run: python scripts/optimize_images.py assets/uploads
+      - name: Commit smaller images
+        run: |
+          if git diff --quiet; then echo "Nothing to commit"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/uploads
+          git commit -m "Optimize uploaded images"
+          git pull --rebase
+          git push

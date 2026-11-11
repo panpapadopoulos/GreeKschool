@@ -1,0 +1,512 @@
+# Pages CMS configuration — https://pagescms.org/docs/
+# Editors sign in at https://app.pagescms.org and see the sections below.
+# Every save is a commit to this repository; GitHub Pages republishes the site in ~1–2 minutes.
+
+media:
+  - name: images
+    label: Images
+    input: assets/uploads
+    output: /assets/uploads
+    categories: [image]
+    rename: safe
+  - name: documents
+    label: Documents (PDF)
+    input: assets/documents
+    output: /assets/documents
+    categories: [document]
+    rename: safe
+
+content:
+  # ---------------------------------------------------------------- Announcements
+  - name: announcements
+    label: 📣 Announcements
+    type: file
+    path: _data/announcements.yml
+    format: yaml
+    fields:
+      - name: announcements
+        label: Announcements
+        description: The newest are shown first; "Important" ones always appear at the top. The section is hidden automatically when there is nothing current to show.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: type
+            label: Type
+            type: select
+            options:
+              values:
+                - { name: general, label: General Information }
+                - { name: notice, label: Important Notice }
+                - { name: event, label: Upcoming Event }
+                - { name: closure, label: School Closure }
+                - { name: registration, label: Registration }
+                - { name: celebration, label: Celebration }
+          - name: important
+            label: Mark as important
+            description: Highlights this announcement in gold and keeps it at the top.
+            type: boolean
+          - name: language
+            label: Language
+            type: select
+            options:
+              values:
+                - { name: en, label: English }
+                - { name: el, label: Ελληνικά (Greek) }
+          - name: date
+            label: Publish date
+            description: The announcement appears on the website starting this day.
+            type: date
+            options: { format: yyyy-MM-dd }
+          - name: expires
+            label: Remove after (optional)
+            description: The announcement disappears automatically after this day. Leave empty to keep it until you delete it.
+            type: date
+            default: ""
+            options: { format: yyyy-MM-dd }
+          - name: body
+            label: Message
+            description: "Plain text. Leave a blank line between paragraphs. For bold, wrap words in **double stars**."
+            type: text
+          - name: image
+            label: Picture (optional)
+            description: Only upload photos of students that are approved for publication, with faces blurred.
+            type: image
+            options: { media: images }
+          - name: image_alt
+            label: Picture description (for screen readers)
+            type: string
+          - name: attachment
+            label: PDF attachment (optional)
+            type: file
+            options: { media: documents, extensions: [pdf] }
+          - name: attachment_label
+            label: Attachment button text
+            description: For example "Read the full letter (PDF)". Leave empty for "View attachment (PDF)".
+            type: string
+
+  # ---------------------------------------------------------------- Calendar
+  - name: events
+    label: 📅 School Calendar
+    type: file
+    path: _data/events.yml
+    format: yaml
+    fields:
+      - name: intro
+        label: Text under the calendar title
+        type: string
+      - name: events
+        label: Events
+        description: Events are sorted by date automatically and grouped by month. Past events are dimmed; the next upcoming event is highlighted.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{date} — {title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: date
+            label: Date
+            type: date
+            required: true
+            options: { format: yyyy-MM-dd }
+          - name: end_date
+            label: Last day (optional, for events lasting several days)
+            type: date
+            default: ""
+            options: { format: yyyy-MM-dd }
+          - name: date_label
+            label: Custom date text (optional)
+            description: Replaces the date shown, e.g. "Dec 22 & 29" or "End of May". The Date above is still used for sorting.
+            type: string
+          - name: category
+            label: Category
+            type: select
+            options:
+              values:
+                - { name: classes, label: Classes }
+                - { name: closure, label: No Classes / School Closure }
+                - { name: holiday, label: Holiday }
+                - { name: feast, label: Feast Day }
+                - { name: program, label: Celebration / Program }
+                - { name: event, label: Special Event }
+                - { name: fundraiser, label: Fundraiser }
+                - { name: trip, label: Field Trip }
+                - { name: registration, label: Registration Deadline }
+          - name: start_time
+            label: Start time (optional)
+            description: e.g. 6:00 pm
+            type: string
+          - name: end_time
+            label: End time (optional)
+            type: string
+          - name: location
+            label: Location (optional)
+            type: string
+          - name: description
+            label: Short description (optional)
+            type: text
+          - name: attachment
+            label: Attachment (optional PDF)
+            type: file
+            options: { media: documents, extensions: [pdf] }
+
+  # ---------------------------------------------------------------- Registration
+  - name: registration
+    label: 📝 Registration & Tuition
+    type: file
+    path: _data/registration.yml
+    format: yaml
+    fields:
+      - name: status
+        label: Registration status badge
+        description: '"Automatic" uses the dates below: before the opening date it says "opens …", until the deadline "open", afterwards "late enrollment – contact the director".'
+        type: select
+        options:
+          values:
+            - { name: auto, label: Automatic (use the dates below) }
+            - { name: open, label: Open }
+            - { name: soon, label: Opening soon }
+            - { name: late, label: Late enrollment – contact the director }
+            - { name: closed, label: Closed }
+            - { name: hide, label: Don't show a badge }
+      - name: opens
+        label: Registration opens (optional)
+        type: date
+        default: ""
+        options: { format: yyyy-MM-dd }
+      - name: deadline
+        label: Enrollment deadline
+        type: date
+        default: ""
+        options: { format: yyyy-MM-dd }
+      - name: deadline_text
+        label: Deadline sentence
+        description: Shown in bold in the dashed box, e.g. "Enrollment deadline September 6, 2026."
+        type: string
+      - name: late_text
+        label: Text after the deadline sentence
+        description: 'To make a link write [link text](mailto:greekschool@stgeorgenwi.org).'
+        type: string
+      - name: tuition
+        label: Tuition boxes
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} — {price}"
+        fields:
+          - name: title
+            label: Heading
+            type: string
+          - name: price
+            label: Price
+            description: e.g. $400
+            type: string
+          - name: unit
+            label: Price label
+            description: e.g. "per child" or "first child"
+            type: string
+          - name: details
+            label: Extra line (optional)
+            description: e.g. "$350 for each additional child"
+            type: string
+          - name: note
+            label: Small print (optional)
+            type: text
+      - name: form_pdf
+        label: Enrollment form (PDF)
+        description: Upload the new form here; the "Download Enrollment Form" link updates automatically.
+        type: file
+        options: { media: documents, extensions: [pdf] }
+      - name: form_label
+        label: Form link text
+        type: string
+      - name: steps
+        label: How to register (steps)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}. {title}"
+        fields:
+          - name: title
+            label: Step title
+            type: string
+          - name: text
+            label: Step text
+            type: string
+          - name: button
+            label: Link under this step
+            type: select
+            options:
+              values:
+                - { name: form, label: Download the enrollment form }
+                - { name: payment, label: Pay tuition online (Square) }
+                - { name: email, label: Email the Greek School }
+                - { name: none, label: No link }
+
+  # ---------------------------------------------------------------- Documents
+  - name: documents
+    label: 📄 Documents & Forms
+    type: file
+    path: _data/documents.yml
+    format: yaml
+    fields:
+      - name: documents
+        label: Documents
+        description: Shown in the "Documents & Forms" section in this order (drag to reorder). Visitors can view or download each one.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: description
+            label: Short description
+            type: string
+          - name: file
+            label: File
+            type: file
+            required: true
+            options: { media: documents }
+          - name: category
+            label: Category
+            type: select
+            options:
+              values:
+                - { name: calendar, label: Academic calendar }
+                - { name: registration, label: Registration form }
+                - { name: announcement, label: School announcement }
+                - { name: parents, label: Parent information }
+                - { name: resource, label: Educational resource }
+                - { name: other, label: Other }
+
+  # ---------------------------------------------------------------- Gallery
+  - name: gallery
+    label: 🖼️ Photo Gallery
+    type: file
+    path: _data/gallery.yml
+    format: yaml
+    fields:
+      - name: intro
+        label: Text under the "Photos" title
+        type: string
+      - name: visible_count
+        label: Photos shown before "Show all"
+        type: number
+      - name: photos
+        label: Photos
+        description: "PRIVACY: Only add photos of students whose families have given consent, with children's faces blurred. No names. Anything uploaded is public, so do not upload unapproved originals. Drag to change the order."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}. {caption}"
+        fields:
+          - name: image
+            label: Photo
+            description: Large photos are resized automatically after upload.
+            type: image
+            required: true
+            options: { media: images, path: assets/uploads/gallery }
+          - name: thumb
+            label: Thumbnail (optional)
+            description: Leave empty; the photo above is used.
+            type: image
+            options: { media: images }
+          - name: caption
+            label: Caption (optional, no student names)
+            type: string
+          - name: category
+            label: Category (optional)
+            description: e.g. Christmas Program, OXI Day, Classroom. When two or more categories exist, visitors get filter buttons.
+            type: string
+          - name: approved
+            label: Approved for publication (consent received, faces blurred)
+            description: The photo is only shown on the website when this is switched on.
+            type: boolean
+
+  # ---------------------------------------------------------------- School information
+  - name: school
+    label: 🏫 School Information
+    type: file
+    path: _data/school.yml
+    format: yaml
+    fields:
+      - { name: name, label: School name, type: string }
+      - { name: name_greek, label: School name in Greek, type: string }
+      - { name: location, label: City and state, type: string }
+      - { name: hero_lead, label: Welcome sentence on the big photo, type: text }
+      - { name: welcome_title, label: Welcome heading, type: string }
+      - name: welcome_text
+        label: Welcome text
+        description: "Leave a blank line between paragraphs. Use **double stars** for bold."
+        type: text
+      - { name: grades, label: Grade levels (short), type: string }
+      - { name: grades_note, label: Grade levels note, type: string }
+      - { name: class_day, label: Class day, type: string, description: 'e.g. "Tuesday Evenings"' }
+      - { name: class_day_short, label: Class day abbreviation (in the circle), type: string }
+      - { name: class_hours, label: School hours, type: string, description: 'e.g. "6:00 – 7:45 pm"' }
+      - { name: season, label: School season, type: string, description: 'e.g. "September – May"' }
+      - { name: season_note, label: School season note, type: string }
+      - { name: school_year, label: School year, type: string, description: 'e.g. "2026–2027"' }
+      - { name: school_year_dates, label: First and last day, type: string, description: 'e.g. "September 15, 2026 – May 18, 2027"' }
+      - { name: academic_calendar_pdf, label: Academic calendar (PDF), type: file, description: 'Upload the new calendar here. The "View Academic Calendar (PDF)" button updates automatically. Also update it under Documents & Forms.', options: { media: documents, extensions: [pdf] } }
+      - { name: director_title, label: Director title, type: string }
+      - { name: director_name, label: Director name, type: string }
+      - { name: email, label: Contact email, type: string }
+      - { name: phone, label: Telephone, type: string }
+      - { name: church_name, label: Church name, type: string }
+      - { name: address_line1, label: Street address, type: string }
+      - { name: address_line2, label: City, state, ZIP, type: string }
+      - { name: church_website, label: Church website, type: string }
+      - name: payment_link
+        label: Tuition payment link (Square)
+        description: Only change this if the church gives you a new Square link.
+        type: string
+      - { name: subjects_intro, label: '"What Our Students Learn" subtitle', type: string }
+      - name: subjects
+        label: What Our Students Learn
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+          - name: icon
+            label: Icon
+            type: select
+            options:
+              values:
+                - { name: book, label: Book }
+                - { name: pen, label: Pen }
+                - { name: chat, label: Speech bubbles }
+                - { name: cross, label: Cross }
+                - { name: temple, label: Columns }
+                - { name: star, label: Star }
+                - { name: music, label: Music }
+                - { name: globe, label: Globe }
+      - { name: resources_intro, label: '"Learning Resources" subtitle', type: string }
+      - name: resources
+        label: Learning resources
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Name, type: string }
+          - { name: text, label: Description, type: text }
+          - { name: link, label: Website address, type: string }
+          - { name: link_label, label: Link text, type: string }
+      - name: links
+        label: Important links (footer)
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Link text, type: string }
+          - { name: url, label: Address, type: string }
+
+  # ---------------------------------------------------------------- Seasonal theme
+  - name: season
+    label: ❄️ Seasonal Theme
+    type: file
+    path: _data/season.yml
+    format: yaml
+    fields:
+      - name: mode
+        label: Mode
+        description: '"Automatic" switches themes by the schedule below. "Use the theme I choose" overrides the schedule. "Off" always shows the normal look.'
+        type: select
+        options:
+          values:
+            - { name: auto, label: Automatic (follow the schedule) }
+            - { name: manual, label: Use the theme I choose below }
+            - { name: "off", label: Off (normal look) }
+      - name: manual_theme
+        label: Theme to use (when Mode is "Use the theme I choose")
+        type: select
+        options:
+          values:
+            - { name: default, label: Default (no decorations) }
+            - { name: christmas, label: Christmas (snowfall) }
+            - { name: autumn, label: Autumn (falling leaves) }
+            - { name: independence, label: Greek Independence Day – March 25 }
+            - { name: oxi, label: OXI Day – October 28 }
+            - { name: easter, label: Orthodox Easter (spring petals) }
+            - { name: backtoschool, label: Back to School }
+      - name: manual_start
+        label: Chosen theme starts (optional)
+        description: Leave both dates empty to use the chosen theme until you change it. Outside these dates the schedule applies.
+        type: date
+        default: ""
+        options: { format: yyyy-MM-dd }
+      - name: manual_end
+        label: Chosen theme ends (optional)
+        type: date
+        default: ""
+        options: { format: yyyy-MM-dd }
+      - name: message
+        label: Greeting message for the chosen theme (optional)
+        description: A short line shown in a slim bar under the menu, e.g. "Καλά Χριστούγεννα!"
+        type: string
+      - name: effects
+        label: Animated effects (snow, leaves, petals)
+        description: Switch off to keep only the colour accents and greeting. Animations are always off for visitors whose device asks for reduced motion, and visitors can pause them.
+        type: boolean
+      - name: intensity
+        label: Effect intensity
+        type: select
+        options:
+          values:
+            - { name: light, label: Light (recommended) }
+            - { name: medium, label: Medium }
+            - { name: strong, label: Strong }
+      - name: schedule
+        label: Automatic schedule
+        description: Each theme is shown between its start and end date (inclusive). Tip — preview any theme by adding ?season=christmas to the website address.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{theme}: {start} → {end}"
+        fields:
+          - name: theme
+            label: Theme
+            type: select
+            options:
+              values:
+                  - { name: default, label: Default (no decorations) }
+                  - { name: christmas, label: Christmas (snowfall) }
+                  - { name: autumn, label: Autumn (falling leaves) }
+                  - { name: independence, label: Greek Independence Day – March 25 }
+                  - { name: oxi, label: OXI Day – October 28 }
+                  - { name: easter, label: Orthodox Easter (spring petals) }
+                  - { name: backtoschool, label: Back to School }
+          - name: start
+            label: Start date
+            type: date
+            options: { format: yyyy-MM-dd }
+          - name: end
+            label: End date
+            type: date
+            options: { format: yyyy-MM-dd }
+          - name: message
+            label: Greeting message (optional)
+            type: string
