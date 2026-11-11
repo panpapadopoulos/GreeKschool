@@ -2,9 +2,18 @@ mode: auto
 manual_theme: default
 manual_start: ""
 manual_end: ""
-effects: true
-intensity: light
 message: ""
+show: all
+animation: auto
+intensity: light
+decoration_style: classic
+custom:
+  name: ""
+  accent: navy
+  decoration: laurel
+  header: gold
+  animation: none
+  icon: star
 schedule:
   - theme: christmas
     start: 2026-12-01

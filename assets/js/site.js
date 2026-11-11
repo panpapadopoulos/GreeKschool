@@ -2,10 +2,25 @@
 (function () {
   'use strict';
 
-  // Today's date as YYYY-MM-DD in the visitor's local time (for date-based content)
+  // "Today" is always the date in Schererville (America/Chicago), whatever the visitor's
+  // time zone, as a plain YYYY-MM-DD string. Dates in the content are compared as strings,
+  // so they never shift because of UTC conversion or daylight saving time.
+  // For previews and testing, ?date=YYYY-MM-DD pretends it is another day (this browser only).
   var now = new Date();
   function pad(n) { return (n < 10 ? '0' : '') + n; }
-  var today = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+  var today = (function () {
+    var q = (location.search.match(/[?&]date=(\d{4}-\d{2}-\d{2})/) || [])[1];
+    if (q) return q;
+    try {
+      var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(now);
+      var get = function (t) { return parts.filter(function (p) { return p.type === t; })[0].value; };
+      return get('year') + '-' + get('month') + '-' + get('day');
+    } catch (e) {
+      return now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+    }
+  })();
+  window.GS = window.GS || {};
+  window.GS.today = today;
 
   /* ---------- Mobile menu ---------- */
   var header = document.querySelector('header.site');
@@ -184,5 +199,5 @@
   }
 
   var y = document.getElementById('year');
-  if (y) y.textContent = now.getFullYear();
+  if (y) y.textContent = today.slice(0, 4);
 })();

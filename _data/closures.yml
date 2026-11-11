@@ -1,0 +1,25 @@
+closures:
+  - title: Voting Day
+    date: 2026-11-03
+    end_date: ""
+    date_label: ""
+    type: no_class
+    note: ""
+  - title: Winter Break
+    date: 2026-12-22
+    end_date: 2026-12-29
+    date_label: Dec 22 & 29
+    type: break
+    note: ""
+  - title: Spring Break
+    date: 2027-03-30
+    end_date: ""
+    date_label: ""
+    type: break
+    note: ""
+  - title: Holy Tuesday
+    date: 2027-04-27
+    end_date: ""
+    date_label: ""
+    type: no_class
+    note: ""

@@ -206,39 +206,78 @@
   </div>
 </section>
 
-<!-- ================= CALENDAR ================= -->
+<!-- ================= CALENDAR =================
+     Data: _data/calendar.yml (settings + PDF), events.yml, deadlines.yml,
+     closures.yml (no-class days and extra classes), class_schedule.yml (regular classes).
+     Dates are plain calendar dates (YYYY-MM-DD) in America/Chicago. -->
+{%- assign cal = site.data.calendar -%}
+{%- assign cal_pdf = cal.academic_calendar_pdf | default: "/academic-calendar-2026-2027.pdf" -%}
 {%- assign events = site.data.events.events -%}
+{%- assign deadlines = site.data.deadlines.deadlines -%}
+{%- assign closures = site.data.closures.closures -%}
 {%- assign keys = "" -%}
-{%- for e in events -%}{%- assign k = e.date | date: "%Y%m%d" -%}{%- capture keys -%}{{ keys }}{{ k }}-{{ forloop.index0 | plus: 1000 }},{%- endcapture -%}{%- endfor -%}
+{%- for e in closures -%}{%- if e.date and e.date != "" -%}{%- capture keys -%}{{ keys }}{{ e.date | date: "%Y%m%d" }}-c{{ forloop.index0 | plus: 1000 }},{%- endcapture -%}{%- endif -%}{%- endfor -%}
+{%- for e in deadlines -%}{%- if e.date and e.date != "" -%}{%- capture keys -%}{{ keys }}{{ e.date | date: "%Y%m%d" }}-d{{ forloop.index0 | plus: 1000 }},{%- endcapture -%}{%- endif -%}{%- endfor -%}
+{%- for e in events -%}{%- if e.date and e.date != "" -%}{%- capture keys -%}{{ keys }}{{ e.date | date: "%Y%m%d" }}-e{{ forloop.index0 | plus: 1000 }},{%- endcapture -%}{%- endif -%}{%- endfor -%}
 {%- assign order = keys | split: "," | sort -%}
 <section id="calendar">
   <div class="wrap">
     <h2 class="section-title">School Calendar {{ s.school_year }}</h2>
-    <p class="section-sub">{{ site.data.events.intro }}</p>
+    <p class="section-sub">{{ cal.intro }}</p>
 
+    <div class="upcoming" id="upcoming" data-ui hidden>
+      <h3 class="sr-only">Coming up</h3>
+      <ul></ul>
+    </div>
+
+    <div class="cal-tabs" role="tablist" aria-label="Calendar views" hidden>
+      <button type="button" role="tab" id="tab-interactive" aria-controls="panel-interactive" aria-selected="true">Interactive calendar</button>
+      <button type="button" role="tab" id="tab-academic" aria-controls="panel-academic" aria-selected="false" tabindex="-1">Academic calendar</button>
+    </div>
+
+    <div id="panel-interactive" class="cal-app" data-ui role="tabpanel" aria-labelledby="tab-interactive" hidden></div>
+
+    <div id="panel-academic" role="tabpanel" aria-labelledby="tab-academic">
     <div class="cal-box">
       <ul class="dates">
         {%- assign month = "" -%}
         {%- for key in order -%}
-        {%- assign idx = key | split: "-" | last | minus: 1000 -%}
-        {%- assign e = events[idx] -%}
+        {%- assign src = key | split: "-" | last | slice: 0 -%}
+        {%- assign idx = key | split: "-" | last | remove_first: src | minus: 1000 -%}
+        {%- case src -%}{%- when "c" -%}{%- assign e = closures[idx] -%}{%- when "d" -%}{%- assign e = deadlines[idx] -%}{%- else -%}{%- assign e = events[idx] -%}{%- endcase -%}
         {%- assign m = e.date | date: "%B %Y" -%}
         {%- if m != month %}
         <li class="month">{{ m }}</li>
         {%- assign month = m -%}
-        {%- endif %}
-        {%- capture meta -%}{% if e.start_time and e.start_time != "" %}{{ e.start_time }}{% if e.end_time and e.end_time != "" %} – {{ e.end_time }}{% endif %}{% endif %}{% if e.location and e.location != "" %}{% if e.start_time and e.start_time != "" %} · {% endif %}{{ e.location }}{% endif %}{%- endcapture -%}
+        {%- endif -%}
+        {%- capture meta -%}{% if e.start_time and e.start_time != "" %}{{ e.start_time }}{% if e.end_time and e.end_time != "" %} – {{ e.end_time }}{% endif %}{% elsif e.time and e.time != "" %}{{ e.time }}{% endif %}{% if e.location and e.location != "" %}{% if e.start_time and e.start_time != "" %} · {% endif %}{{ e.location }}{% endif %}{%- endcapture -%}
         {%- assign meta = meta | strip -%}
-        {%- capture extra -%}{% if meta != "" %}{{ meta }}{% endif %}{% if e.description and e.description != "" %}{% if meta != "" %}<br>{% endif %}{{ e.description }}{% endif %}{% if e.attachment and e.attachment != "" %} <a href="{{ e.attachment }}" target="_blank" rel="noopener">Details (PDF)</a>{% endif %}{%- endcapture -%}
-        <li data-date="{{ e.date | date: '%Y-%m-%d' }}" data-end="{{ e.end_date | date: '%Y-%m-%d' }}"><time datetime="{{ e.date | date: '%Y-%m-%d' }}">{% if e.date_label and e.date_label != "" %}{{ e.date_label }}{% else %}{{ e.date | date: "%b %-d" }}{% endif %}</time><span class="what">{{ e.title }}{% assign extra = extra | strip %}{% if extra != "" %}<small>{{ extra }}</small>{% endif %}</span>{% case e.category %}{% when "classes" %}<span class="tag classes">Classes</span>{% when "closure" %}<span class="tag closure">No Classes</span>{% when "holiday" %}<span class="tag holiday">Holiday</span>{% when "feast" %}<span class="tag feast">Feast</span>{% when "program" %}<span class="tag program">Program</span>{% when "event" %}<span class="tag event">Special Event</span>{% when "fundraiser" %}<span class="tag fundraiser">Fundraiser</span>{% when "trip" %}<span class="tag trip">Field Trip</span>{% when "registration" %}<span class="tag registration">Registration</span>{% endcase %}</li>
+        {%- assign desc = e.description | default: e.note -%}
+        {%- capture extra -%}{% if meta != "" %}{{ meta }}{% endif %}{% if desc and desc != "" %}{% if meta != "" %}<br>{% endif %}{{ desc }}{% endif %}{% if e.attachment and e.attachment != "" %} <a href="{{ e.attachment }}" target="_blank" rel="noopener">Details (PDF)</a>{% endif %}{% if e.link and e.link != "" %} <a href="{{ e.link }}" target="_blank" rel="noopener">More information</a>{% endif %}{%- endcapture -%}
+        {%- assign extra = extra | strip -%}
+        {%- if src == "c" -%}
+          {%- case e.type -%}{%- when "extra_class" -%}{%- assign tagc = "extra" -%}{%- assign tagl = "Extra Class" -%}{%- when "holiday" -%}{%- assign tagc = "holiday" -%}{%- assign tagl = "Holiday · No Classes" -%}{%- else -%}{%- assign tagc = "closure" -%}{%- assign tagl = "No Classes" -%}{%- endcase -%}
+        {%- elsif src == "d" -%}
+          {%- if e.kind == "registration" -%}{%- assign tagc = "registration" -%}{%- assign tagl = "Registration" -%}{%- else -%}{%- assign tagc = "deadline" -%}{%- assign tagl = "Deadline" -%}{%- endif -%}
+        {%- else -%}
+          {%- assign tagc = e.category | default: "event" -%}
+          {%- case tagc -%}{%- when "classes" -%}{%- assign tagl = "Classes" -%}{%- when "closure" -%}{%- assign tagl = "No Classes" -%}{%- when "holiday" -%}{%- assign tagl = "Holiday" -%}{%- when "feast" -%}{%- assign tagl = "Feast" -%}{%- when "national" -%}{%- assign tagl = "Greek National Day" -%}{%- when "program" -%}{%- assign tagl = "Program" -%}{%- when "fundraiser" -%}{%- assign tagl = "Fundraiser" -%}{%- when "trip" -%}{%- assign tagl = "Field Trip" -%}{%- when "meeting" -%}{%- assign tagl = "Parent Meeting" -%}{%- when "registration" -%}{%- assign tagl = "Registration" -%}{%- when "deadline" -%}{%- assign tagl = "Deadline" -%}{%- else -%}{%- assign tagc = "event" -%}{%- assign tagl = "Special Event" -%}{%- endcase -%}
+        {%- endif %}
+        <li data-date="{{ e.date | date: '%Y-%m-%d' }}" data-end="{{ e.end_date | date: '%Y-%m-%d' }}"><time datetime="{{ e.date | date: '%Y-%m-%d' }}">{% if e.date_label and e.date_label != "" %}{{ e.date_label }}{% else %}{{ e.date | date: "%b %-d" }}{% endif %}</time><span class="what">{{ e.title }}{% if extra != "" %}<small>{{ extra }}</small>{% endif %}</span><span class="tag {{ tagc }}">{{ tagl }}</span></li>
         {%- endfor %}
+        {%- if order.size == 0 %}
+        <li class="none">No dates have been added yet. Please check back soon.</li>
+        {%- endif %}
       </ul>
     </div>
+    </div>
+
     <div class="cal-actions">
-      <a class="btn btn-blue" href="{{ s.academic_calendar_pdf }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>View Academic Calendar (PDF)</a>
-      <a class="btn btn-ghost" href="{{ s.academic_calendar_pdf }}" download>Download PDF</a>
+      <a class="btn btn-blue" href="{{ cal_pdf }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>View Academic Calendar (PDF)</a>
+      <a class="btn btn-ghost" href="{{ cal_pdf }}" download>Download PDF</a>
     </div>
   </div>
+  <script id="calendar-data" type="application/json">{"settings":{{ cal | jsonify | replace: "</", "<\/" }},"schedules":{{ site.data.class_schedule.schedules | jsonify | replace: "</", "<\/" }},"closures":{{ closures | jsonify | replace: "</", "<\/" }},"deadlines":{{ deadlines | jsonify | replace: "</", "<\/" }},"events":{{ events | jsonify | replace: "</", "<\/" }}}</script>
 </section>
 
 <!-- ================= DOCUMENTS ================= -->
@@ -266,7 +305,7 @@
 
 <!-- ================= PHOTOS ================= -->
 {%- assign g = site.data.gallery -%}
-{%- assign photos = g.photos | where: "approved", true -%}
+{%- assign photos = g.photos | where: "show_in_gallery", true -%}
 {%- assign visible = g.visible_count | default: 12 -%}
 {%- assign cats = photos | map: "category" | compact | uniq -%}
 <section id="photos">
@@ -328,7 +367,7 @@
   <ul class="footer-links">
     <li><a href="{{ s.church_website }}" target="_blank" rel="noopener">{{ s.church_website | remove: "https://" | remove: "http://" | remove: "www." }}</a></li>
     <li><a href="mailto:{{ s.email }}">{{ s.email }}</a></li>
-    <li><a href="{{ s.academic_calendar_pdf }}" target="_blank" rel="noopener">Academic Calendar</a></li>
+    <li><a href="{{ site.data.calendar.academic_calendar_pdf }}" target="_blank" rel="noopener">Academic Calendar</a></li>
     {%- for l in s.links %}{% if l.url and l.url != "" %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a></li>{% endif %}{% endfor %}
   </ul>
   <p class="copyright">© <span id="year">{{ site.time | date: "%Y" }}</span> {{ s.church_name }}, {{ s.location }}. All rights reserved.</p>
@@ -345,6 +384,7 @@
 <button class="season-toggle" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span>Pause animation</span></button>
 <script id="season-data" type="application/json">{{ site.data.season | jsonify | replace: "</", "<\/" }}</script>
 <script src="/assets/js/site.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="/assets/js/calendar.js?v={{ site.time | date: '%s' }}" defer></script>
 <script src="/assets/js/seasonal.js?v={{ site.time | date: '%s' }}" defer></script>
 
 <!-- UserWay accessibility widget: replace YOUR_USERWAY_ACCOUNT_ID with the ID from your free account at userway.org -->

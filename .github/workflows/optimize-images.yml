@@ -1,5 +1,7 @@
 # Resizes and compresses photos uploaded through Pages CMS, and strips
 # EXIF/GPS data. Commits the smaller files back; GitHub Pages then republishes.
+# NOTE: the original upload is already in the Git history before this runs, so
+# location data must be removed BEFORE uploading (see docs/ADMIN-GUIDE.md).
 name: Optimize uploaded images
 
 on:

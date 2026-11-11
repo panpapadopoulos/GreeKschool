@@ -1,0 +1,10 @@
+schedules:
+  - name: Greek School classes
+    weekdays:
+      - tuesday
+    start: 2026-09-15
+    end: 2027-05-18
+    start_time: 6:00 pm
+    end_time: 7:45 pm
+    location: St. George Greek Orthodox Church
+    note: ""
