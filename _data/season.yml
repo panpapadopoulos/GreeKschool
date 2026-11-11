@@ -1,21 +1,17 @@
 mode: auto
 manual_theme: default
-manual_start: ""
-manual_end: ""
-message: ""
 show_greeting: true
+message: Καλώς Ορίσατε - Welcome!
 show: all
 animation: auto
 intensity: light
 decoration_style: classic
 custom:
-  name: ""
-  message: ""
   accent: navy
   decoration: laurel
   header: gold
   animation: none
-  icon: star
+  icon: flag-gr
 schedule:
   - theme: christmas
     start: 2026-12-01
@@ -36,7 +32,6 @@ schedule:
   - theme: autumn
     start: 2027-10-01
     end: 2027-10-20
-    message: ""
   - theme: oxi
     start: 2027-10-21
     end: 2027-10-28
