@@ -1,14 +1,13 @@
 show: true
 title: Meet Our Faculty
 subtitle: Γνωρίστε τους Εκπαιδευτικούς μας
-description: ""
 photo: /images/faculty/faculty.jpg
 photo_alt: The faculty of the St. George Greek School standing together on the stage
-order_note: Faculty members are listed from left to right.
-names_inset: 18
 members:
-  - name: Κυρία Ελευθερία Κότση
   - name: Κυρία Ελένη Λόξα
+  - name: Κυρία Ελευθερία Κότση
   - name: Κυρία Αγγελική Μουρατίδου
   - name: Κυρία Μαρία Κοτταρά
   - name: Κύριος Παναγιώτης Παπαδόπουλος
+order_note: Faculty members are listed from left to right.
+names_inset: 18
