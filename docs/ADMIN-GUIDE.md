@@ -4,7 +4,7 @@ A short guide for the school director and staff. You don't need any technical kn
 
 ## Signing in
 
-1. Go to **https://app.pagescms.org**.
+1. Go to **greekschool.stgeorgenwi.org/admin**. It takes you straight to the editor at app.pagescms.org.
 2. Sign in.
    - **If you were invited by email:** type your email address. Pages CMS emails you a 6-digit code, valid for 5 minutes. Type the code to sign in.
    - **If you have a GitHub account:** you can sign in with GitHub instead.

@@ -26,7 +26,7 @@ In order: News & Announcements (shown only when there is a current announcement)
 The site is plain HTML, CSS and JavaScript. GitHub Pages builds it with Jekyll automatically, so there is no build step to run and no server code.
 
 - `index.html` is the page template. It reads its content from the YAML files in `_data/`.
-- Content is edited in **[Pages CMS](https://app.pagescms.org)**. Each save is a commit to `main`, and GitHub Pages republishes the site in 1–2 minutes.
+- Content is edited in **[Pages CMS](https://app.pagescms.org)**. Shortcut: **greekschool.stgeorgenwi.org/admin** opens the editor. Each save is a commit to `main`, and GitHub Pages republishes the site in 1–2 minutes.
 - **One source of truth for dates.** The interactive calendar, the "Coming up" boxes and the Academic calendar list all read the same data files.
 - **Dates are calendar dates** (`YYYY-MM-DD`) in **America/Chicago**. "Today" is always worked out for Schererville, whatever the visitor's time zone. Dates are compared as whole days, never as times, so nothing shifts at midnight or when daylight saving time starts or ends.
 - **Testing a date:** add `?date=YYYY-MM-DD` to the address to see the site as it will look on that day. This affects only your own browser.
