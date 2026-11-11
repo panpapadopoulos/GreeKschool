@@ -42,6 +42,14 @@
     halloween:     { label: 'Halloween (gentle)', bar: '#5b3412', rule: '#d2691e', corners: ['pumpkins', 'autumn'], anim: 'leaves', icon: 'leaf', msg: "Wishing everyone a happy and safe autumn evening!" },
     veterans:      { label: 'Veterans Day', bar: '#22324f', rule: '#9e2b33', strip: 'us', corners: ['flag-us'], anim: 'none', icon: 'flag-us', msg: "Thank you to all who have served. Honoring our veterans." },
     thanksgiving:  { label: 'Thanksgiving', bar: '#7a4318', rule: '#c0702b', corners: ['autumn', 'wheat'], anim: 'leaves', icon: 'leaf', msg: "Happy Thanksgiving from the St. George Greek School!" },
+    mlk:           { label: 'Martin Luther King Jr. Day', bar: '#22324f', rule: GOLD, strip: 'gold', corners: [], anim: 'none', icon: 'star', msg: "Honoring the life and legacy of Dr. Martin Luther King Jr." },
+    presidents:    { label: "Presidents' Day", bar: '#1f3a6e', rule: '#b22234', strip: 'us', corners: ['flag-us'], anim: 'none', icon: 'flag-us', msg: "Happy Presidents' Day from the St. George Greek School!" },
+    juneteenth:    { label: 'Juneteenth', bar: '#1f3a6e', rule: '#b22234', strip: 'us', corners: ['stars'], anim: 'none', icon: 'star', msg: "Juneteenth — celebrating freedom." },
+    labor:         { label: 'Labor Day', bar: '#1f3a6e', rule: '#b22234', strip: 'us', corners: ['flag-us'], anim: 'none', icon: 'flag-us', msg: "Happy Labor Day! Wishing all our families a restful holiday." },
+    columbus:      { label: 'Columbus Day', bar: '#1f3a6e', rule: '#b22234', strip: 'us', corners: [], anim: 'none', icon: 'flag-us', msg: "Wishing everyone a restful holiday weekend." },
+    threehierarchs:{ label: 'Three Hierarchs (January 30)', bar: '#1d3f7a', ink: '#f3d77a', rule: GOLD, strip: 'gold', corners: ['books', 'laurel-gold'], anim: 'none', key: 'gold', icon: 'book', msg: "Χρόνια πολλά! Feast of the Three Hierarchs, patrons of Greek education." },
+    cleanmonday:   { label: 'Clean Monday (Καθαρά Δευτέρα)', bar: '#1b689f', rule: '#7fb6dd', corners: ['kites', 'kites'], anim: 'none', icon: 'kite', msg: "Καλή Σαρακοστή! A blessed Clean Monday and Great Lent." },
+    dormition:     { label: 'Dormition of the Theotokos (August 15)', bar: '#2b4e88', rule: GOLD, strip: 'gold', corners: ['lily', 'lily'], anim: 'none', key: 'gold', icon: 'lily', msg: "Χρόνια πολλά! Feast of the Dormition of the Theotokos." },
     custom:        { label: 'Custom celebration' }
   };
   var ACCENTS = { navy: ['#1d3f7a', GOLD], blue: ['#2a6aa0', '#8fb3d9'], gold: [GOLD, GOLD], burgundy: ['#86232a', '#b8322f'], green: ['#466f40', '#7a9a3e'], purple: ['#5b3f86', '#8e6fbf'], rose: ['#8b2e44', '#c9576e'], orange: ['#874816', '#c0702b'], greek: ['#0d5eaf', GR] };
@@ -67,10 +75,15 @@
   } else if (cfg.mode === 'manual' && within(cfg.manual_start, cfg.manual_end)) {
     theme = cfg.manual_theme || 'default'; message = cfg.message || '';
   } else if (cfg.mode === 'auto' || cfg.mode === 'manual') {
-    (cfg.schedule || []).some(function (r) {
-      if (r && r.theme && within(r.start, r.end)) { theme = r.theme; entry = r; message = r.message || ''; return true; }
-      return false;
+    // When entries overlap, the SHORTEST one wins (a one-day holiday beats the season
+    // around it), so the order of the list in the CMS doesn't matter.
+    var best = null, bestLen = Infinity;
+    (cfg.schedule || []).forEach(function (r) {
+      if (!r || !r.theme || !within(r.start, r.end)) return;
+      var len = (Date.parse(String(r.end || '9999-12-31').slice(0, 10)) - Date.parse(String(r.start || '0001-01-01').slice(0, 10))) || 0;
+      if (len < bestLen) { best = r; bestLen = len; }
     });
+    if (best) { theme = best.theme; entry = best; message = best.message || ''; }
   }
   var preset = PRESETS[theme] ? assign({}, PRESETS[theme]) : null;
   if (theme === 'custom') {
@@ -215,7 +228,7 @@
   }
   function pole(x, y1, y2) { return '<path d="M' + x + ' ' + y2 + 'V' + y1 + '" stroke="#d9dde2" stroke-width="3" stroke-linecap="round"/><circle cx="' + x + '" cy="' + (y1 - 4) + '" r="4.5" fill="' + GOLD + '"/>'; }
 
-  var MIRROR = { fir: 1, laurel: 1, 'laurel-gold': 1, autumn: 1, blossom: 1, 'blossom-eggs': 1, palm: 1, lily: 1, wheat: 1, snowflakes: 1, stars: 1, hearts: 1, books: 1, cap: 1, pumpkins: 1 };
+  var MIRROR = { kites: 1, fir: 1, laurel: 1, 'laurel-gold': 1, autumn: 1, blossom: 1, 'blossom-eggs': 1, palm: 1, lily: 1, wheat: 1, snowflakes: 1, stars: 1, hearts: 1, books: 1, cap: 1, pumpkins: 1 };
   var DECO = {
     laurel: function (s) { return leafy(MAIN, { seed: s, colors: ['#6b8a3a', '#5a7a2e', '#7f9a46'], stem: '#5a6e2c', len: 26, ratio: .3, spread: 42, tip: 1 }) + '<circle cx="70" cy="120" r="3.4" fill="#33402a"/><circle cx="120" cy="88" r="3" fill="#33402a"/>'; },
     'laurel-gold': function (s) { return leafy(MAIN, { seed: s, colors: [GOLD, '#b38c1c', '#ddbd52'], stem: '#a88518', len: 26, ratio: .3, spread: 42, tip: 1 }) + '<path d="M28 196h18M37 187v18" stroke="' + GOLD + '" stroke-width="5" stroke-linecap="round"/>'; },
@@ -306,6 +319,18 @@
     },
     'flag-gr': function (s) { return pole(s === 1 ? 50 : 112, 60, 214) + flagGR(s === 1 ? 52 : 114, 62, 92); },
     'flag-us': function (s) { return pole(s === 1 ? 50 : 112, 64, 214) + flagUS(s === 1 ? 52 : 114, 66, 96); },
+    kites: function (s) {
+      function kite(x, y, k, c1, c2, rot) {
+        var o = '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ') scale(' + k + ')">';
+        o += '<path d="M0-40L28 0 0 52-28 0z" fill="' + c1 + '"/><path d="M0-40L28 0H0z M0 0V52L-28 0z" fill="' + c2 + '"/>';
+        o += '<path d="M0-40V52M-28 0H28" stroke="#4a3a26" stroke-width="1.4"/>';
+        o += '<path d="M0 52C-10 72 12 86 -2 106S-14 130 -6 150" fill="none" stroke="#4a3a26" stroke-width="1.2"/>';
+        [[-3, 76], [1, 101], [-9, 126]].forEach(function (b) { o += '<path d="M' + b[0] + ' ' + b[1] + 'l-7-4v8zm0 0l7-4v8z" fill="' + c1 + '"/>'; });
+        return o + '</g>';
+      }
+      return s === 1 ? kite(110, 70, 1, '#0d5eaf', '#ffffff', -12) + kite(52, 120, .55, GOLD, '#c0702b', 10)
+                     : kite(110, 70, 1, '#b8322f', GOLD, -12) + kite(52, 120, .55, '#0d5eaf', '#ffffff', 10);
+    },
     sun: function () {
       var o = '<circle cx="110" cy="110" r="40" fill="#f6d36b" opacity=".55"/><circle cx="110" cy="110" r="28" fill="#fbe39a" opacity=".8"/>';
       for (var i = 0; i < 12; i++) { var a = i * 30 * Math.PI / 180; o += '<path d="M' + (110 + Math.cos(a) * 52).toFixed(1) + ' ' + (110 + Math.sin(a) * 52).toFixed(1) + 'L' + (110 + Math.cos(a) * 72).toFixed(1) + ' ' + (110 + Math.sin(a) * 72).toFixed(1) + '" stroke="#fbe39a" stroke-width="3" stroke-linecap="round" opacity=".7"/>'; }
@@ -338,6 +363,7 @@
       egg: '<path d="M12 3c3.9 0 7 6 7 10a7 7 0 0 1-14 0c0-4 3.1-10 7-10z" fill="#c62f2a" stroke="currentColor" stroke-width="1.2"/>',
       cross: '<path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
       cap: '<path d="M12 5l10 4-10 4L2 9zM6 11v4c0 2 12 2 12 0v-4M19 10v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
+      kite: '<path d="M12 2l6 7-6 10-6-10zM12 2v17M6 9h12M12 19c-1 2 1 3 0 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
       book: '<path d="M4 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4zM20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>'
     };
     return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + (I[k] || I.star) + '</svg>';

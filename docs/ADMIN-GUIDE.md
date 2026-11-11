@@ -125,7 +125,25 @@ Animations never run for visitors whose device is set to reduce motion, and ever
 Set **Mode** to **Off** and click **Save**. To stop only the animation, set **Animation** to *No animation*.
 
 ### Plan ahead
-Under **Automatic schedule**, add each occasion with a start and end date. Only the occasions you list switch on.
+The **Automatic schedule** is filled in through January 2028. It covers:
+- **All US federal holidays.**
+- **The main Greek national and church days:** Theophany, the Three Hierarchs, Greek Language Day, Clean Monday, March 25, Palm Sunday, Pascha, St. George, the Dormition, Greek Flag Day and OXI Day.
+- **School milestones:** back to school and the end of the year.
+- **The four seasons**, which fill the gaps, without animation.
+
+When two entries overlap, the shorter one wins. A one-day holiday therefore always takes priority over the season around it, whatever the order of the list.
+
+**Once a year**, add the next year's dates. Pascha, Clean Monday, Palm Sunday and the Monday holidays change every year. If April 23 falls before Pascha, St. George is celebrated on Bright Monday.
+
+## Faculty
+Open **Faculty** to replace the group photo or change the names.
+- **Order:** drag the names so they match the photo from left to right.
+- **Adding or removing people:** use the buttons under the list.
+- **Hiding the section:** switch off **Show the faculty section**.
+- **After a new photo:** if the names no longer sit under each person, adjust **Space at the sides of the names row**.
+
+## Photo captions
+Each photo has an English caption and an optional Greek caption. Both show under the photo in the viewer.
 
 ## Photos — please read
 

@@ -545,7 +545,10 @@ content:
             type: image
             options: { media: images }
           - name: caption
-            label: Caption (optional, no student names)
+            label: Caption in English (optional, no student names)
+            type: string
+          - name: caption_el
+            label: Caption in Greek (optional)
             type: string
           - name: category
             label: Category (optional)
@@ -555,6 +558,54 @@ content:
             label: Show in the gallery
             description: Switch off to take the photo off the gallery page. This does NOT make the file private — to remove a photo completely, delete the entry and ask the website administrator to delete the file.
             type: boolean
+
+  # ---------------------------------------------------------------- Faculty
+  - name: faculty
+    label: Faculty
+    type: file
+    path: _data/faculty.yml
+    format: yaml
+    fields:
+      - name: show
+        label: Show the faculty section
+        type: boolean
+      - name: title
+        label: Heading
+        type: string
+      - name: subtitle
+        label: Subtitle (Greek)
+        type: string
+      - name: description
+        label: Short description (optional)
+        type: text
+      - name: photo
+        label: Group photograph
+        description: Upload a new group photo to replace it. A wide photo with everyone in one row works best.
+        type: image
+        options: { media: images, path: assets/uploads }
+      - name: photo_alt
+        label: Photo description (for screen readers)
+        type: string
+      - name: members
+        label: Faculty members (left to right as in the photo)
+        description: Drag to change the order. Add or remove people with the buttons below the list.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+      - name: order_note
+        label: Note under the names
+        type: string
+      - name: names_inset
+        label: Space at the sides of the names row (%)
+        description: Moves the names closer together so each one sits under the right person. 0 spreads them across the whole photo; 18 fits the current photo.
+        type: number
 
   # ---------------------------------------------------------------- School information
   - name: school
@@ -753,6 +804,14 @@ content:
             - { name: halloween, label: Halloween (gentle, nothing scary) }
             - { name: veterans, label: Veterans Day }
             - { name: thanksgiving, label: Thanksgiving }
+            - { name: threehierarchs, label: Three Hierarchs – January 30 }
+            - { name: cleanmonday, label: Clean Monday (Καθαρά Δευτέρα) }
+            - { name: dormition, label: Dormition of the Theotokos – August 15 }
+            - { name: mlk, label: Martin Luther King Jr. Day }
+            - { name: presidents, label: Presidents' Day }
+            - { name: juneteenth, label: Juneteenth }
+            - { name: labor, label: Labor Day }
+            - { name: columbus, label: Columbus Day }
             - { name: custom, label: Custom celebration (set it up below) }
       - name: manual_start
         label: Chosen occasion starts (optional)
@@ -851,6 +910,7 @@ content:
                 - { name: blossom, label: Spring blossoms }
                 - { name: lily, label: Lilies }
                 - { name: palm, label: Palm branches }
+                - { name: kites, label: Kites }
                 - { name: fir, label: Fir with ornaments }
                 - { name: autumn, label: Autumn leaves }
                 - { name: wheat, label: Wheat }

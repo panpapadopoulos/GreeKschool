@@ -321,7 +321,7 @@
     {%- endif %}
     <div class="gallery" id="gallery">
       {%- for p in photos %}
-      <a href="{{ p.image }}"{% if forloop.index > visible %} class="more"{% endif %} data-caption="{{ p.caption | escape }}" data-cat="{{ p.category | escape }}"><img src="{{ p.thumb | default: p.image }}" alt="{% if p.caption and p.caption != '' %}{{ p.caption | escape }}{% else %}{{ s.name }} photo{% endif %}" loading="lazy" decoding="async" width="700" height="525"></a>
+      <a href="{{ p.image }}"{% if forloop.index > visible %} class="more"{% endif %} data-caption="{{ p.caption | escape }}"{% if p.caption_el and p.caption_el != "" %} data-caption-el="{{ p.caption_el | escape }}"{% endif %} data-cat="{{ p.category | escape }}"><img src="{{ p.thumb | default: p.image }}" alt="{% if p.caption and p.caption != '' %}{{ p.caption | escape }}{% else %}{{ s.name }} photo{% endif %}" loading="lazy" decoding="async" width="700" height="525"></a>
       {%- endfor %}
     </div>
     {%- if photos.size > visible %}
@@ -329,6 +329,39 @@
     {%- endif %}
   </div>
 </section>
+
+<!-- ================= FACULTY ================= -->
+    <!-- Faculty: _data/faculty.yml (Pages CMS → Faculty). Names are listed left to right as in the photo. -->
+    {%- assign fac = site.data.faculty -%}
+    {%- if fac.show %}
+    <section id="faculty" class="faculty">
+  <div class="wrap">
+      <h2 class="section-title">{{ fac.title | default: "Meet Our Faculty" }}</h2>
+      {%- if fac.subtitle and fac.subtitle != "" %}<p class="section-sub" lang="el">{{ fac.subtitle }}</p>{% endif %}
+      {%- if fac.description and fac.description != "" %}<div class="faculty-desc">{{ fac.description | markdownify }}</div>{% endif %}
+      <figure class="faculty-figure" style="--names-inset: {{ fac.names_inset | default: 0 }}%; --n: {{ fac.members.size | default: 1 }}">
+        {%- if fac.photo and fac.photo != "" %}
+        <img src="{{ fac.photo }}" alt="{{ fac.photo_alt | default: 'The faculty of the St. George Greek School' }}" loading="lazy" decoding="async" width="720" height="500">
+        {%- endif %}
+        {%- if fac.members.size > 0 %}
+        <figcaption>
+          <ol class="faculty-names">
+            {%- for m in fac.members %}{% if m.name and m.name != "" %}
+            {%- assign first = m.name | split: " " | first -%}
+            {%- if first == "Κυρία" or first == "Κύριος" or first == "Κος" or first == "Κα" or first == "Mrs." or first == "Mr." or first == "Ms." or first == "Dr." %}
+            <li lang="el"><span class="hon">{{ first }}</span> {{ m.name | remove_first: first | strip }}</li>
+            {%- else %}
+            <li lang="el">{{ m.name }}</li>
+            {%- endif %}
+            {%- endif %}{% endfor %}
+          </ol>
+          {%- if fac.order_note and fac.order_note != "" %}<p class="faculty-note">{{ fac.order_note }}</p>{% endif %}
+        </figcaption>
+        {%- endif %}
+      </figure>
+  </div>
+</section>
+    {%- endif %}
 
 <!-- ================= CONTACT ================= -->
 <section id="contact" class="alt contact">
@@ -376,7 +409,7 @@
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="lb-btn lb-close" type="button" aria-label="Close">✕</button>
   <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">‹</button>
-  <figure><img alt=""><figcaption><span class="cap"></span><span class="count"></span></figcaption></figure>
+  <figure><img alt=""><figcaption><span class="cap"></span><span class="cap-el" lang="el" hidden></span><span class="count"></span></figcaption></figure>
   <button class="lb-btn lb-next" type="button" aria-label="Next photo">›</button>
 </div>
 

@@ -113,12 +113,17 @@
     var box = document.getElementById('lightbox');
     var img = box.querySelector('img');
     var cap = box.querySelector('.cap');
+    var capEl = box.querySelector('.cap-el');
     var count = box.querySelector('.count');
     var showAll = document.getElementById('showAll');
     var current = 0, lastFocus = null, list = [];
-    function visibleLinks() {
+    // The viewer always browses every published photo in CMS order, whether or not
+    // "Show all" has been clicked. ("Show all" only controls how many thumbnails
+    // the page shows.) An active category filter narrows it to that category.
+    // Unpublished photos are never in the page, so they are never included.
+    function viewerLinks() {
       return Array.prototype.filter.call(gallery.querySelectorAll('a'), function (a) {
-        return a.offsetParent !== null; // only photos currently shown (respects "show all" and filters)
+        return !a.classList.contains('filtered');
       });
     }
     if (showAll) showAll.addEventListener('click', function () {
@@ -143,16 +148,17 @@
       img.classList.add('loading');
       img.onload = function () { img.classList.remove('loading'); };
       img.src = a.href;
-      var c = a.getAttribute('data-caption') || '';
-      img.alt = c || 'St. George Greek School photo ' + (current + 1) + ' of ' + list.length;
+      var c = a.getAttribute('data-caption') || '', ce = a.getAttribute('data-caption-el') || '';
+      img.alt = c || ce || 'St. George Greek School photo ' + (current + 1) + ' of ' + list.length;
       cap.textContent = c;
+      if (capEl) { capEl.textContent = ce; capEl.hidden = !ce; }
       count.textContent = (current + 1) + ' / ' + list.length;
       // Preload the next photo for snappy navigation
       var n = list[(current + 1) % list.length];
       if (n) { var pre = new Image(); pre.src = n.href; }
     }
     function open(a) {
-      list = visibleLinks();
+      list = viewerLinks();
       lastFocus = a;
       show(list.indexOf(a));
       box.classList.add('open');
