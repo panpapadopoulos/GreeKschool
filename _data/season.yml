@@ -3,12 +3,14 @@ manual_theme: default
 manual_start: ""
 manual_end: ""
 message: ""
+show_greeting: true
 show: all
 animation: auto
 intensity: light
 decoration_style: classic
 custom:
   name: ""
+  message: ""
   accent: navy
   decoration: laurel
   header: gold

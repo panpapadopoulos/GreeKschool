@@ -110,6 +110,12 @@ Christmas and Winter snow by default. To add snow to another occasion, set **Ani
 
 Animations never run for visitors whose device is set to reduce motion, and every visitor has a **Pause animation** button.
 
+### The greeting bar
+- Every occasion comes with a ready-made greeting in English and Greek. For example, Christmas shows "Καλά Χριστούγεννα! Merry Christmas from the St. George Greek School."
+- To use your own wording, type it in **Your own greeting** for the occasion you chose, or in **Greeting** in the schedule.
+- To show no greeting at all, switch off **Show the greeting bar**.
+- Visitors can close the greeting with **✕**. It then stays closed on their device until the greeting changes.
+
 ### Activate a custom occasion
 1. Fill in **Custom celebration**: a colour, a corner decoration, a detail under the menu, an animation and an icon.
 2. Choose *Custom celebration* as the occasion. You can choose it under **Mode**, or add it to the **Automatic schedule** with dates.

@@ -1,6 +1,46 @@
 intro: Moments from our classes, programs and celebrations.
 visible_count: 12
 photos:
+  - image: /images/gallery/photo-32.jpg
+    thumb: /images/gallery/thumbs/photo-32.jpg
+    caption: "Students at the OXI Day program"
+    category: ""
+    show_in_gallery: true
+  - image: /images/gallery/photo-31.jpg
+    thumb: /images/gallery/thumbs/photo-31.jpg
+    caption: "Ready for the OXI Day program"
+    category: ""
+    show_in_gallery: true
+  - image: /images/gallery/photo-33.jpg
+    thumb: /images/gallery/thumbs/photo-33.jpg
+    caption: "Carrying the American and Greek flags"
+    category: ""
+    show_in_gallery: true
+  - image: /images/gallery/photo-26.jpg
+    thumb: /images/gallery/thumbs/photo-26.jpg
+    caption: "Writing ΟΧΙ in class for OXI Day"
+    category: ""
+    show_in_gallery: true
+  - image: /images/gallery/photo-27.jpg
+    thumb: /images/gallery/thumbs/photo-27.jpg
+    caption: "Celebrating OXI Day in the classroom"
+    category: ""
+    show_in_gallery: true
+  - image: /images/gallery/photo-28.jpg
+    thumb: /images/gallery/thumbs/photo-28.jpg
+    caption: "At the OXI Day program"
+    category: ""
+    show_in_gallery: true
+  - image: /images/gallery/photo-29.jpg
+    thumb: /images/gallery/thumbs/photo-29.jpg
+    caption: "Greek Flag Day, October 27"
+    category: ""
+    show_in_gallery: true
+  - image: /images/gallery/photo-30.jpg
+    thumb: /images/gallery/thumbs/photo-30.jpg
+    caption: "The stage set for the OXI Day program"
+    category: ""
+    show_in_gallery: true
   - image: /images/gallery/photo-01.jpg
     thumb: /images/gallery/thumbs/photo-01.jpg
     caption: ""

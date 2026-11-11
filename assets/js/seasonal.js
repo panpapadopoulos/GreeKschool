@@ -18,30 +18,30 @@
   var GR = 'gr', GOLD = '#c9a227';
   var PRESETS = {
     'default':     { label: 'Default (no decorations)' },
-    winter:        { label: 'Winter', bar: '#34557a', rule: '#8fb3d9', strip: 'frost', corners: ['snowflakes', 'snowflakes'], anim: 'snow', icon: 'snowflake' },
-    spring:        { label: 'Spring', bar: '#466f40', rule: '#cf7d93', corners: ['blossom', 'blossom'], anim: 'petals', icon: 'flower' },
-    summer:        { label: 'Summer', bar: '#d9a521', ink: '#142d58', rule: '#e0a82e', corners: ['sun'], anim: 'sunlight', icon: 'sun' },
-    autumn:        { label: 'Autumn', bar: '#874816', rule: '#c0702b', corners: ['autumn', 'autumn'], anim: 'leaves', icon: 'leaf' },
-    christmas:     { label: 'Christmas', bar: '#86232a', rule: '#b8322f', strip: 'lights', corners: ['fir', 'fir'], anim: 'snow', key: 'gold', icon: 'snowflake' },
-    newyear:       { label: 'New Year', bar: '#18284a', ink: '#f3d77a', rule: GOLD, strip: 'gold', corners: ['stars', 'stars'], anim: 'sparkles', key: 'gold', icon: 'star' },
-    theophany:     { label: 'Theophany (January 6)', bar: '#1b689f', rule: '#7fb6dd', strip: 'waves', band: 'waves', corners: [], anim: 'water', icon: 'wave' },
-    greeklanguage: { label: 'Greek Language Day (February 9)', bar: '#1d3f7a', rule: GOLD, strip: 'gold', corners: ['letters', 'letters'], anim: 'none', icon: 'alpha' },
-    valentine:     { label: "Valentine's Day", bar: '#8b2e44', rule: '#c9576e', corners: ['hearts', 'hearts'], anim: 'hearts', icon: 'heart' },
-    independence:  { label: 'Greek Independence Day (March 25)', bar: '#0d5eaf', rule: GR, strip: 'gr', corners: ['flag-gr', 'laurel'], anim: 'none', icon: 'flag-gr', confetti: ['#0d5eaf', '#ffffff', '#5b9be0'] },
-    annunciation:  { label: 'Annunciation (March 25)', bar: '#2b4e88', rule: GOLD, strip: 'gold', corners: ['lily', 'lily'], anim: 'none', key: 'gold', icon: 'lily' },
-    march25:       { label: 'March 25 — Independence Day & Annunciation', bar: '#0d5eaf', rule: GR, strip: 'gr', corners: ['flag-gr', 'lily'], anim: 'none', icon: 'flag-gr', confetti: ['#0d5eaf', '#ffffff', '#5b9be0'] },
-    palmsunday:    { label: 'Palm Sunday', bar: '#4b6a2d', rule: '#7a9a3e', corners: ['palm', 'palm'], anim: 'none', icon: 'palm' },
-    easter:        { label: 'Orthodox Easter (Pascha)', bar: '#8a1c1c', rule: '#b5302c', corners: ['blossom-eggs', 'lily'], anim: 'petals', icon: 'egg' },
-    stgeorge:      { label: 'Feast of St. George', bar: '#142d58', ink: '#f3d77a', rule: GOLD, strip: 'gold', corners: ['laurel-gold', 'laurel-gold'], anim: 'none', key: 'gold', icon: 'cross' },
-    memorial:      { label: 'Memorial Day', bar: '#22324f', rule: '#9e2b33', strip: 'us', corners: ['flag-us'], anim: 'none', icon: 'flag-us' },
-    endofyear:     { label: 'End of the School Year', bar: '#1d3f7a', ink: '#f3d77a', rule: GOLD, strip: 'gold', corners: ['cap', 'books'], anim: 'confetti', key: 'gold', icon: 'cap', confetti: [GOLD, '#ffffff', '#2a6aa0', '#e9d48a'] },
-    july4:         { label: 'Independence Day (July 4)', bar: '#1f3a6e', rule: '#b22234', strip: 'us', corners: ['flag-us', 'stars'], anim: 'none', icon: 'flag-us', confetti: ['#b22234', '#ffffff', '#3c3b6e'] },
-    backtoschool:  { label: 'Beginning of the School Year', bar: GOLD, ink: '#142d58', rule: GOLD, corners: ['books', 'letters'], anim: 'none', key: 'gold', icon: 'book' },
-    flagday:       { label: 'Greek Flag Day (October 27)', bar: '#0d5eaf', rule: GR, strip: 'gr', corners: ['flag-gr', 'flag-gr'], anim: 'none', icon: 'flag-gr', confetti: ['#0d5eaf', '#ffffff', '#5b9be0'] },
-    oxi:           { label: 'OXI Day (October 28)', bar: '#0d5eaf', rule: GR, strip: 'gr', corners: ['flag-gr', 'laurel'], anim: 'none', icon: 'flag-gr', confetti: ['#0d5eaf', '#ffffff', '#5b9be0'] },
-    halloween:     { label: 'Halloween (gentle)', bar: '#5b3412', rule: '#d2691e', corners: ['pumpkins', 'autumn'], anim: 'leaves', icon: 'leaf' },
-    veterans:      { label: 'Veterans Day', bar: '#22324f', rule: '#9e2b33', strip: 'us', corners: ['flag-us'], anim: 'none', icon: 'flag-us' },
-    thanksgiving:  { label: 'Thanksgiving', bar: '#7a4318', rule: '#c0702b', corners: ['autumn', 'wheat'], anim: 'leaves', icon: 'leaf' },
+    winter:        { label: 'Winter', bar: '#34557a', rule: '#8fb3d9', strip: 'frost', corners: ['snowflakes', 'snowflakes'], anim: 'snow', icon: 'snowflake', msg: "Καλό χειμώνα! Wishing our families a warm and happy winter." },
+    spring:        { label: 'Spring', bar: '#466f40', rule: '#cf7d93', corners: ['blossom', 'blossom'], anim: 'petals', icon: 'flower', msg: "Καλή άνοιξη! Happy spring from the St. George Greek School." },
+    summer:        { label: 'Summer', bar: '#d9a521', ink: '#142d58', rule: '#e0a82e', corners: ['sun'], anim: 'sunlight', icon: 'sun', msg: "Καλό καλοκαίρι! Have a wonderful summer." },
+    autumn:        { label: 'Autumn', bar: '#874816', rule: '#c0702b', corners: ['autumn', 'autumn'], anim: 'leaves', icon: 'leaf', msg: "Καλό φθινόπωρο! Happy autumn from the St. George Greek School." },
+    christmas:     { label: 'Christmas', bar: '#86232a', rule: '#b8322f', strip: 'lights', corners: ['fir', 'fir'], anim: 'snow', key: 'gold', icon: 'snowflake', msg: "Καλά Χριστούγεννα! Merry Christmas from the St. George Greek School." },
+    newyear:       { label: 'New Year', bar: '#18284a', ink: '#f3d77a', rule: GOLD, strip: 'gold', corners: ['stars', 'stars'], anim: 'sparkles', key: 'gold', icon: 'star', msg: "Καλή Χρονιά! Happy New Year from the St. George Greek School." },
+    theophany:     { label: 'Theophany (January 6)', bar: '#1b689f', rule: '#7fb6dd', strip: 'waves', band: 'waves', corners: [], anim: 'water', icon: 'wave', msg: "Καλά Φώτα! Blessed Feast of Theophany." },
+    greeklanguage: { label: 'Greek Language Day (February 9)', bar: '#1d3f7a', rule: GOLD, strip: 'gold', corners: ['letters', 'letters'], anim: 'none', icon: 'alpha', msg: "Παγκόσμια Ημέρα Ελληνικής Γλώσσας — Happy World Greek Language Day!" },
+    valentine:     { label: "Valentine's Day", bar: '#8b2e44', rule: '#c9576e', corners: ['hearts', 'hearts'], anim: 'hearts', icon: 'heart', msg: "Happy Valentine's Day from the St. George Greek School!" },
+    independence:  { label: 'Greek Independence Day (March 25)', bar: '#0d5eaf', rule: GR, strip: 'gr', corners: ['flag-gr', 'laurel'], anim: 'none', icon: 'flag-gr', confetti: ['#0d5eaf', '#ffffff', '#5b9be0'], msg: "Ζήτω η 25η Μαρτίου! Celebrating Greek Independence Day." },
+    annunciation:  { label: 'Annunciation (March 25)', bar: '#2b4e88', rule: GOLD, strip: 'gold', corners: ['lily', 'lily'], anim: 'none', key: 'gold', icon: 'lily', msg: "Χρόνια πολλά! Blessed Feast of the Annunciation." },
+    march25:       { label: 'March 25 — Independence Day & Annunciation', bar: '#0d5eaf', rule: GR, strip: 'gr', corners: ['flag-gr', 'lily'], anim: 'none', icon: 'flag-gr', confetti: ['#0d5eaf', '#ffffff', '#5b9be0'], msg: "Χρόνια πολλά! Celebrating Greek Independence Day and the Annunciation." },
+    palmsunday:    { label: 'Palm Sunday', bar: '#4b6a2d', rule: '#7a9a3e', corners: ['palm', 'palm'], anim: 'none', icon: 'palm', msg: "Κυριακή των Βαΐων — Blessed Palm Sunday." },
+    easter:        { label: 'Orthodox Easter (Pascha)', bar: '#8a1c1c', rule: '#b5302c', corners: ['blossom-eggs', 'lily'], anim: 'petals', icon: 'egg', msg: "Χριστός Ανέστη! Christ is Risen!" },
+    stgeorge:      { label: 'Feast of St. George', bar: '#142d58', ink: '#f3d77a', rule: GOLD, strip: 'gold', corners: ['laurel-gold', 'laurel-gold'], anim: 'none', key: 'gold', icon: 'cross', msg: "Χρόνια πολλά! Happy Feast of St. George, our patron saint." },
+    memorial:      { label: 'Memorial Day', bar: '#22324f', rule: '#9e2b33', strip: 'us', corners: ['flag-us'], anim: 'none', icon: 'flag-us', msg: "On Memorial Day we honor those who gave their lives in service to our country." },
+    endofyear:     { label: 'End of the School Year', bar: '#1d3f7a', ink: '#f3d77a', rule: GOLD, strip: 'gold', corners: ['cap', 'books'], anim: 'confetti', key: 'gold', icon: 'cap', confetti: [GOLD, '#ffffff', '#2a6aa0', '#e9d48a'], msg: "Συγχαρητήρια! Congratulations on a wonderful school year!" },
+    july4:         { label: 'Independence Day (July 4)', bar: '#1f3a6e', rule: '#b22234', strip: 'us', corners: ['flag-us', 'stars'], anim: 'none', icon: 'flag-us', confetti: ['#b22234', '#ffffff', '#3c3b6e'], msg: "Happy Fourth of July from the St. George Greek School!" },
+    backtoschool:  { label: 'Beginning of the School Year', bar: GOLD, ink: '#142d58', rule: GOLD, corners: ['books', 'letters'], anim: 'none', key: 'gold', icon: 'book', msg: "Welcome back! Καλή σχολική χρονιά!" },
+    flagday:       { label: 'Greek Flag Day (October 27)', bar: '#0d5eaf', rule: GR, strip: 'gr', corners: ['flag-gr', 'flag-gr'], anim: 'none', icon: 'flag-gr', confetti: ['#0d5eaf', '#ffffff', '#5b9be0'], msg: "27 Οκτωβρίου — Honoring the Greek flag on Greek Flag Day." },
+    oxi:           { label: 'OXI Day (October 28)', bar: '#0d5eaf', rule: GR, strip: 'gr', corners: ['flag-gr', 'laurel'], anim: 'none', icon: 'flag-gr', confetti: ['#0d5eaf', '#ffffff', '#5b9be0'], msg: "Χρόνια πολλά! Honoring OXI Day, October 28." },
+    halloween:     { label: 'Halloween (gentle)', bar: '#5b3412', rule: '#d2691e', corners: ['pumpkins', 'autumn'], anim: 'leaves', icon: 'leaf', msg: "Wishing everyone a happy and safe autumn evening!" },
+    veterans:      { label: 'Veterans Day', bar: '#22324f', rule: '#9e2b33', strip: 'us', corners: ['flag-us'], anim: 'none', icon: 'flag-us', msg: "Thank you to all who have served. Honoring our veterans." },
+    thanksgiving:  { label: 'Thanksgiving', bar: '#7a4318', rule: '#c0702b', corners: ['autumn', 'wheat'], anim: 'leaves', icon: 'leaf', msg: "Happy Thanksgiving from the St. George Greek School!" },
     custom:        { label: 'Custom celebration' }
   };
   var ACCENTS = { navy: ['#1d3f7a', GOLD], blue: ['#2a6aa0', '#8fb3d9'], gold: [GOLD, GOLD], burgundy: ['#86232a', '#b8322f'], green: ['#466f40', '#7a9a3e'], purple: ['#5b3f86', '#8e6fbf'], rose: ['#8b2e44', '#c9576e'], orange: ['#874816', '#c0702b'], greek: ['#0d5eaf', GR] };
@@ -52,7 +52,7 @@
   try { cfg = JSON.parse(document.getElementById('season-data').textContent) || {}; } catch (e) {}
   var q = {};
   location.search.replace(/[?&]([a-z]+)=([^&#]*)/g, function (_, k, v) { q[k] = decodeURIComponent(v); });
-  var previewing = !!(q.season || q.anim || q.intensity || q.show || q.deco);
+  var previewing = !!(q.season || q.anim || q.intensity || q.show || q.deco || q.greeting);
   var today = (window.GS && window.GS.today) || new Date().toISOString().slice(0, 10);
   function within(start, end) {
     start = start ? String(start).slice(0, 10) : ''; end = end ? String(end).slice(0, 10) : '';
@@ -79,6 +79,9 @@
                corners: c.decoration && c.decoration !== 'none' ? [c.decoration, c.decoration] : [], anim: c.animation || 'none', icon: c.icon || 'star', key: c.accent === 'gold' ? 'gold' : null };
   }
 
+  // Greeting: your own message wins; otherwise the occasion's ready-made greeting.
+  if (!message && preset) message = theme === 'custom' ? (cfg.custom && cfg.custom.message) || '' : preset.msg || '';
+  var greetingOn = q.greeting ? q.greeting !== 'off' : cfg.show_greeting !== false;
   var show = q.show || cfg.show || 'all';
   var layers = {
     colors: ['all', 'theme', 'theme_decorations'].indexOf(show) > -1,
@@ -105,15 +108,16 @@
       if (preset.rule === GR) html.setAttribute('data-season-rule', 'gr');
       else if (preset.rule) html.style.setProperty('--season-rule', preset.rule);
       if (preset.key === 'gold') html.setAttribute('data-season-key', 'gold');
+      // The ✕ hides this greeting on this device until the greeting changes (previews always show it).
       var bar = document.querySelector('.season-bar'), dismissed = false;
-      try { dismissed = sessionStorage.getItem('season-bar-hidden') === theme + message; } catch (e) {}
-      if (bar && message && !dismissed) {
+      if (!previewing) try { dismissed = localStorage.getItem('season-bar-hidden') === theme + message; } catch (e) {}
+      if (bar && message && greetingOn && !dismissed) {
         bar.querySelector('.season-text').textContent = message;
         bar.querySelector('.season-icon').innerHTML = icon(preset.icon);
         bar.classList.add('show');
         bar.querySelector('button').addEventListener('click', function () {
           bar.classList.remove('show');
-          try { sessionStorage.setItem('season-bar-hidden', theme + message); } catch (e) {}
+          try { localStorage.setItem('season-bar-hidden', theme + message); } catch (e) {}
         });
       }
     }
@@ -356,6 +360,7 @@
       sel(['intensity', 'Intensity'], [['light', 'Light'], ['medium', 'Medium'], ['strong', 'Strong']], intensity) +
       sel(['show', 'Show'], [['all', 'Everything'], ['theme_decorations', 'Colours + decorations'], ['theme', 'Colours only'], ['decorations', 'Decorations only'], ['animation', 'Animation only']], show) +
       sel(['deco', 'Decorations'], [['classic', 'Classic'], ['minimal', 'Minimal']], style) +
+      sel(['greeting', 'Greeting'], [['on', 'Show'], ['off', 'Hide']], greetingOn ? 'on' : 'off') +
       '<a href="' + location.pathname + '">Exit preview</a>';
     panel.addEventListener('change', function (e) {
       var k = e.target.getAttribute('data-p'); if (!k) return;

@@ -765,9 +765,13 @@ content:
         type: date
         default: ""
         options: { format: yyyy-MM-dd }
+      - name: show_greeting
+        label: Show the greeting bar
+        description: A slim bar under the menu with a greeting for the occasion. Every occasion has a ready-made greeting in English and Greek; visitors can close it with ✕. Switch off to show no greeting at all.
+        type: boolean
       - name: message
-        label: Greeting for the chosen occasion (optional)
-        description: A short line in a slim bar under the menu, e.g. "Καλά Χριστούγεννα!"
+        label: Your own greeting for the chosen occasion (optional)
+        description: Leave empty to use the occasion's ready-made greeting, e.g. "Καλά Χριστούγεννα! Merry Christmas from the St. George Greek School."
         type: string
       - name: show
         label: What to show
@@ -817,6 +821,10 @@ content:
         fields:
           - name: name
             label: Name (for your reference)
+            type: string
+          - name: message
+            label: Greeting
+            description: Shown in the greeting bar when this custom celebration is active.
             type: string
           - name: accent
             label: Colour
@@ -916,6 +924,7 @@ content:
             options: { format: yyyy-MM-dd }
           - name: message
             label: Greeting (optional)
+            description: Leave empty to use the occasion's ready-made greeting.
             type: string
           - name: animation
             label: Animation (optional)
