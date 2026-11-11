@@ -1,0 +1,41 @@
+events:
+  - title: Veneration of the Holy Cross
+    date: 2026-09-13
+    category: feast
+  - title: First Day of Classes
+    date: 2026-09-15
+    category: classes
+  - title: Student Fundraiser begins (runs through Oct 27)
+    date: 2026-09-29
+    category: fundraiser
+  - title: OXI Day Program
+    date: 2026-10-25
+    category: program
+  - title: Student Fundraiser ends
+    date: 2026-10-27
+    category: fundraiser
+  - title: OXI Day
+    date: 2026-10-28
+    category: national
+  - title: Fundraiser pick-up after class
+    date: 2026-11-10
+    category: fundraiser
+  - title: Christmas Program
+    date: 2026-12-20
+    category: program
+  - title: Nativity of our Lord & Savior Jesus Christ
+    date: 2026-12-25
+    category: feast
+  - title: March 25th Program
+    date: 2027-03-28
+    category: program
+  - title: Great & Holy Pascha
+    date: 2027-05-02
+    category: feast
+  - title: Last Day of Classes
+    date: 2027-05-18
+    category: classes
+  - title: Class Field Trip (date TBD)
+    date: 2027-05-31
+    date_label: End of May
+    category: trip

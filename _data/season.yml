@@ -1,0 +1,38 @@
+mode: auto
+manual_theme: default
+show_greeting: true
+message: Καλώς Ορίσατε - Welcome!
+show: all
+animation: auto
+intensity: light
+decoration_style: classic
+custom:
+  accent: navy
+  decoration: laurel
+  header: gold
+  animation: none
+  icon: flag-gr
+schedule:
+  - theme: christmas
+    start: 2026-12-01
+    end: 2027-01-06
+    message: Καλά Χριστούγεννα — Merry Christmas from the St. George Greek School!
+  - theme: independence
+    start: 2027-03-18
+    end: 2027-03-28
+    message: Χρόνια πολλά, Ελλάδα! Celebrating Greek Independence Day, March 25.
+  - theme: easter
+    start: 2027-05-02
+    end: 2027-05-16
+    message: Χριστός Ανέστη! Christ is Risen!
+  - theme: backtoschool
+    start: 2027-08-23
+    end: 2027-09-21
+    message: Welcome back! Καλή σχολική χρονιά!
+  - theme: autumn
+    start: 2027-10-01
+    end: 2027-10-20
+  - theme: oxi
+    start: 2027-10-21
+    end: 2027-10-28
+    message: Χρόνια πολλά! Honoring OXI Day, October 28.

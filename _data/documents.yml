@@ -1,0 +1,9 @@
+documents:
+  - title: Academic Calendar 2026–2027
+    description: The official school calendar for the 2026–2027 school year.
+    file: /academic-calendar-2026-2027.pdf
+    category: calendar
+  - title: Enrollment Form
+    description: Complete one form per family and return it to the Greek School.
+    file: /registration-form.pdf
+    category: registration

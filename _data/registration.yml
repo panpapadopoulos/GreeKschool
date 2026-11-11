@@ -1,0 +1,28 @@
+status: auto
+opens: ""
+deadline: 2026-09-06
+deadline_text: "Enrollment deadline: September 6, 2026."
+late_text: "Missed the deadline? [Contact the director](mailto:greekschool@stgeorgenwi.org) — we're happy to help."
+tuition:
+  - title: Orthodox Church Members
+    price: $400
+    unit: per child
+    details: ""
+    note: If your membership is with a parish other than St. George, please submit a letter of good standing to the church office upon registration.
+  - title: Non-Members
+    price: $550
+    unit: first child
+    details: $350 for each additional child
+    note: ""
+form_pdf: /registration-form.pdf
+form_label: Download Enrollment Form
+steps:
+  - title: Fill out the form
+    text: Download and complete the enrollment form for each family.
+    button: form
+  - title: Pay tuition
+    text: Pay online, by phone at [219-322-6165](tel:2193226165), or in person at the church office.
+    button: payment
+  - title: Submit the form
+    text: Email the completed form to the Greek School or drop it off at the church office.
+    button: email

@@ -1,0 +1,33 @@
+# Flags any file in the upload folders that is not an allowed type
+# (the same lists as .pages.yml). Pages CMS already refuses other types; this also
+# catches files added another way. A failed run shows a red X in the Actions tab.
+name: Check uploaded files
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/uploads/**"
+      - "assets/documents/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Only allowed file types
+        run: |
+          bad=$(find assets/uploads assets/documents -type f \
+            ! -name '.gitkeep' \
+            ! -iname '*.jpg' ! -iname '*.jpeg' ! -iname '*.png' ! -iname '*.webp' \
+            ! -iname '*.pdf' ! -iname '*.docx' ! -iname '*.xlsx' 2>/dev/null || true)
+          if [ -n "$bad" ]; then
+            echo "::error::These files are not an allowed type and should be removed:"
+            echo "$bad"
+            exit 1
+          fi
+          echo "All uploaded files are allowed types."

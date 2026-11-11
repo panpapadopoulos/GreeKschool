@@ -1,0 +1,58 @@
+name: St. George Greek School
+name_greek: Ελληνικό Σχολείο Αγίου Γεωργίου
+location: Schererville, Indiana
+hero_lead: Discover your heritage through the Greek language, culture and faith of our ancestors. Classes for students K–6, Tuesday evenings at St. George Greek Orthodox Church.
+welcome_title: Καλώς ήρθατε! Welcome!
+welcome_text: |-
+  The St. George Greek School offers a nurturing and engaging learning environment where students can discover their heritage as they study the Greek language and culture of our ancestors.
+
+  We offer Greek education from **Kindergarten to 6th grade** learning level. Students are placed according to their level of Greek language ability, so every child learns at the right pace.
+grades: K–6
+grades_note: Placed by Greek language ability
+class_day: Tuesday Evenings
+class_day_short: Τρ
+class_hours: 6:00 – 7:45 pm
+season: September – May
+season_note: At St. George Greek Orthodox Church
+school_year: 2026–2027
+school_year_dates: September 15, 2026 – May 18, 2027
+director_title: Greek School Director
+director_name: Dr. Angela Fauth
+email: greekschool@stgeorgenwi.org
+phone: (219) 322-6165
+church_name: St. George Greek Orthodox Church
+address_line1: 528 West 77th Avenue
+address_line2: Schererville, Indiana 46375
+church_website: https://stgeorgenwi.org
+payment_link: https://stgeorgedonation.square.site/product/greek-school-tuition/15?cs=true&cst=custom
+subjects_intro: Taught at all levels throughout the school year.
+subjects:
+  - title: Alphabet & Reading
+    text: From first letters to confident reading of Greek words and stories.
+    icon: book
+  - title: Writing & Grammar
+    text: Building strong writing skills and an understanding of Greek grammar.
+    icon: pen
+  - title: Conversation & Vocabulary
+    text: Speaking practice through everyday conversations, plus the words and expressions to talk in Greek with family and friends.
+    icon: chat
+  - title: Faith & Traditions
+    text: Religious and cultural traditions of the Greek Orthodox Church.
+    icon: cross
+  - title: History
+    text: Lessons on Greek history and the stories of our ancestors.
+    icon: temple
+  - title: Programs
+    text: Students perform at the OXI Day, Christmas and March 25th programs.
+    icon: star
+resources_intro: In class and at home, our students learn with the books and online platforms of two trusted Greek-language programs.
+resources:
+  - title: Greek123
+    text: A proven step-by-step method to Greek fluency, combining books with a digital learning platform.
+    link: https://www.greek123.com
+    link_label: Visit greek123.com
+  - title: Ellinopoula
+    text: An e-learning platform that makes Greek exciting for kids with interactive lessons, games, videos and culture.
+    link: https://www.ellinopoula.com
+    link_label: Visit ellinopoula.com
+links: []

@@ -1,235 +1,81 @@
+---
+# This page is built by GitHub Pages (Jekyll). Content comes from the _data/ folder,
+# which is edited through Pages CMS (see .pages.yml and docs/ADMIN-GUIDE.md).
+---
+{%- assign s = site.data.school -%}
+{%- assign reg = site.data.registration -%}
+{%- assign today = site.time | date: "%Y%m%d" | plus: 0 -%}
+{%- capture tel -%}{{ s.phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | remove: "." }}{%- endcapture -%}
 <!doctype html>
 <html lang="en">
-<head> 
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>St. George Greek School | Schererville, Indiana</title>
-<meta name="description" content="The Greek School of St. George Greek Orthodox Church in Schererville, Indiana. Greek language, culture and faith for students K–6.">
-<link rel="icon" href="images/logo.png">
+<title>{{ s.name }} | {{ s.location }}</title>
+<meta name="description" content="The Greek School of {{ s.church_name }} in {{ s.location }}. Greek language, culture and faith for students {{ s.grades }}.">
+<link rel="canonical" href="{{ site.url }}/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ s.name }} | {{ s.location }}">
+<meta property="og:description" content="Greek language, culture and faith for students {{ s.grades }} at {{ s.church_name }}.">
+<meta property="og:url" content="{{ site.url }}/">
+<meta property="og:image" content="{{ site.url }}/images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2a6aa0">
+<link rel="icon" href="/images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --blue: #2a6aa0;        /* church site banner blue */
-    --navy: #1d3f7a;        /* seal navy */
-    --navy-dark: #142d58;
-    --sky: #e9f1f8;
-    --gold: #c9a227;
-    --text: #22303f;
-    --muted: #5b6878;
-    --white: #ffffff;
-    --radius: 14px;
-    --key: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M0 19H20M2 19V1H18V15H6V5H14V11H10' fill='none' stroke='%23ffffff' stroke-opacity='.55' stroke-width='2'/%3E%3C/svg%3E");
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font-family: "Open Sans", system-ui, sans-serif;
-    color: var(--text);
-    background: var(--white);
-    line-height: 1.65;
-  }
-  h1, h2, h3 { font-family: "Libre Baskerville", Georgia, serif; color: var(--navy); line-height: 1.25; }
-  a { color: var(--blue); }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-
-  /* ---------- Header ---------- */
-  header {
-    background: var(--blue);
-    color: var(--white);
-    position: sticky; top: 0; z-index: 10;
-    box-shadow: 0 2px 10px rgba(0,0,0,.15);
-  }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 20px; max-width: 1080px; margin: 0 auto; }
-  .brand { display: flex; align-items: center; gap: 12px; color: var(--white); text-decoration: none; }
-  .bar, .brand img, .brand strong { transition: all .3s ease; }
-  .brand img { width: 72px; height: 72px; border-radius: 50%; }
-  header.shrink .bar { padding-top: 6px; padding-bottom: 6px; }
-  header.shrink .brand img { width: 44px; height: 44px; }
-  header.shrink .brand strong { font-size: 1rem; }
-  .brand strong { font-family: "Libre Baskerville", serif; font-weight: 400; font-size: 1.1rem; letter-spacing: .03em; display: block; text-transform: uppercase; }
-  .brand span { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
-  nav { display: flex; gap: 4px; flex-wrap: wrap; }
-  nav a { color: var(--white); text-decoration: none; font-weight: 600; font-size: .92rem; padding: 8px 10px; border-radius: 8px; }
-  nav a:hover { background: rgba(255,255,255,.15); }
-  nav a.cta { background: var(--white); color: var(--blue); }
-  nav a.cta:hover { background: var(--sky); }
-  .menu-btn { display: none; background: none; border: 1px solid rgba(255,255,255,.6); color: #fff; border-radius: 8px; padding: 6px 10px; font-size: 1.1rem; cursor: pointer; }
-
-  /* ---------- Hero ---------- */
-  .hero {
-    background:
-      radial-gradient(ellipse 55% 60% at 50% 55%, rgba(20,45,88,.55) 0%, rgba(20,45,88,0) 100%),
-      linear-gradient(180deg, rgba(20,45,88,.45) 0%, rgba(20,45,88,.15) 40%, rgba(20,45,88,.65) 100%),
-      url("images/hero.jpg") center 35% / cover no-repeat var(--navy);
-    color: var(--white);
-    text-align: center;
-    padding: 56px 0 76px;
-    min-height: min(78vh, 720px);
-    display: flex; align-items: center;
-    position: relative;
-  }
-  .hero h1, .hero p { text-shadow: 0 2px 4px rgba(0,0,0,.5), 0 2px 18px rgba(0,0,0,.55); }
-  .hero .wrap { position: relative; width: 100%; }
-  .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 20px; background: var(--key) repeat-x; }
-  .hero img { width: 180px; height: 180px; border-radius: 50%; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
-  .hero h1 { color: var(--white); font-size: clamp(1.9rem, 4.5vw, 3rem); margin: 24px 0 6px; }
-  .hero .greek { font-family: "Libre Baskerville", serif; font-size: 1.15rem; opacity: .9; margin: 0; letter-spacing: .04em; }
-  .hero p.lead { max-width: 640px; margin: 18px auto 30px; font-size: 1.08rem; opacity: .95; }
-  .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 13px 26px; border-radius: 999px; font-weight: 700; text-decoration: none; transition: transform .15s, box-shadow .15s; }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.2); }
-  .btn-gold { background: var(--gold); color: var(--navy-dark); }
-  .btn-white { background: var(--white); color: var(--navy); }
-  .btn-outline { border: 2px solid var(--white); color: var(--white); }
-  .btn-blue { background: var(--blue); color: var(--white); }
-
-  /* ---------- Sections ---------- */
-  section { padding: 72px 0; scroll-margin-top: 70px; }
-  section.alt { background: var(--sky); }
-  .section-title { text-align: center; margin: 0 0 8px; font-size: clamp(1.6rem, 3vw, 2.1rem); }
-  .section-sub { text-align: center; color: var(--muted); margin: 0 auto 40px; max-width: 620px; }
-  .grid { display: grid; gap: 22px; }
-  .grid-3 { grid-template-columns: repeat(3, 1fr); }
-  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-  .card { background: var(--white); border-radius: var(--radius); padding: 26px; box-shadow: 0 4px 18px rgba(29,63,122,.08); border-top: 4px solid var(--blue); }
-  .card h3 { margin: 0 0 8px; font-size: 1.15rem; }
-  .card p { margin: 0; color: var(--muted); }
-  .subjects .card { text-align: center; display: flex; flex-direction: column; align-items: center; padding: 32px 26px; }
-  .icon { width: 64px; height: 64px; border-radius: 50%; background: var(--sky); color: var(--blue); display: grid; place-items: center; margin-bottom: 16px; }
-  .icon svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-
-  .resources .card { text-decoration: none; text-align: center; border-top-color: var(--gold); transition: transform .15s, box-shadow .15s; }
-  .resources .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(29,63,122,.15); }
-  .resources h3 { font-size: 1.4rem; }
-  .more-link { display: inline-block; margin-top: 14px; font-weight: 700; color: var(--blue); font-size: .92rem; }
-
-  /* About */
-  .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
-  .about p { font-size: 1.05rem; }
-  .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
-  .facts li { background: var(--sky); border-radius: 10px; padding: 14px 18px; display: flex; gap: 14px; align-items: center; }
-  .facts b { color: var(--navy); display: block; }
-  .facts small { color: var(--muted); font-size: .92rem; }
-  .facts .n { flex: none; width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-weight: 700; }
-
-  /* Tuition */
-  .price { font-family: "Libre Baskerville", serif; font-size: 2.2rem; color: var(--navy); margin: 6px 0; }
-  .price small { font-family: "Open Sans", sans-serif; font-size: .95rem; color: var(--muted); }
-  .note { font-size: .88rem; color: var(--muted); margin-top: 10px !important; font-style: italic; }
-  .steps { counter-reset: s; list-style: none; padding: 0; margin: 40px 0 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-  .steps li { counter-increment: s; background: var(--white); border-radius: var(--radius); padding: 22px 22px 22px 70px; position: relative; box-shadow: 0 4px 18px rgba(29,63,122,.08); }
-  .steps li::before { content: counter(s); position: absolute; left: 20px; top: 20px; width: 34px; height: 34px; border-radius: 50%; background: var(--gold); color: var(--navy-dark); font-weight: 700; display: grid; place-items: center; }
-  .steps b { color: var(--navy); display: block; margin-bottom: 4px; }
-  .steps p { margin: 0 0 10px; color: var(--muted); font-size: .95rem; }
-  .steps a.small { font-weight: 700; font-size: .92rem; }
-  .deadline { margin: 30px auto 0; text-align: center; background: var(--white); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 16px; max-width: 640px; }
-
-  /* Calendar */
-  .dates { list-style: none; padding: 0; margin: 0 auto; max-width: 760px; }
-  .dates li { display: grid; grid-template-columns: 120px 1fr auto; gap: 16px; align-items: center; padding: 14px 18px; border-bottom: 1px solid #dbe5ef; }
-  .dates li:last-child { border-bottom: 0; }
-  .dates time { font-weight: 700; color: var(--navy); }
-  .tag { font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
-  .tag.class { background: #fff3c4; color: #7a5b00; }
-  .tag.event { background: #d4eef5; color: #0f5566; }
-  .tag.off { background: #e6e6e6; color: #444; }
-  .tag.feast { background: #e6ecf8; color: var(--navy); }
-  .tag.fund { background: #dcf3d6; color: #2d6a1f; }
-  .tag.trip { background: #efe3f7; color: #6b3d8a; }
-  .dates li.month { display: block; padding: 22px 18px 6px; border-bottom: 2px solid var(--blue); font-family: "Libre Baskerville", serif; font-weight: 700; color: var(--blue); font-size: 1.05rem; }
-  .dates li.month:first-child { padding-top: 10px; }
-  .cal-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
-  .cal-box { background: var(--white); border-radius: var(--radius); box-shadow: 0 4px 18px rgba(29,63,122,.08); padding: 10px 6px; }
-  .cal-note { text-align: center; color: var(--muted); font-size: .92rem; margin-top: 18px; }
-
-  /* Photos */
-  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .gallery a { display: block; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 14px rgba(29,63,122,.12); }
-  .gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .3s; }
-  .gallery a:hover img { transform: scale(1.05); }
-  .gallery:not(.all) a.more { display: none; }
-  button.btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
-  .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(10,20,40,.92); display: none; align-items: center; justify-content: center; flex-direction: column; padding: 20px; }
-  .lightbox.open { display: flex; }
-  .lightbox img { max-width: 100%; max-height: calc(100vh - 40px); border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
-  .lb-btn { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 50px; height: 50px; border-radius: 50%; font-size: 1.6rem; cursor: pointer; display: grid; place-items: center; }
-  .lb-btn:hover { background: rgba(255,255,255,.25); }
-  .lb-close { top: 16px; left: 16px; }
-  .lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
-  .lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
-
-  /* Contact */
-  .contact { text-align: center; }
-  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; max-width: 820px; margin: 0 auto; }
-  .map { display: block; width: 100%; max-width: 820px; height: 320px; margin: 22px auto 0; border: 0; border-radius: var(--radius); box-shadow: 0 4px 18px rgba(29,63,122,.1); }
-  .director { display: flex; flex-direction: column; justify-content: center; background: var(--white); border-radius: var(--radius); padding: 34px 40px; box-shadow: 0 4px 18px rgba(29,63,122,.1); border-top: 4px solid var(--gold); }
-  .director .role { text-transform: uppercase; letter-spacing: .1em; font-size: .8rem; color: var(--muted); font-weight: 700; }
-  .director h3 { font-size: 1.5rem; margin: 6px 0 14px; }
-  .director a { font-weight: 700; font-size: 1.05rem; }
-  .director p { margin: 6px 0; }
-
-  /* Footer */
-  footer { background: var(--navy-dark); color: rgba(255,255,255,.85); text-align: center; padding: 40px 20px 30px; position: relative; font-size: .92rem; }
-  footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 20px; background: var(--key) repeat-x; opacity: .6; }
-  footer a { color: #fff; }
-  .copyright { margin: 22px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.15); max-width: 720px; font-size: .82rem; opacity: .75; }
-  .footer-logos { display: flex; justify-content: center; align-items: center; gap: 24px; margin: 10px 0 14px; flex-wrap: wrap; }
-  .footer-logos { gap: 40px; }
-  .footer-logos img { height: 110px; display: block; }
-  .footer-logos .seal { width: 110px; }
-  .footer-logos .church { width: 110px; }
-  .footer-logos a { transition: opacity .15s; }
-  .footer-logos a:hover { opacity: .8; }
-
-  @media (max-width: 900px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 560px) { .grid-3 { grid-template-columns: 1fr; } .gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; } .lb-prev, .lb-next { top: auto; bottom: 16px; transform: none; } }
-  @media (max-width: 1100px) {
-    .menu-btn { display: block; }
-    nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--blue); flex-direction: column; padding: 8px 16px 16px; box-shadow: 0 8px 16px rgba(0,0,0,.15); }
-    nav.open { display: flex; }
-    nav a.cta { align-self: flex-start; }
-  }
-  @media (max-width: 820px) {
-    .about { grid-template-columns: 1fr; }
-    .grid-3 { grid-template-columns: repeat(2, 1fr); }
-    .brand strong, header.shrink .brand strong { font-size: .95rem; }
-    .brand img { width: 56px; height: 56px; }
-    .dates li { grid-template-columns: 1fr auto; }
-    .dates li span.what { grid-column: 1 / -1; grid-row: 2; }
-  }
-</style>
+<link rel="stylesheet" href="/assets/css/site.css?v={{ site.time | date: '%s' }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "School",
+  "name": {{ s.name | jsonify }},
+  "alternateName": {{ s.name_greek | jsonify }},
+  "url": "{{ site.url }}/",
+  "logo": "{{ site.url }}/images/logo.png",
+  "email": {{ s.email | jsonify }},
+  "telephone": {{ s.phone | jsonify }},
+  "address": { "@type": "PostalAddress", "streetAddress": {{ s.address_line1 | jsonify }}, "addressLocality": "Schererville", "addressRegion": "IN", "postalCode": "46375", "addressCountry": "US" },
+  "parentOrganization": { "@type": "Church", "name": {{ s.church_name | jsonify }}, "url": {{ s.church_website | jsonify }} }
+}
+</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<header>
+<header class="site">
   <div class="bar">
     <a class="brand" href="#top">
-      <img src="images/logo-white.png" alt="">
-      <div><strong>St. George Greek School</strong><span>Schererville, Indiana</span></div>
+      <img src="/images/logo-white.png" alt="" width="72" height="72">
+      <div><strong>{{ s.name }}</strong><span>{{ s.location }}</span></div>
     </a>
-    <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
-    <nav onclick="if(event.target.tagName==='A')this.classList.remove('open')">
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="main" id="site-nav" aria-label="Main">
+      <a href="#news" data-news-link hidden>News</a>
       <a href="#about">About</a>
       <a href="#registration">Registration</a>
       <a href="#calendar">Calendar</a>
       <a href="#photos">Photos</a>
       <a href="#contact">Contact</a>
-      <a href="https://stgeorgenwi.org" target="_blank" rel="noopener">Our Church ↗</a>
-      <a class="cta" href="https://stgeorgedonation.square.site/product/greek-school-tuition/15?cs=true&cst=custom" target="_blank" rel="noopener">Pay Tuition</a>
+      <a href="{{ s.church_website }}" target="_blank" rel="noopener">Our Church ↗</a>
+      <a class="cta" href="{{ s.payment_link }}" target="_blank" rel="noopener">Pay Tuition</a>
     </nav>
   </div>
 </header>
+<div class="season-bar" role="note" aria-label="Seasonal greeting">
+  <div class="wrap"><span class="season-icon" aria-hidden="true"></span><span class="season-text"></span></div>
+  <button type="button" aria-label="Hide this message">✕</button>
+</div>
 
+<main id="main">
 <!-- ================= HERO ================= -->
 <div class="hero" id="top">
   <div class="wrap">
-    <img src="images/logo-color.png" alt="Ελληνικό Σχολείο Αγίου Γεωργίου – St. George Greek School seal">
-    <h1>St. George Greek School</h1>
-    <p class="greek">Ελληνικό Σχολείο Αγίου Γεωργίου</p>
-    <p class="lead">Discover your heritage through the Greek language, culture and faith of our ancestors. Classes for students K–6, Tuesday evenings at St. George Greek Orthodox Church.</p>
+    <img src="/images/logo-color.png" alt="{{ s.name_greek }} – {{ s.name }} seal" width="180" height="180">
+    <h1>{{ s.name }}</h1>
+    <p class="greek" lang="el">{{ s.name_greek }}</p>
+    <p class="lead">{{ s.hero_lead }}</p>
     <div class="btns">
       <a class="btn btn-gold" href="#registration">Enroll Now</a>
       <a class="btn btn-outline" href="#contact">Contact Us</a>
@@ -237,47 +83,86 @@
   </div>
 </div>
 
+<!-- ================= ANNOUNCEMENTS (shown only when there are current announcements) ================= -->
+{%- assign news = site.data.announcements.announcements -%}
+{%- assign keys = "" -%}
+{%- for a in news -%}
+  {%- assign exp = a.expires | date: "%Y%m%d" | plus: 0 -%}
+  {%- if a.title and a.title != "" -%}{%- unless exp > 0 and exp < today -%}
+    {%- assign d = a.date | date: "%Y%m%d" | plus: 0 -%}
+    {%- assign inv = 99999999 | minus: d -%}
+    {%- if a.important -%}{%- assign rank = 1 -%}{%- else -%}{%- assign rank = 2 -%}{%- endif -%}
+    {%- capture keys -%}{{ keys }}{{ rank }}{{ inv }}-{{ forloop.index0 | plus: 1000 }},{%- endcapture -%}
+  {%- endunless -%}{%- endif -%}
+{%- endfor -%}
+{%- assign order = keys | split: "," | sort -%}
+{%- if order.size > 0 %}
+<section id="news" class="news-section" data-news>
+  <div class="wrap">
+    <h2 class="section-title">News &amp; Announcements</h2>
+    <p class="section-sub">The latest from the {{ s.name }}.</p>
+    <div class="news">
+      {%- for key in order -%}
+      {%- assign idx = key | split: "-" | last | minus: 1000 -%}
+      {%- assign a = news[idx] -%}
+      {%- assign type = a.type | default: "general" -%}
+      <article class="news-item{% if a.important %} important{% endif %}{% if a.image and a.image != '' %} has-image{% endif %}" data-start="{{ a.date | date: '%Y-%m-%d' }}" data-end="{{ a.expires | date: '%Y-%m-%d' }}"{% if a.language == "el" %} lang="el"{% endif %}>
+        {%- if a.image and a.image != "" %}<img src="{{ a.image }}" alt="{{ a.image_alt | default: '' }}" loading="lazy">{% endif %}
+        <div>
+          <div class="news-meta">
+            {%- if a.important %}<span class="flag">Important</span>{% endif %}
+            <span>{% case type %}{% when "notice" %}Important Notice{% when "event" %}Upcoming Event{% when "closure" %}School Closure{% when "registration" %}Registration{% when "celebration" %}Celebration{% else %}General Information{% endcase %}</span>
+            {%- if a.date and a.date != "" %}<span aria-hidden="true">·</span><time datetime="{{ a.date | date: '%Y-%m-%d' }}">{{ a.date | date: "%B %-d, %Y" }}</time>{% endif %}
+          </div>
+          <h3>{{ a.title }}</h3>
+          <div class="news-body">{{ a.body | markdownify }}</div>
+          {%- if a.attachment and a.attachment != "" %}
+          <a class="news-attach" href="{{ a.attachment }}" target="_blank" rel="noopener">📄 {{ a.attachment_label | default: "View attachment (PDF)" }}</a>
+          {%- endif %}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
 <!-- ================= ABOUT ================= -->
 <section id="about">
   <div class="wrap">
     <div class="about">
       <div>
-        <h2>Καλώς ήρθατε! Welcome!</h2>
-        <p>The St. George Greek School offers a nurturing and engaging learning environment where students can discover their heritage as they study the Greek language and culture of our ancestors.</p>
-        <p>We offer Greek education from <b>Kindergarten to 6th grade</b> learning level. Students are placed according to their level of Greek language ability, so every child learns at the right pace.</p>
+        <h2>{{ s.welcome_title }}</h2>
+        {{ s.welcome_text | markdownify }}
       </div>
       <ul class="facts">
-        <li><span class="n">K–6</span><div><b>Grade Levels</b><small>Placed by Greek language ability</small></div></li>
-        <li><span class="n">Τρ</span><div><b>Tuesday Evenings</b><small>6:00 – 7:45 pm</small></div></li>
-        <li><span class="n">⛪</span><div><b>September – May</b><small>At St. George Greek Orthodox Church</small></div></li>
+        <li><span class="n">{{ s.grades }}</span><div><b>Grade Levels</b><small>{{ s.grades_note }}</small></div></li>
+        <li><span class="n" lang="el">{{ s.class_day_short }}</span><div><b>{{ s.class_day }}</b><small>{{ s.class_hours }}</small></div></li>
+        <li><span class="n" aria-hidden="true">⛪</span><div><b>{{ s.season }}</b><small>{{ s.season_note }}</small></div></li>
       </ul>
     </div>
 
-    <h2 class="section-title" style="margin-top:64px">What Our Students Learn</h2>
-    <p class="section-sub">Taught at all levels throughout the school year.</p>
+    <h2 class="section-title sub-title">What Our Students Learn</h2>
+    <p class="section-sub">{{ s.subjects_intro }}</p>
     <div class="grid grid-3 subjects">
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></svg></div><h3>Alphabet &amp; Reading</h3><p>From first letters to confident reading of Greek words and stories.</p></div>
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"/><path d="M14.5 5.5l3 3"/></svg></div><h3>Writing &amp; Grammar</h3><p>Building strong writing skills and an understanding of Greek grammar.</p></div>
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M17 9h3a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-4-3h-3"/></svg></div><h3>Conversation &amp; Vocabulary</h3><p>Speaking practice through everyday conversations, plus the words and expressions to talk in Greek with family and friends.</p></div>
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M9 4.5h6M7 9h10M9 15.5l6-1.5"/></svg></div><h3>Faith &amp; Traditions</h3><p>Religious and cultural traditions of the Greek Orthodox Church.</p></div>
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5M4 9h16M6 9v8M10 9v8M14 9v8M18 9v8M3 20h18M4 17h16"/></svg></div><h3>History</h3><p>Lessons on Greek history and the stories of our ancestors.</p></div>
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></div><h3>Programs</h3><p>Students perform at the OXI Day, Christmas and March 25th programs.</p></div>
+      {%- for sub in s.subjects %}
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true">{% case sub.icon %}{% when "pen" %}<path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"/><path d="M14.5 5.5l3 3"/>{% when "chat" %}<path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M17 9h3a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-4-3h-3"/>{% when "cross" %}<path d="M12 2v20M9 4.5h6M7 9h10M9 15.5l6-1.5"/>{% when "temple" %}<path d="M3 9l9-5 9 5M4 9h16M6 9v8M10 9v8M14 9v8M18 9v8M3 20h18M4 17h16"/>{% when "star" %}<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>{% when "music" %}<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>{% when "globe" %}<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>{% else %}<path d="M4 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>{% endcase %}</svg></div><h3>{{ sub.title }}</h3><p>{{ sub.text }}</p></div>
+      {%- endfor %}
     </div>
 
-    <h2 class="section-title" style="margin-top:64px">Our Learning Resources</h2>
-    <p class="section-sub">In class and at home, our students learn with the books and online platforms of two trusted Greek-language programs.</p>
+    {%- if s.resources.size > 0 %}
+    <h2 class="section-title sub-title">Our Learning Resources</h2>
+    <p class="section-sub">{{ s.resources_intro }}</p>
     <div class="grid grid-2 resources">
-      <a class="card" href="https://www.greek123.com" target="_blank" rel="noopener">
-        <h3>Greek123</h3>
-        <p>A proven step-by-step method to Greek fluency, combining books with a digital learning platform.</p>
-        <span class="more-link">Visit greek123.com ↗</span>
+      {%- for r in s.resources %}
+      <a class="card" href="{{ r.link }}" target="_blank" rel="noopener">
+        <h3>{{ r.title }}</h3>
+        <p>{{ r.text }}</p>
+        <span class="more-link">{{ r.link_label | default: "Visit website" }} ↗</span>
       </a>
-      <a class="card" href="https://www.ellinopoula.com" target="_blank" rel="noopener">
-        <h3>Ellinopoula</h3>
-        <p>An e-learning platform that makes Greek exciting for kids with interactive lessons, games, videos and culture.</p>
-        <span class="more-link">Visit ellinopoula.com ↗</span>
-      </a>
+      {%- endfor %}
     </div>
+    {%- endif %}
   </div>
 </section>
 
@@ -285,118 +170,163 @@
 <section id="registration" class="alt">
   <div class="wrap">
     <h2 class="section-title">Registration &amp; Tuition</h2>
-    <p class="section-sub">2026–2027 School Year · September 15, 2026 – May 18, 2027</p>
+    <p class="section-sub">{{ s.school_year }} School Year · {{ s.school_year_dates }}</p>
+    {%- if reg.status != "hide" %}
+    <div class="status" data-reg-status="{{ reg.status | default: 'auto' }}" data-opens="{{ reg.opens | date: '%Y-%m-%d' }}" data-deadline="{{ reg.deadline | date: '%Y-%m-%d' }}" data-opens-label="{{ reg.opens | date: '%B %-d' }}" data-deadline-label="{{ reg.deadline | date: '%B %-d, %Y' }}" hidden><span role="status"></span></div>
+    {%- endif %}
 
     <div class="grid grid-2">
+      {%- for t in reg.tuition %}
       <div class="card">
-        <h3>Orthodox Church Members</h3>
-        <div class="price">$400 <small>per child</small></div>
-        <p class="note">If your membership is with a parish other than St. George, please submit a letter of good standing to the church office upon registration.</p>
+        <h3>{{ t.title }}</h3>
+        <div class="price">{{ t.price }} {% if t.unit and t.unit != "" %}<small>{{ t.unit }}</small>{% endif %}</div>
+        {%- if t.details and t.details != "" %}<p>{{ t.details }}</p>{% endif %}
+        {%- if t.note and t.note != "" %}<p class="note">{{ t.note }}</p>{% endif %}
       </div>
-      <div class="card">
-        <h3>Non-Members</h3>
-        <div class="price">$550 <small>first child</small></div>
-        <p>$350 for each additional child</p>
-      </div>
+      {%- endfor %}
     </div>
 
     <ol class="steps">
+      {%- for st in reg.steps %}
       <li>
-        <b>Fill out the form</b>
-        <p>Download and complete the enrollment form for each family.</p>
-        <a class="small" href="registration-form.pdf" download>⬇ Download Enrollment Form</a>
+        <b>{{ st.title }}</b>
+        <p>{{ st.text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</p>
+        {%- case st.button %}
+        {%- when "form" %}<a class="small" href="{{ reg.form_pdf }}" download>⬇ {{ reg.form_label | default: "Download Enrollment Form" }}</a>
+        {%- when "payment" %}<a class="small" href="{{ s.payment_link }}" target="_blank" rel="noopener">💳 Pay Tuition Online</a>
+        {%- when "email" %}<a class="small" href="mailto:{{ s.email }}?subject=Greek%20School%20Enrollment">✉ Email the Form</a>
+        {%- endcase %}
       </li>
-      <li>
-        <b>Pay tuition</b>
-        <p>Pay online, by phone at <a href="tel:2193226165">219-322-6165</a>, or in person at the church office.</p>
-        <a class="small" href="https://stgeorgedonation.square.site/product/greek-school-tuition/15?cs=true&cst=custom" target="_blank" rel="noopener">💳 Pay Tuition Online</a>
-      </li>
-      <li>
-        <b>Submit the form</b>
-        <p>Email the completed form to the Greek School or drop it off at the church office.</p>
-        <a class="small" href="mailto:greekschool@stgeorgenwi.org?subject=Greek%20School%20Enrollment">✉ Email the Form</a>
-      </li>
+      {%- endfor %}
     </ol>
 
-    <p class="deadline"><b>Enrollment deadline: September 6, 2026.</b><br>Missed the deadline? <a href="mailto:greekschool@stgeorgenwi.org">Contact the director</a> — we're happy to help.</p>
+    {%- if reg.deadline_text != "" or reg.late_text != "" %}
+    <p class="deadline">{% if reg.deadline_text != "" %}<b>{{ reg.deadline_text }}</b><br>{% endif %}{{ reg.late_text | markdownify | remove: "<p>" | remove: "</p>" | strip }}</p>
+    {%- endif %}
   </div>
 </section>
 
-<!-- ================= CALENDAR ================= -->
-<!-- To update each year: edit the dates below. -->
+<!-- ================= CALENDAR =================
+     Data: _data/calendar.yml (settings + PDF), events.yml, deadlines.yml,
+     closures.yml (no-class days and extra classes), class_schedule.yml (regular classes).
+     Dates are plain calendar dates (YYYY-MM-DD) in America/Chicago. -->
+{%- assign cal = site.data.calendar -%}
+{%- assign cal_pdf = cal.academic_calendar_pdf | default: "/academic-calendar-2026-2027.pdf" -%}
+{%- assign events = site.data.events.events -%}
+{%- assign deadlines = site.data.deadlines.deadlines -%}
+{%- assign closures = site.data.closures.closures -%}
+{%- assign keys = "" -%}
+{%- for e in closures -%}{%- if e.date and e.date != "" -%}{%- capture keys -%}{{ keys }}{{ e.date | date: "%Y%m%d" }}-c{{ forloop.index0 | plus: 1000 }},{%- endcapture -%}{%- endif -%}{%- endfor -%}
+{%- for e in deadlines -%}{%- if e.date and e.date != "" -%}{%- capture keys -%}{{ keys }}{{ e.date | date: "%Y%m%d" }}-d{{ forloop.index0 | plus: 1000 }},{%- endcapture -%}{%- endif -%}{%- endfor -%}
+{%- for e in events -%}{%- if e.date and e.date != "" -%}{%- capture keys -%}{{ keys }}{{ e.date | date: "%Y%m%d" }}-e{{ forloop.index0 | plus: 1000 }},{%- endcapture -%}{%- endif -%}{%- endfor -%}
+{%- assign order = keys | split: "," | sort -%}
 <section id="calendar">
   <div class="wrap">
-    <h2 class="section-title">School Calendar 2026–2027</h2>
-    <p class="section-sub">Classes meet Tuesday evenings, 6:00 – 7:45 pm.</p>
+    <h2 class="section-title">School Calendar {{ s.school_year }}</h2>
+    <p class="section-sub">{{ cal.intro }}</p>
 
+    <div class="upcoming" id="upcoming" data-ui hidden>
+      <h3 class="sr-only">Coming up</h3>
+      <ul></ul>
+    </div>
+
+    <div class="cal-tabs" role="tablist" aria-label="Calendar views" hidden>
+      <button type="button" role="tab" id="tab-interactive" aria-controls="panel-interactive" aria-selected="true">Interactive calendar</button>
+      <button type="button" role="tab" id="tab-academic" aria-controls="panel-academic" aria-selected="false" tabindex="-1">Academic calendar</button>
+    </div>
+
+    <div id="panel-interactive" class="cal-app" data-ui role="tabpanel" aria-labelledby="tab-interactive" hidden></div>
+
+    <div id="panel-academic" role="tabpanel" aria-labelledby="tab-academic">
     <div class="cal-box">
       <ul class="dates">
-        <li class="month">September 2026</li>
-        <li><time>Sep 6</time><span class="what">Enrollment deadline</span><span class="tag class">Registration</span></li>
-        <li><time>Sep 13</time><span class="what">Veneration of the Holy Cross</span><span class="tag feast">Feast</span></li>
-        <li><time>Sep 15</time><span class="what">First Day of Classes</span><span class="tag class">Classes</span></li>
-        <li><time>Sep 29</time><span class="what">Student Fundraiser begins (runs through Oct 27)</span><span class="tag fund">Fundraiser</span></li>
-        <li class="month">October 2026</li>
-        <li><time>Oct 25</time><span class="what">OXI Day Program</span><span class="tag event">Program</span></li>
-        <li><time>Oct 27</time><span class="what">Student Fundraiser ends</span><span class="tag fund">Fundraiser</span></li>
-        <li><time>Oct 28</time><span class="what">OXI Day</span><span class="tag feast">Feast</span></li>
-        <li class="month">November 2026</li>
-        <li><time>Nov 3</time><span class="what">Voting Day</span><span class="tag off">No Classes</span></li>
-        <li><time>Nov 10</time><span class="what">Fundraiser pick-up after class</span><span class="tag fund">Fundraiser</span></li>
-        <li class="month">December 2026</li>
-        <li><time>Dec 20</time><span class="what">Christmas Program</span><span class="tag event">Program</span></li>
-        <li><time>Dec 22 &amp; 29</time><span class="what">Winter Break</span><span class="tag off">No Classes</span></li>
-        <li><time>Dec 25</time><span class="what">Nativity of our Lord &amp; Savior Jesus Christ</span><span class="tag feast">Feast</span></li>
-        <li class="month">March 2027</li>
-        <li><time>Mar 28</time><span class="what">March 25th Program</span><span class="tag event">Program</span></li>
-        <li><time>Mar 30</time><span class="what">Spring Break</span><span class="tag off">No Classes</span></li>
-        <li class="month">April 2027</li>
-        <li><time>Apr 27</time><span class="what">Holy Tuesday</span><span class="tag off">No Classes</span></li>
-        <li class="month">May 2027</li>
-        <li><time>May 2</time><span class="what">Great &amp; Holy Pascha</span><span class="tag feast">Feast</span></li>
-        <li><time>May 18</time><span class="what">Last Day of Classes</span><span class="tag class">Classes</span></li>
-        <li><time>End of May</time><span class="what">Class Field Trip (date TBD)</span><span class="tag trip">Field Trip</span></li>
+        {%- assign month = "" -%}
+        {%- for key in order -%}
+        {%- assign src = key | split: "-" | last | slice: 0 -%}
+        {%- assign idx = key | split: "-" | last | remove_first: src | minus: 1000 -%}
+        {%- case src -%}{%- when "c" -%}{%- assign e = closures[idx] -%}{%- when "d" -%}{%- assign e = deadlines[idx] -%}{%- else -%}{%- assign e = events[idx] -%}{%- endcase -%}
+        {%- assign m = e.date | date: "%B %Y" -%}
+        {%- if m != month %}
+        <li class="month">{{ m }}</li>
+        {%- assign month = m -%}
+        {%- endif -%}
+        {%- capture meta -%}{% if e.start_time and e.start_time != "" %}{{ e.start_time }}{% if e.end_time and e.end_time != "" %} – {{ e.end_time }}{% endif %}{% elsif e.time and e.time != "" %}{{ e.time }}{% endif %}{% if e.location and e.location != "" %}{% if e.start_time and e.start_time != "" %} · {% endif %}{{ e.location }}{% endif %}{%- endcapture -%}
+        {%- assign meta = meta | strip -%}
+        {%- assign desc = e.description | default: e.note -%}
+        {%- capture extra -%}{% if meta != "" %}{{ meta }}{% endif %}{% if desc and desc != "" %}{% if meta != "" %}<br>{% endif %}{{ desc }}{% endif %}{% if e.attachment and e.attachment != "" %} <a href="{{ e.attachment }}" target="_blank" rel="noopener">Details (PDF)</a>{% endif %}{% if e.link and e.link != "" %} <a href="{{ e.link }}" target="_blank" rel="noopener">More information</a>{% endif %}{%- endcapture -%}
+        {%- assign extra = extra | strip -%}
+        {%- if src == "c" -%}
+          {%- case e.type -%}{%- when "extra_class" -%}{%- assign tagc = "extra" -%}{%- assign tagl = "Extra Class" -%}{%- when "holiday" -%}{%- assign tagc = "holiday" -%}{%- assign tagl = "Holiday · No Classes" -%}{%- else -%}{%- assign tagc = "closure" -%}{%- assign tagl = "No Classes" -%}{%- endcase -%}
+        {%- elsif src == "d" -%}
+          {%- if e.kind == "registration" -%}{%- assign tagc = "registration" -%}{%- assign tagl = "Registration" -%}{%- else -%}{%- assign tagc = "deadline" -%}{%- assign tagl = "Deadline" -%}{%- endif -%}
+        {%- else -%}
+          {%- assign tagc = e.category | default: "event" -%}
+          {%- case tagc -%}{%- when "classes" -%}{%- assign tagl = "Classes" -%}{%- when "closure" -%}{%- assign tagl = "No Classes" -%}{%- when "holiday" -%}{%- assign tagl = "Holiday" -%}{%- when "feast" -%}{%- assign tagl = "Feast" -%}{%- when "national" -%}{%- assign tagl = "Greek National Day" -%}{%- when "program" -%}{%- assign tagl = "Program" -%}{%- when "fundraiser" -%}{%- assign tagl = "Fundraiser" -%}{%- when "trip" -%}{%- assign tagl = "Field Trip" -%}{%- when "meeting" -%}{%- assign tagl = "Parent Meeting" -%}{%- when "registration" -%}{%- assign tagl = "Registration" -%}{%- when "deadline" -%}{%- assign tagl = "Deadline" -%}{%- else -%}{%- assign tagc = "event" -%}{%- assign tagl = "Special Event" -%}{%- endcase -%}
+        {%- endif %}
+        <li data-date="{{ e.date | date: '%Y-%m-%d' }}" data-end="{{ e.end_date | date: '%Y-%m-%d' }}"><time datetime="{{ e.date | date: '%Y-%m-%d' }}">{% if e.date_label and e.date_label != "" %}{{ e.date_label }}{% else %}{{ e.date | date: "%b %-d" }}{% endif %}</time><span class="what">{{ e.title }}{% if extra != "" %}<small>{{ extra }}</small>{% endif %}</span><span class="tag {{ tagc }}">{{ tagl }}</span></li>
+        {%- endfor %}
+        {%- if order.size == 0 %}
+        <li class="none">No dates have been added yet. Please check back soon.</li>
+        {%- endif %}
       </ul>
     </div>
+    </div>
+
     <div class="cal-actions">
-      <a class="btn btn-blue" href="academic-calendar-2026-2027.pdf" target="_blank" rel="noopener">📅 View Original Calendar (PDF)</a>
+      <a class="btn btn-blue" href="{{ cal_pdf }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>View Academic Calendar (PDF)</a>
+      <a class="btn btn-ghost" href="{{ cal_pdf }}" download>Download PDF</a>
     </div>
   </div>
+  <script id="calendar-data" type="application/json">{"settings":{{ cal | jsonify | replace: "</", "<\/" }},"schedules":{{ site.data.class_schedule.schedules | jsonify | replace: "</", "<\/" }},"closures":{{ closures | jsonify | replace: "</", "<\/" }},"deadlines":{{ deadlines | jsonify | replace: "</", "<\/" }},"events":{{ events | jsonify | replace: "</", "<\/" }}}</script>
 </section>
 
+<!-- ================= DOCUMENTS ================= -->
+{%- assign docs = site.data.documents.documents -%}
+{%- if docs.size > 0 %}
+<section id="documents" class="alt">
+  <div class="wrap">
+    <h2 class="section-title">Documents &amp; Forms</h2>
+    <p class="section-sub">Calendars, forms and information for families.</p>
+    <ul class="docs">
+      {%- for d in docs %}{% if d.file and d.file != "" %}
+      <li>
+        <span class="ficon" aria-hidden="true">{{ d.file | split: "." | last | upcase | truncate: 4, "" }}</span>
+        <div>
+          <h3>{{ d.title }}</h3>
+          {%- if d.description and d.description != "" %}<p>{{ d.description }}</p>{% endif %}
+          <div class="links"><a href="{{ d.file }}" target="_blank" rel="noopener">View<span class="sr-only"> {{ d.title }}</span></a><a href="{{ d.file }}" download>Download<span class="sr-only"> {{ d.title }}</span></a></div>
+        </div>
+      </li>
+      {%- endif %}{% endfor %}
+    </ul>
+  </div>
+</section>
+{%- endif %}
+
 <!-- ================= PHOTOS ================= -->
-<!-- To add a photo: put a large copy in images/gallery/ and a small copy in images/gallery/thumbs/, then add a line like the ones below -->
+{%- assign g = site.data.gallery -%}
+{%- assign photos = g.photos | where: "show_in_gallery", true -%}
+{%- assign visible = g.visible_count | default: 12 -%}
+{%- assign cats = photos | map: "category" | compact | uniq -%}
 <section id="photos">
   <div class="wrap">
     <h2 class="section-title">Photos</h2>
-    <p class="section-sub">Moments from our classes, programs and celebrations.</p>
-    <div class="gallery" id="gallery">
-      <a href="images/gallery/photo-01.jpg"><img src="images/gallery/thumbs/photo-01.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-02.jpg"><img src="images/gallery/thumbs/photo-02.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-03.jpg"><img src="images/gallery/thumbs/photo-03.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-04.jpg"><img src="images/gallery/thumbs/photo-04.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-05.jpg"><img src="images/gallery/thumbs/photo-05.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-06.jpg"><img src="images/gallery/thumbs/photo-06.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-07.jpg"><img src="images/gallery/thumbs/photo-07.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-08.jpg"><img src="images/gallery/thumbs/photo-08.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-09.jpg"><img src="images/gallery/thumbs/photo-09.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-10.jpg"><img src="images/gallery/thumbs/photo-10.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-11.jpg"><img src="images/gallery/thumbs/photo-11.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-12.jpg"><img src="images/gallery/thumbs/photo-12.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-13.jpg" class="more"><img src="images/gallery/thumbs/photo-13.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-14.jpg" class="more"><img src="images/gallery/thumbs/photo-14.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-15.jpg" class="more"><img src="images/gallery/thumbs/photo-15.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-16.jpg" class="more"><img src="images/gallery/thumbs/photo-16.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-17.jpg" class="more"><img src="images/gallery/thumbs/photo-17.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-18.jpg" class="more"><img src="images/gallery/thumbs/photo-18.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-19.jpg" class="more"><img src="images/gallery/thumbs/photo-19.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-20.jpg" class="more"><img src="images/gallery/thumbs/photo-20.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-21.jpg" class="more"><img src="images/gallery/thumbs/photo-21.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-22.jpg" class="more"><img src="images/gallery/thumbs/photo-22.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-23.jpg" class="more"><img src="images/gallery/thumbs/photo-23.jpg" alt="St. George Greek School photo" loading="lazy"></a>
-      <a href="images/gallery/photo-24.jpg" class="more"><img src="images/gallery/thumbs/photo-24.jpg" alt="St. George Greek School photo" loading="lazy"></a>
+    <p class="section-sub">{{ g.intro }}</p>
+    {%- assign realcats = "" | split: "" -%}{%- for c in cats -%}{%- if c != "" -%}{%- assign realcats = realcats | push: c -%}{%- endif -%}{%- endfor -%}
+    {%- if realcats.size > 1 %}
+    <div class="chips" role="group" aria-label="Filter photos">
+      <button type="button" data-cat="" aria-pressed="true">All</button>
+      {%- for c in realcats %}<button type="button" data-cat="{{ c | escape }}" aria-pressed="false">{{ c }}</button>{% endfor %}
     </div>
-    <div class="cal-actions"><button class="btn btn-blue" id="showAll" type="button">Show all 24 photos</button></div>
+    {%- endif %}
+    <div class="gallery" id="gallery">
+      {%- for p in photos %}
+      <a href="{{ p.image }}"{% if forloop.index > visible %} class="more"{% endif %} data-caption="{{ p.caption | escape }}" data-cat="{{ p.category | escape }}"><img src="{{ p.thumb | default: p.image }}" alt="{% if p.caption and p.caption != '' %}{{ p.caption | escape }}{% else %}{{ s.name }} photo{% endif %}" loading="lazy" decoding="async" width="700" height="525"></a>
+      {%- endfor %}
+    </div>
+    {%- if photos.size > visible %}
+    <div class="cal-actions"><button class="btn btn-blue" id="showAll" type="button" aria-controls="gallery" aria-expanded="false">Show all {{ photos.size }} photos</button></div>
+    {%- endif %}
   </div>
 </section>
 
@@ -407,102 +337,66 @@
     <p class="section-sub">Please contact our director with any questions about classes, placement or registration.</p>
     <div class="contact-grid">
       <div class="director">
-        <div class="role">Greek School Director</div>
-        <h3>Dr. Angela Fauth</h3>
-        <p><a href="mailto:greekschool@stgeorgenwi.org">greekschool@stgeorgenwi.org</a></p>
-        <p>Church office: <a href="tel:2193226165">(219) 322-6165</a></p>
+        <div class="role">{{ s.director_title }}</div>
+        <h3>{{ s.director_name }}</h3>
+        <p><a href="mailto:{{ s.email }}">{{ s.email }}</a></p>
+        <p>Church office: <a href="tel:{{ tel }}">{{ s.phone }}</a></p>
       </div>
       <div class="director">
         <div class="role">Address</div>
-        <h3>St. George Greek Orthodox Church</h3>
-        <p>528 West 77th Avenue<br>Schererville, Indiana 46375</p>
-        <p><a href="tel:2193226165">(219) 322-6165</a></p>
-        <p><a href="https://www.google.com/maps/search/?api=1&query=528+West+77th+Avenue+Schererville+IN+46375" target="_blank" rel="noopener">📍 Get Directions</a></p>
+        <h3>{{ s.church_name }}</h3>
+        <p>{{ s.address_line1 }}<br>{{ s.address_line2 }}</p>
+        <p><a href="tel:{{ tel }}">{{ s.phone }}</a></p>
+        <p><a href="https://www.google.com/maps/search/?api=1&amp;query={{ s.address_line1 | append: ' ' | append: s.address_line2 | url_encode }}" target="_blank" rel="noopener">📍 Get Directions</a></p>
       </div>
     </div>
-    <iframe class="map" title="Map to St. George Greek Orthodox Church" loading="lazy" src="https://www.google.com/maps?q=528+West+77th+Avenue,+Schererville,+IN+46375&output=embed"></iframe>
+    <iframe class="map" title="Map to {{ s.church_name }}" loading="lazy" src="https://www.google.com/maps?q={{ s.address_line1 | append: ', ' | append: s.address_line2 | url_encode }}&amp;output=embed"></iframe>
   </div>
 </section>
+</main>
 
-<footer>
+<footer class="site">
   <div class="footer-logos">
-    <a href="https://stgeorgenwi.org" target="_blank" rel="noopener"><img class="church" src="images/church-logo.png" alt="St. George Greek Orthodox Church, Schererville, Indiana"></a>
-    <img class="seal" src="images/logo-white.png" alt="St. George Greek School seal">
-    <a href="https://chicago.goarch.org/" target="_blank" rel="noopener"><img class="metro" src="images/metropolis-logo.png" alt="Greek Orthodox Metropolis of Chicago"></a>
+    <a href="{{ s.church_website }}" target="_blank" rel="noopener"><img class="church" src="/images/church-logo.png" alt="{{ s.church_name }}, {{ s.location }}" loading="lazy"></a>
+    <img class="seal" src="/images/logo-white.png" alt="{{ s.name }} seal" loading="lazy">
+    <a href="https://chicago.goarch.org/" target="_blank" rel="noopener"><img class="metro" src="/images/metropolis-logo.png" alt="Greek Orthodox Metropolis of Chicago" loading="lazy"></a>
   </div>
-  <p><b>St. George Greek School</b> · St. George Greek Orthodox Church</p>
-  <p>528 West 77th Avenue, Schererville, Indiana 46375 · <a href="tel:2193226165">(219) 322-6165</a></p>
+  <p class="footer-name">{{ s.name }} · {{ s.church_name }}</p>
+  <p>{{ s.address_line1 }}, {{ s.address_line2 }} · <a href="tel:{{ tel }}">{{ s.phone }}</a></p>
   <p>Metropolis of Chicago · Greek Orthodox Archdiocese of America</p>
-  <p><a href="https://stgeorgenwi.org" target="_blank" rel="noopener">stgeorgenwi.org</a></p>
-  <p class="copyright">© <span id="year">2026</span> St. George Greek Orthodox Church, Schererville, Indiana. All rights reserved.</p>
+  <ul class="footer-links">
+    <li><a href="{{ s.church_website }}" target="_blank" rel="noopener">{{ s.church_website | remove: "https://" | remove: "http://" | remove: "www." }}</a></li>
+    <li><a href="mailto:{{ s.email }}">{{ s.email }}</a></li>
+    <li><a href="{{ site.data.calendar.academic_calendar_pdf }}" target="_blank" rel="noopener">Academic Calendar</a></li>
+    {%- for l in s.links %}{% if l.url and l.url != "" %}<li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a></li>{% endif %}{% endfor %}
+  </ul>
+  <p class="copyright">© <span id="year">{{ site.time | date: "%Y" }}</span> {{ s.church_name }}, {{ s.location }}. All rights reserved.</p>
 </footer>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="lb-btn lb-close" type="button" aria-label="Close">✕</button>
   <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">‹</button>
-  <img alt="">
+  <figure><img alt=""><figcaption><span class="cap"></span><span class="count"></span></figcaption></figure>
   <button class="lb-btn lb-next" type="button" aria-label="Next photo">›</button>
 </div>
 
-<script>
-  // Photo gallery: "show all" button + full-size viewer
-  (function () {
-    var gallery = document.getElementById('gallery');
-    var links = Array.prototype.slice.call(gallery.querySelectorAll('a'));
-    var box = document.getElementById('lightbox');
-    var img = box.querySelector('img');
-    var current = 0;
-    document.getElementById('showAll').addEventListener('click', function () {
-      gallery.classList.add('all');
-      this.parentNode.style.display = 'none';
-    });
-    function show(i) {
-      current = (i + links.length) % links.length;
-      img.src = links[current].href;
-      img.alt = 'St. George Greek School photo ' + (current + 1) + ' of ' + links.length;
-    }
-    function close() { box.classList.remove('open'); document.body.style.overflow = ''; }
-    links.forEach(function (a, i) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        show(i);
-        box.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-    box.querySelector('.lb-close').addEventListener('click', close);
-    box.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
-    box.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
-    box.addEventListener('click', function (e) { if (e.target === box) close(); });
-    document.addEventListener('keydown', function (e) {
-      if (!box.classList.contains('open')) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowLeft') show(current - 1);
-      if (e.key === 'ArrowRight') show(current + 1);
-    });
-  })();
-
-  // Shrink the header logo once the visitor scrolls past the hero
-  (function () {
-    var header = document.querySelector('header');
-    var hero = document.querySelector('.hero');
-    function update() {
-      header.classList.toggle('shrink', window.scrollY > hero.offsetHeight - header.offsetHeight);
-    }
-    window.addEventListener('scroll', update, { passive: true });
-    update();
-    document.getElementById('year').textContent = new Date().getFullYear();
-  })();
-</script>
+<canvas id="season-canvas" aria-hidden="true" hidden></canvas>
+<button class="season-toggle" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span>Pause animation</span></button>
+<script id="season-data" type="application/json">{{ site.data.season | jsonify | replace: "</", "<\/" }}</script>
+<script src="/assets/js/site.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="/assets/js/calendar.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="/assets/js/seasonal.js?v={{ site.time | date: '%s' }}" defer></script>
 
 <!-- UserWay accessibility widget: replace YOUR_USERWAY_ACCOUNT_ID with the ID from your free account at userway.org -->
 <script>
   // When the menu collapses to ☰ (≤1100px), move the UserWay button to the bottom-left corner
   (function () {
+    var id = 'YOUR_USERWAY_ACCOUNT_ID';
+    if (id.indexOf('YOUR_') === 0) return; // not configured yet
     var s = document.createElement('script');
     s.src = 'https://cdn.userway.org/widget.js';
     s.async = true;
-    s.setAttribute('data-account', 'YOUR_USERWAY_ACCOUNT_ID');
+    s.setAttribute('data-account', id);
     if (window.matchMedia('(max-width: 1100px)').matches) s.setAttribute('data-position', '5');
     document.body.appendChild(s);
   })();
