@@ -420,9 +420,10 @@
 <script src="/assets/js/calendar.js?v={{ site.time | date: '%s' }}" defer></script>
 <script src="/assets/js/seasonal.js?v={{ site.time | date: '%s' }}" defer></script>
 
-{%- if s.goatcounter and s.goatcounter != "" %}
-<!-- Visitor statistics: GoatCounter (no cookies, no personal data). Dashboard: https://{{ s.goatcounter }}.goatcounter.com -->
-<script data-goatcounter="https://{{ s.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+{%- assign gc = site.data.stats.goatcounter -%}
+{%- if gc and gc != "" %}
+<!-- Visitor statistics: GoatCounter (no cookies, no personal data). Dashboard: https://{{ gc }}.goatcounter.com -->
+<script data-goatcounter="https://{{ gc }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 {%- endif %}
 
 <!-- UserWay accessibility widget: replace YOUR_USERWAY_ACCOUNT_ID with the ID from your free account at userway.org -->

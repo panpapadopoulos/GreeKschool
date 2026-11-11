@@ -746,13 +746,6 @@ content:
           - name: link_label
             label: Link text
             type: string
-      - name: goatcounter
-        label: Visitor statistics (GoatCounter code)
-        description: 'The name of your GoatCounter site, e.g. "stgeorgegreekschool". See visitors at https://stgeorgegreekschool.goatcounter.com. Leave empty to turn statistics off.'
-        type: string
-        pattern:
-          regex: "^[a-z0-9-]*$"
-          message: Only lowercase letters, numbers and dashes
       - name: links
         label: Important links (footer)
         type: object
@@ -764,6 +757,26 @@ content:
           - name: url
             label: Address
             type: string
+
+  # ---------------------------------------------------------------- Visitor statistics
+  - name: stats
+    label: Visitor Statistics
+    type: file
+    path: _data/stats.yml
+    format: yaml
+    fields:
+      - name: dashboard
+        label: Your visitor statistics page
+        description: Copy this address into a new browser tab and log in with the GoatCounter account to see daily visitors, popular pages, and where visitors come from.
+        type: string
+        readonly: true
+      - name: goatcounter
+        label: GoatCounter code
+        description: 'Leave as "stgeorgegreekschool". Clear it to turn visitor statistics off.'
+        type: string
+        pattern:
+          regex: "^[a-z0-9-]*$"
+          message: Only lowercase letters, numbers and dashes
 
   # ---------------------------------------------------------------- Seasonal theme
   - name: season
