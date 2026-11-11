@@ -746,6 +746,13 @@ content:
           - name: link_label
             label: Link text
             type: string
+      - name: goatcounter
+        label: Visitor statistics (GoatCounter code)
+        description: 'The name of your GoatCounter site, e.g. "stgeorgegreekschool". See visitors at https://stgeorgegreekschool.goatcounter.com. Leave empty to turn statistics off.'
+        type: string
+        pattern:
+          regex: "^[a-z0-9-]*$"
+          message: Only lowercase letters, numbers and dashes
       - name: links
         label: Important links (footer)
         type: object
