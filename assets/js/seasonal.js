@@ -56,8 +56,29 @@
   var ANIMS = ['snow', 'leaves', 'petals', 'confetti', 'sparkles', 'hearts', 'sunlight', 'water'];
 
   /* ---------- Settings + preview ---------- */
-  var cfg = {};
-  try { cfg = JSON.parse(document.getElementById('season-data').textContent) || {}; } catch (e) {}
+  var raw = {};
+  try { raw = JSON.parse(document.getElementById('season-data').textContent) || {}; } catch (e) {}
+  var cfg = normalize(raw);
+  // The CMS stores the seasonal settings in three files (Right now / Occasions calendar /
+  // Custom celebration). Turn them into one flat settings object. Older single-file
+  // settings (everything in season.yml) are still understood.
+  function normalize(r) {
+    if (!r || !r.settings) return r || {};
+    var s = r.settings || {}, now = s.now || {}, look = s.look || {};
+    if (s.schedule || s.manual_theme !== undefined) return s; // older all-in-one season.yml
+    var mode = s.mode === 'manual' || s.mode === 'auto' ? s.mode : 'off';
+    return {
+      mode: mode,
+      manual_theme: now.occasion || 'default', manual_start: now.start || '', manual_end: now.end || '',
+      greeting: now.greeting, message: now.message || '',
+      show_greeting: look.greetings !== false,
+      show: look.show, animation: look.animation, intensity: look.intensity, decoration_style: look.decorations,
+      custom: r.custom || {},
+      schedule: (r.occasions || []).map(function (o) {
+        return o ? { name: o.name, theme: o.occasion, start: o.start, end: o.end, greeting: o.greeting, message: o.message || '', animation: o.animation } : null;
+      })
+    };
+  }
   var q = {};
   location.search.replace(/[?&]([a-z]+)=([^&#]*)/g, function (_, k, v) { q[k] = decodeURIComponent(v); });
   var previewing = !!(q.season || q.anim || q.intensity || q.show || q.deco || q.greeting);
@@ -67,13 +88,14 @@
     return (!start || start <= today) && (!end || end >= today);
   }
 
-  var theme = 'default', message = '', entry = null;
+  // greetSrc = where this occasion's greeting choice comes from (a calendar entry, or "Right now")
+  var theme = 'default', message = '', entry = null, greetSrc = null;
   if (q.season && PRESETS[q.season]) {
     theme = q.season;
     (cfg.schedule || []).some(function (r) { if (r && r.theme === theme) { entry = r; return true; } return false; });
-    message = entry && entry.message || (cfg.manual_theme === theme ? cfg.message : '') || '';
+    greetSrc = entry || (cfg.manual_theme === theme ? cfg : null);
   } else if (cfg.mode === 'manual' && within(cfg.manual_start, cfg.manual_end)) {
-    theme = cfg.manual_theme || 'default'; message = cfg.message || '';
+    theme = cfg.manual_theme || 'default'; greetSrc = cfg;
   } else if (cfg.mode === 'auto' || cfg.mode === 'manual') {
     // When entries overlap, the SHORTEST one wins (a one-day holiday beats the season
     // around it), so the order of the list in the CMS doesn't matter.
@@ -83,7 +105,7 @@
       var len = (Date.parse(String(r.end || '9999-12-31').slice(0, 10)) - Date.parse(String(r.start || '0001-01-01').slice(0, 10))) || 0;
       if (len < bestLen) { best = r; bestLen = len; }
     });
-    if (best) { theme = best.theme; entry = best; message = best.message || ''; }
+    if (best) { theme = best.theme; entry = best; greetSrc = best; }
   }
   var preset = PRESETS[theme] ? assign({}, PRESETS[theme]) : null;
   if (theme === 'custom') {
@@ -92,9 +114,12 @@
                corners: c.decoration && c.decoration !== 'none' ? [c.decoration, c.decoration] : [], anim: c.animation || 'none', icon: c.icon || 'star', key: c.accent === 'gold' ? 'gold' : null };
   }
 
-  // Greeting: your own message wins; otherwise the occasion's ready-made greeting.
-  if (!message && preset) message = theme === 'custom' ? (cfg.custom && cfg.custom.message) || '' : preset.msg || '';
-  var greetingOn = q.greeting ? q.greeting !== 'off' : cfg.show_greeting !== false;
+  // Greeting: "standard" = the occasion's ready-made greeting, "custom" = your own words,
+  // "none" = no greeting bar. Older settings without a choice: your text if there is any.
+  var gMode = greetSrc ? (greetSrc.greeting || (greetSrc.message ? 'custom' : 'standard')) : 'standard';
+  if (gMode === 'custom' && greetSrc.message) message = greetSrc.message;
+  if (!message && preset) message = theme === 'custom' ? (cfg.custom && (cfg.custom.greeting || cfg.custom.message)) || '' : preset.msg || '';
+  var greetingOn = q.greeting ? q.greeting !== 'off' : (cfg.show_greeting !== false && gMode !== 'none');
   var show = q.show || cfg.show || 'all';
   var layers = {
     colors: ['all', 'theme', 'theme_decorations'].indexOf(show) > -1,

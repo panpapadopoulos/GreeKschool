@@ -79,61 +79,67 @@ The boxes above the calendar show the next class and the next few important date
 
 ## Seasonal decorations
 
-Open **Seasonal Theme**.
+Open **Seasonal Look** in the menu. It has three parts:
+
+| Part | What it is for |
+|---|---|
+| **Right now** | Choose between automatic, one occasion of your choice, or the normal website. It also has the appearance settings that apply to every occasion. |
+| **Occasions calendar** | The list of occasions and their dates. Each entry also says whether it shows a greeting. |
+| **My custom celebration** | Your own design: colour, drawings and greeting. |
+
+Normally you leave **Right now** set to **Automatic**. The website then changes by itself through the year, following the Occasions calendar. That calendar is filled in through January 2028 with all US federal holidays, the main Greek national and church days, school milestones and the four seasons.
 
 ### Preview first
 Nothing changes for visitors while you preview. Add `?season=` and an occasion name to the website address, for example:
 
 `https://greekschool.stgeorgenwi.org/?season=christmas`
 
-A small **Preview** panel appears. Use it to try every occasion, animation and intensity. Click **Exit preview** when you are done.
+A small **Preview** panel appears. Use it to try every occasion, animation and intensity.
 
-The occasion names are:
-`winter`, `spring`, `summer`, `autumn`, `christmas`, `newyear`, `theophany`, `greeklanguage`, `valentine`, `independence`, `annunciation`, `march25`, `palmsunday`, `easter`, `stgeorge`, `memorial`, `endofyear`, `july4`, `backtoschool`, `flagday`, `oxi`, `halloween`, `veterans`, `thanksgiving` and `custom`.
-
-### Select the Christmas theme
-- **Right now:** set **Mode** to *Use the occasion I choose below* and set the occasion to *Christmas*. You can add a greeting, for example "Καλά Χριστούγεννα!". Click **Save**.
-- **Automatically:** leave **Mode** on *Automatic*. Christmas is already in the **Automatic schedule**, from December 1 to January 6.
-
-### Turn on snowfall
-Christmas and Winter snow by default. To add snow to another occasion, set **Animation** to *Snowfall*. **Animation intensity** controls how much falls; *Light* is recommended.
-
-### Change the seasonal effects
-**What to show** decides which parts appear:
-- *Everything*: colours, decorations and animation.
-- *Colours and decorations*: no animation.
-- *Colours and greeting only*.
-- *Decorations only*.
-- *Animation only*.
-
-**Decorations** controls how much is drawn. *Classic* adds small drawings in the corners of the big photo. *Minimal* shows only the detail under the menu.
-
-Animations never run for visitors whose device is set to reduce motion, and every visitor has a **Pause animation** button.
-
-### The greeting bar
-- Every occasion comes with a ready-made greeting in English and Greek. For example, Christmas shows "Καλά Χριστούγεννα! Merry Christmas from the St. George Greek School."
-- To use your own wording, type it in **Your own greeting** for the occasion you chose, or in **Greeting** in the schedule.
-- To show no greeting at all, switch off **Show the greeting bar**.
-- Visitors can close the greeting with **✕**. It then stays closed on their device until the greeting changes.
-
-### Activate a custom occasion
-1. Fill in **Custom celebration**: a colour, a corner decoration, a detail under the menu, an animation and an icon.
-2. Choose *Custom celebration* as the occasion. You can choose it under **Mode**, or add it to the **Automatic schedule** with dates.
+### Hide or change the greeting of one occasion (for example, Autumn)
+1. Open **Seasonal Look → Occasions calendar** and click the entry, for example "Autumn 2026".
+2. Set **Greeting bar** to the option you want:
+   - **Show the standard greeting**: the ready-made greeting in English and Greek.
+   - **Show my own greeting**: type your text in **My own greeting**.
+   - **No greeting**: the decorations stay, with no greeting bar.
 3. Click **Save**.
 
-### Return to the normal appearance
-Set **Mode** to **Off** and click **Save**. To stop only the animation, set **Animation** to *No animation*.
+### Hide all greetings
+Open **Seasonal Look → Right now** and switch off **Show greeting bars**.
 
-### Plan ahead
-The **Automatic schedule** is filled in through January 2028. It covers:
-- **All US federal holidays.**
-- **The main Greek national and church days:** Theophany, the Three Hierarchs, Greek Language Day, Clean Monday, March 25, Palm Sunday, Pascha, St. George, the Dormition, Greek Flag Day and OXI Day.
-- **School milestones:** back to school and the end of the year.
-- **The four seasons**, which fill the gaps, without animation.
+Visitors can also close a greeting with **✕**. It then stays closed on their device until the greeting changes.
 
-When two entries overlap, the shorter one wins. A one-day holiday therefore always takes priority over the season around it, whatever the order of the list.
+### Show one occasion now (for example, Christmas)
+1. Open **Seasonal Look → Right now**.
+2. Set **What should the website show?** to **One occasion that I choose below**.
+3. Under **The occasion I choose**, pick **Christmas** and choose a greeting.
+4. Optionally add **Show from / Show until** dates. Outside those dates the website goes back to Automatic.
+
+### Turn on snowfall, or change the effects
+Open **Seasonal Look → Right now → Appearance**:
+- **What to show:** everything, colours and decorations only, and so on.
+- **Animation:** "Default" uses snow for Christmas and Winter, leaves for Autumn, and so on. Choose "Snowfall" to add snow to any occasion, or "No animation".
+- **How much animation:** "A little" is recommended.
+- **Decorations:** "Full" or "Light".
+
+You can also set **Animation** for a single entry in the Occasions calendar.
+
+Animations never run for visitors whose device asks for reduced motion, and every visitor has a **Pause animation** button.
+
+### Return to the normal website
+In **Right now**, set **What should the website show?** to **Nothing: the normal website**, then click **Save**.
+
+### Add or change an occasion in the calendar
+1. Open **Occasions calendar** and click **Add an entry**.
+2. Give it a name for the list, for example "Pascha 2028". Choose the occasion, first day and last day.
+3. Click **Save**.
+
+The order of the list doesn't matter. When two entries overlap, the shorter one wins, so a one-day holiday always beats the season around it.
 
 **Once a year**, add the next year's dates. Pascha, Clean Monday, Palm Sunday and the Monday holidays change every year. If April 23 falls before Pascha, St. George is celebrated on Bright Monday.
+
+### Your own celebration
+Fill in **My custom celebration**: colour, drawings, detail under the menu, animation, icon and greeting. Then choose **My custom celebration** as the occasion, either in **Right now** or in the Occasions calendar.
 
 ## Faculty
 Open **Faculty** to replace the group photo or change the names.

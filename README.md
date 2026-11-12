@@ -46,7 +46,11 @@ _data/
   documents.yml              Documents & Forms library
   gallery.yml                Photo gallery (order, captions, show/hide)
   school.yml                 School information, contact, descriptions
-  season.yml                 Seasonal theme settings and schedule
+  season.yml                 Seasonal Look → Right now (mode, chosen occasion, appearance)
+  season_schedule.yml        Seasonal Look → Occasions calendar (dates, greeting per occasion)
+  season_custom.yml          Seasonal Look → My custom celebration
+  faculty.yml                Faculty section (photo, names left to right)
+  stats.yml                  Visitor statistics (GoatCounter)
 assets/
   css/site.css               Styles
   js/site.js                 Menu, gallery viewer, announcements, "today" in Chicago

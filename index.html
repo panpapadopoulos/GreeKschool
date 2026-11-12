@@ -415,7 +415,7 @@
 
 <canvas id="season-canvas" aria-hidden="true" hidden></canvas>
 <button class="season-toggle" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span>Pause animation</span></button>
-<script id="season-data" type="application/json">{{ site.data.season | jsonify | replace: "</", "<\/" }}</script>
+<script id="season-data" type="application/json">{"settings":{{ site.data.season | jsonify | replace: "</", "<\/" }},"occasions":{{ site.data.season_schedule.occasions | jsonify | replace: "</", "<\/" }},"custom":{{ site.data.season_custom | jsonify | replace: "</", "<\/" }}}</script>
 <script src="/assets/js/site.js?v={{ site.time | date: '%s' }}" defer></script>
 <script src="/assets/js/calendar.js?v={{ site.time | date: '%s' }}" defer></script>
 <script src="/assets/js/seasonal.js?v={{ site.time | date: '%s' }}" defer></script>

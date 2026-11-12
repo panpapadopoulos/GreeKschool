@@ -37,7 +37,7 @@ content:
         list:
           collapsible:
             collapsed: true
-            summary: "{title}"
+            summary: "{date}   ·   {title}"
         fields:
           - name: title
             label: Title
@@ -46,6 +46,7 @@ content:
           - name: type
             label: Type
             type: select
+            default: general
             options:
               values:
                 - { name: general, label: General Information }
@@ -61,6 +62,7 @@ content:
           - name: language
             label: Language
             type: select
+            default: en
             options:
               values:
                 - { name: en, label: English }
@@ -138,6 +140,7 @@ content:
               - name: category
                 label: Category
                 type: select
+                default: program
                 options:
                   values:
                     - { name: program, label: Special program / celebration }
@@ -206,6 +209,7 @@ content:
               - name: kind
                 label: Kind
                 type: select
+                default: other
                 options:
                   values:
                     - { name: registration, label: Registration }
@@ -308,6 +312,7 @@ content:
               - name: type
                 label: What happens
                 type: select
+                default: no_class
                 options:
                   values:
                     - { name: no_class, label: No class }
@@ -374,6 +379,395 @@ content:
             label: How many dates to show in "Coming up"
             description: In addition to the next class. 3 is recommended.
             type: number
+
+  # ---------------------------------------------------------------- Seasonal look
+  - name: seasonal
+    label: Seasonal Look
+    type: group
+    items:
+      - name: season
+        label: Right now
+        type: file
+        path: _data/season.yml
+        format: yaml
+        fields:
+          - name: mode
+            label: What should the website show?
+            description: '"Automatic" switches between the occasions in the Occasions calendar by itself.'
+            type: select
+            default: auto
+            options:
+              values:
+                - { name: auto, label: "Automatic: follow the Occasions calendar (recommended)" }
+                - { name: manual, label: "One occasion that I choose below" }
+                - { name: "off", label: "Nothing: the normal website" }
+          - name: now
+            label: The occasion I choose
+            description: Only used when the setting above is "One occasion that I choose below".
+            type: object
+            fields:
+              - name: occasion
+                label: Occasion
+                type: select
+                default: default
+                options:
+                  values: &occasions
+                    - { name: default, label: None }
+                    - { name: winter, label: Winter }
+                    - { name: spring, label: Spring }
+                    - { name: summer, label: Summer }
+                    - { name: autumn, label: Autumn }
+                    - { name: backtoschool, label: Back to school }
+                    - { name: endofyear, label: End of the school year }
+                    - { name: christmas, label: Christmas }
+                    - { name: newyear, label: New Year }
+                    - { name: theophany, label: Theophany (January 6) }
+                    - { name: threehierarchs, label: Three Hierarchs (January 30) }
+                    - { name: greeklanguage, label: Greek Language Day (February 9) }
+                    - { name: cleanmonday, label: Clean Monday (Καθαρά Δευτέρα) }
+                    - { name: march25, label: March 25 (Independence Day and Annunciation) }
+                    - { name: independence, label: Greek Independence Day only }
+                    - { name: annunciation, label: Annunciation only }
+                    - { name: palmsunday, label: Palm Sunday }
+                    - { name: easter, label: Pascha (Orthodox Easter) }
+                    - { name: stgeorge, label: Feast of St. George }
+                    - { name: dormition, label: Dormition of the Theotokos (August 15) }
+                    - { name: flagday, label: Greek Flag Day (October 27) }
+                    - { name: oxi, label: OXI Day (October 28) }
+                    - { name: mlk, label: Martin Luther King Jr. Day }
+                    - { name: presidents, label: "Presidents' Day" }
+                    - { name: memorial, label: Memorial Day }
+                    - { name: juneteenth, label: Juneteenth }
+                    - { name: july4, label: Fourth of July }
+                    - { name: labor, label: Labor Day }
+                    - { name: columbus, label: Columbus Day }
+                    - { name: veterans, label: Veterans Day }
+                    - { name: thanksgiving, label: Thanksgiving }
+                    - { name: valentine, label: "Valentine's Day" }
+                    - { name: halloween, label: Halloween (gentle) }
+                    - { name: custom, label: My custom celebration }
+              - name: greeting
+                label: Greeting bar
+                type: select
+                default: standard
+                options:
+                  values: &greeting_choices
+                    - { name: standard, label: Show the standard greeting }
+                    - { name: custom, label: Show my own greeting (type it below) }
+                    - { name: none, label: No greeting }
+              - name: message
+                label: My own greeting
+                description: Only used when "Show my own greeting" is chosen.
+                type: string
+              - name: start
+                label: Show from (optional)
+                type: date
+                default: ""
+                options: { format: yyyy-MM-dd }
+              - name: end
+                label: Show until (optional)
+                description: Leave both dates empty to keep it until you change it. Outside these dates the website goes back to the Occasions calendar.
+                type: date
+                default: ""
+                options: { format: yyyy-MM-dd }
+          - name: look
+            label: Appearance (for every occasion)
+            type: object
+            fields:
+              - name: greetings
+                label: Show greeting bars
+                description: Switch off to hide every greeting. To hide the greeting of just one occasion, choose "No greeting" for it in the Occasions calendar.
+                type: boolean
+                default: true
+              - name: show
+                label: What to show
+                type: select
+                default: all
+                options:
+                  values:
+                    - { name: all, label: "Everything: colours, decorations and animation" }
+                    - { name: theme_decorations, label: Colours and decorations (no animation) }
+                    - { name: theme, label: Colours and greeting only }
+                    - { name: decorations, label: Decorations only }
+                    - { name: animation, label: Animation only }
+              - name: animation
+                label: Animation
+                description: '"Default" uses what suits each occasion (snow for Christmas, nothing for national days).'
+                type: select
+                default: auto
+                options:
+                  values: &animations
+                    - { name: auto, label: Default for the occasion }
+                    - { name: none, label: No animation }
+                    - { name: snow, label: Snowfall }
+                    - { name: leaves, label: Falling leaves }
+                    - { name: petals, label: Falling petals }
+                    - { name: confetti, label: Gentle confetti }
+                    - { name: sparkles, label: Twinkling stars }
+                    - { name: hearts, label: Small hearts }
+                    - { name: sunlight, label: Sunlight }
+                    - { name: water, label: Water droplets }
+              - name: intensity
+                label: How much animation
+                type: select
+                default: light
+                options:
+                  values:
+                    - { name: light, label: A little (recommended) }
+                    - { name: medium, label: Some }
+                    - { name: strong, label: A lot }
+              - name: decorations
+                label: Decorations
+                type: select
+                default: classic
+                options:
+                  values:
+                    - { name: classic, label: "Full: a detail under the menu and drawings in the big photo's corners" }
+                    - { name: minimal, label: "Light: only the detail under the menu" }
+
+      - name: season_schedule
+        label: Occasions calendar
+        type: file
+        path: _data/season_schedule.yml
+        format: yaml
+        fields:
+          - name: occasions
+            label: Occasions
+            description: 'Each occasion shows from its first to its last day. If two overlap, the shorter one wins, so a holiday beats the season around it. Order does not matter. Preview any occasion first by adding ?season=christmas to the website address.'
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}   ·   {start} → {end}"
+            fields:
+              - name: name
+                label: Name in this list
+                description: Just for you, e.g. "Christmas 2027".
+                type: string
+                required: true
+              - name: occasion
+                label: Occasion
+                type: select
+                required: true
+                options:
+                  values: *occasions
+              - name: start
+                label: First day
+                type: date
+                required: true
+                options: { format: yyyy-MM-dd }
+              - name: end
+                label: Last day
+                type: date
+                required: true
+                options: { format: yyyy-MM-dd }
+              - name: greeting
+                label: Greeting bar
+                type: select
+                default: standard
+                options:
+                  values: *greeting_choices
+              - name: message
+                label: My own greeting
+                description: Only used when "Show my own greeting" is chosen.
+                type: string
+              - name: animation
+                label: Animation
+                type: select
+                default: auto
+                options:
+                  values: *animations
+
+      - name: season_custom
+        label: My custom celebration
+        type: file
+        path: _data/season_custom.yml
+        format: yaml
+        fields:
+          - name: name
+            label: Name (just for you)
+            type: string
+          - name: greeting
+            label: Greeting text
+            type: string
+          - name: accent
+            label: Colour
+            type: select
+            default: navy
+            options:
+              values:
+                - { name: navy, label: Navy and gold }
+                - { name: blue, label: Blue }
+                - { name: gold, label: Gold }
+                - { name: burgundy, label: Burgundy }
+                - { name: green, label: Green }
+                - { name: purple, label: Purple }
+                - { name: rose, label: Rose }
+                - { name: orange, label: Warm orange }
+                - { name: greek, label: Greek blue and white }
+          - name: decoration
+            label: Drawings in the big photo's corners
+            type: select
+            default: laurel
+            options:
+              values:
+                - { name: none, label: None }
+                - { name: laurel, label: Laurel branch }
+                - { name: laurel-gold, label: Gold laurel }
+                - { name: blossom, label: Spring blossoms }
+                - { name: lily, label: Lilies }
+                - { name: palm, label: Palm branches }
+                - { name: fir, label: Fir with ornaments }
+                - { name: autumn, label: Autumn leaves }
+                - { name: wheat, label: Wheat }
+                - { name: kites, label: Kites }
+                - { name: stars, label: Stars }
+                - { name: books, label: Books }
+                - { name: cap, label: Graduation cap }
+                - { name: letters, label: Greek letters }
+                - { name: flag-gr, label: Greek flag }
+                - { name: flag-us, label: American flag }
+          - name: header
+            label: Detail under the menu
+            type: select
+            default: gold
+            options:
+              values:
+                - { name: none, label: None }
+                - { name: gold, label: Gold double line }
+                - { name: gr, label: Greek blue-and-white stripes }
+                - { name: us, label: Red, white and blue }
+                - { name: lights, label: String of lights }
+                - { name: frost, label: Frost }
+                - { name: waves, label: Waves }
+          - name: animation
+            label: Animation
+            type: select
+            default: none
+            options:
+              values:
+                - { name: none, label: None }
+                - { name: snow, label: Snowfall }
+                - { name: leaves, label: Falling leaves }
+                - { name: petals, label: Falling petals }
+                - { name: confetti, label: Gentle confetti }
+                - { name: sparkles, label: Twinkling stars }
+                - { name: hearts, label: Small hearts }
+                - { name: sunlight, label: Sunlight }
+                - { name: water, label: Water droplets }
+          - name: icon
+            label: Icon in the greeting bar
+            type: select
+            default: star
+            options:
+              values:
+                - { name: star, label: Star }
+                - { name: cross, label: Cross }
+                - { name: book, label: Book }
+                - { name: cap, label: Graduation cap }
+                - { name: flower, label: Flower }
+                - { name: leaf, label: Leaf }
+                - { name: snowflake, label: Snowflake }
+                - { name: flag-gr, label: Greek flag }
+                - { name: flag-us, label: American flag }
+                - { name: kite, label: Kite }
+
+  # ---------------------------------------------------------------- Gallery
+  - name: gallery
+    label: Photo Gallery
+    type: file
+    path: _data/gallery.yml
+    format: yaml
+    fields:
+      - name: intro
+        label: Text under the "Photos" title
+        type: string
+      - name: visible_count
+        label: Photos shown before "Show all"
+        type: number
+      - name: photos
+        label: Photos
+        description: "PRIVACY: a photo is PUBLIC on the internet the moment it is uploaded — even if it is not shown in the gallery, and it stays in the website's history after deletion. Upload ONLY photos already approved by the families, with children's faces blurred and no names. Drag to change the order."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{caption}"
+        fields:
+          - name: image
+            label: Photo (approved, faces blurred)
+            description: Large photos are resized and their location data removed automatically after upload.
+            type: image
+            required: true
+            options: { media: images, path: assets/uploads/gallery }
+          - name: thumb
+            label: Thumbnail (optional)
+            description: Leave empty; the photo above is used.
+            type: image
+            options: { media: images }
+          - name: caption
+            label: Caption in English (optional, no student names)
+            type: string
+          - name: caption_el
+            label: Caption in Greek (optional)
+            type: string
+          - name: category
+            label: Category (optional)
+            description: e.g. Christmas Program, OXI Day, Classroom. With two or more categories, visitors get filter buttons.
+            type: string
+          - name: show_in_gallery
+            label: Show in the gallery
+            default: true
+            description: Switch off to take the photo off the gallery page. This does NOT make the file private — to remove a photo completely, delete the entry and ask the website administrator to delete the file.
+            type: boolean
+
+  # ---------------------------------------------------------------- Faculty
+  - name: faculty
+    label: Faculty
+    type: file
+    path: _data/faculty.yml
+    format: yaml
+    fields:
+      - name: show
+        label: Show the faculty section
+        type: boolean
+      - name: title
+        label: Heading
+        type: string
+      - name: subtitle
+        label: Subtitle (Greek)
+        type: string
+      - name: description
+        label: Short description (optional)
+        type: text
+      - name: photo
+        label: Group photograph
+        description: Upload a new group photo to replace it. A wide photo with everyone in one row works best.
+        type: image
+        options: { media: images, path: assets/uploads }
+      - name: photo_alt
+        label: Photo description (for screen readers)
+        type: string
+      - name: members
+        label: Faculty members (left to right as in the photo)
+        description: Drag to change the order. Add or remove people with the buttons below the list.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+      - name: order_note
+        label: Note under the names
+        type: string
+      - name: names_inset
+        label: Space at the sides of the names row (%)
+        description: Moves the names closer together so each one sits under the right person. 0 spreads them across the whole photo; 18 fits the current photo.
+        type: number
 
   # ---------------------------------------------------------------- Registration
   - name: registration
@@ -510,102 +904,6 @@ content:
                 - { name: parents, label: Parent information }
                 - { name: resource, label: Educational resource }
                 - { name: other, label: Other }
-
-  # ---------------------------------------------------------------- Gallery
-  - name: gallery
-    label: Photo Gallery
-    type: file
-    path: _data/gallery.yml
-    format: yaml
-    fields:
-      - name: intro
-        label: Text under the "Photos" title
-        type: string
-      - name: visible_count
-        label: Photos shown before "Show all"
-        type: number
-      - name: photos
-        label: Photos
-        description: "PRIVACY: a photo is PUBLIC on the internet the moment it is uploaded — even if it is not shown in the gallery, and it stays in the website's history after deletion. Upload ONLY photos already approved by the families, with children's faces blurred and no names. Drag to change the order."
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{caption}"
-        fields:
-          - name: image
-            label: Photo (approved, faces blurred)
-            description: Large photos are resized and their location data removed automatically after upload.
-            type: image
-            required: true
-            options: { media: images, path: assets/uploads/gallery }
-          - name: thumb
-            label: Thumbnail (optional)
-            description: Leave empty; the photo above is used.
-            type: image
-            options: { media: images }
-          - name: caption
-            label: Caption in English (optional, no student names)
-            type: string
-          - name: caption_el
-            label: Caption in Greek (optional)
-            type: string
-          - name: category
-            label: Category (optional)
-            description: e.g. Christmas Program, OXI Day, Classroom. With two or more categories, visitors get filter buttons.
-            type: string
-          - name: show_in_gallery
-            label: Show in the gallery
-            description: Switch off to take the photo off the gallery page. This does NOT make the file private — to remove a photo completely, delete the entry and ask the website administrator to delete the file.
-            type: boolean
-
-  # ---------------------------------------------------------------- Faculty
-  - name: faculty
-    label: Faculty
-    type: file
-    path: _data/faculty.yml
-    format: yaml
-    fields:
-      - name: show
-        label: Show the faculty section
-        type: boolean
-      - name: title
-        label: Heading
-        type: string
-      - name: subtitle
-        label: Subtitle (Greek)
-        type: string
-      - name: description
-        label: Short description (optional)
-        type: text
-      - name: photo
-        label: Group photograph
-        description: Upload a new group photo to replace it. A wide photo with everyone in one row works best.
-        type: image
-        options: { media: images, path: assets/uploads }
-      - name: photo_alt
-        label: Photo description (for screen readers)
-        type: string
-      - name: members
-        label: Faculty members (left to right as in the photo)
-        description: Drag to change the order. Add or remove people with the buttons below the list.
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{name}"
-        fields:
-          - name: name
-            label: Name
-            type: string
-            required: true
-      - name: order_note
-        label: Note under the names
-        type: string
-      - name: names_inset
-        label: Space at the sides of the names row (%)
-        description: Moves the names closer together so each one sits under the right person. 0 spreads them across the whole photo; 18 fits the current photo.
-        type: number
 
   # ---------------------------------------------------------------- School information
   - name: school
@@ -777,248 +1075,3 @@ content:
         pattern:
           regex: "^[a-z0-9-]*$"
           message: Only lowercase letters, numbers and dashes
-
-  # ---------------------------------------------------------------- Seasonal theme
-  - name: season
-    label: Seasonal Theme
-    type: file
-    path: _data/season.yml
-    format: yaml
-    fields:
-      - name: mode
-        label: Mode
-        description: '"Automatic" follows the schedule at the bottom. "Use the occasion I choose" overrides it. "Off" always shows the normal website.'
-        type: select
-        options:
-          values:
-            - { name: auto, label: Automatic (follow the schedule) }
-            - { name: manual, label: Use the occasion I choose below }
-            - { name: "off", label: Off (normal website) }
-      - name: manual_theme
-        label: Occasion to use (when Mode is "Use the occasion I choose")
-        type: select
-        options:
-          values: &occasions
-            - { name: default, label: Default (no decorations) }
-            - { name: winter, label: Winter }
-            - { name: spring, label: Spring }
-            - { name: summer, label: Summer }
-            - { name: autumn, label: Autumn }
-            - { name: christmas, label: Christmas }
-            - { name: newyear, label: New Year }
-            - { name: theophany, label: Theophany – January 6 }
-            - { name: greeklanguage, label: Greek Language Day – February 9 }
-            - { name: valentine, label: Valentine's Day }
-            - { name: independence, label: Greek Independence Day – March 25 }
-            - { name: annunciation, label: Annunciation – March 25 }
-            - { name: march25, label: March 25 – Independence Day and Annunciation together }
-            - { name: palmsunday, label: Palm Sunday }
-            - { name: easter, label: Orthodox Easter (Pascha) }
-            - { name: stgeorge, label: Feast of St. George }
-            - { name: memorial, label: Memorial Day }
-            - { name: endofyear, label: End of the school year }
-            - { name: july4, label: Independence Day – July 4 }
-            - { name: backtoschool, label: Beginning of the school year }
-            - { name: flagday, label: Greek Flag Day – October 27 }
-            - { name: oxi, label: OXI Day – October 28 }
-            - { name: halloween, label: Halloween (gentle, nothing scary) }
-            - { name: veterans, label: Veterans Day }
-            - { name: thanksgiving, label: Thanksgiving }
-            - { name: threehierarchs, label: Three Hierarchs – January 30 }
-            - { name: cleanmonday, label: Clean Monday (Καθαρά Δευτέρα) }
-            - { name: dormition, label: Dormition of the Theotokos – August 15 }
-            - { name: mlk, label: Martin Luther King Jr. Day }
-            - { name: presidents, label: Presidents' Day }
-            - { name: juneteenth, label: Juneteenth }
-            - { name: labor, label: Labor Day }
-            - { name: columbus, label: Columbus Day }
-            - { name: custom, label: Custom celebration (set it up below) }
-      - name: manual_start
-        label: Chosen occasion starts (optional)
-        description: Leave both dates empty to keep it until you change it. Outside these dates the schedule applies.
-        type: date
-        default: ""
-        options: { format: yyyy-MM-dd }
-      - name: manual_end
-        label: Chosen occasion ends (optional)
-        type: date
-        default: ""
-        options: { format: yyyy-MM-dd }
-      - name: show_greeting
-        label: Show the greeting bar
-        description: A slim bar under the menu with a greeting for the occasion. Every occasion has a ready-made greeting in English and Greek; visitors can close it with ✕. Switch off to show no greeting at all.
-        type: boolean
-      - name: message
-        label: Your own greeting for the chosen occasion (optional)
-        description: Leave empty to use the occasion's ready-made greeting, e.g. "Καλά Χριστούγεννα! Merry Christmas from the St. George Greek School."
-        type: string
-      - name: show
-        label: What to show
-        type: select
-        options:
-          values:
-            - { name: all, label: "Everything: colours, decorations and animation" }
-            - { name: theme_decorations, label: Colours and decorations (no animation) }
-            - { name: theme, label: Colours and greeting only }
-            - { name: decorations, label: Decorations only }
-            - { name: animation, label: Animation only }
-      - name: animation
-        label: Animation
-        description: '"Default" uses the animation that suits each occasion (snow for Christmas, leaves for autumn, none for national days).'
-        type: select
-        options:
-          values:
-            - { name: auto, label: Default for the occasion }
-            - { name: none, label: No animation }
-            - { name: snow, label: Snowfall }
-            - { name: leaves, label: Falling leaves }
-            - { name: petals, label: Falling petals }
-            - { name: confetti, label: Gentle confetti }
-            - { name: sparkles, label: Twinkling stars }
-            - { name: hearts, label: Small hearts }
-            - { name: sunlight, label: Sunlight }
-            - { name: water, label: Water droplets }
-      - name: intensity
-        label: Animation intensity
-        type: select
-        options:
-          values:
-            - { name: light, label: Light (recommended) }
-            - { name: medium, label: Medium }
-            - { name: strong, label: Strong }
-      - name: decoration_style
-        label: Decorations
-        type: select
-        options:
-          values:
-            - { name: classic, label: "Classic: detail under the menu and drawings in the big photo's corners" }
-            - { name: minimal, label: "Minimal: only the detail under the menu" }
-      - name: custom
-        label: Custom celebration
-        description: Used when the occasion is "Custom celebration".
-        type: object
-        fields:
-          - name: name
-            label: Name (for your reference)
-            type: string
-          - name: message
-            label: Greeting
-            description: Shown in the greeting bar when this custom celebration is active.
-            type: string
-          - name: accent
-            label: Colour
-            type: select
-            options:
-              values:
-                - { name: navy, label: Navy and gold }
-                - { name: blue, label: Blue }
-                - { name: gold, label: Gold }
-                - { name: burgundy, label: Burgundy }
-                - { name: green, label: Green }
-                - { name: purple, label: Purple }
-                - { name: rose, label: Rose }
-                - { name: orange, label: Warm orange }
-                - { name: greek, label: Greek blue and white }
-          - name: decoration
-            label: Corner decoration
-            type: select
-            options:
-              values:
-                - { name: none, label: None }
-                - { name: laurel, label: Laurel branch }
-                - { name: laurel-gold, label: Gold laurel }
-                - { name: blossom, label: Spring blossoms }
-                - { name: lily, label: Lilies }
-                - { name: palm, label: Palm branches }
-                - { name: kites, label: Kites }
-                - { name: fir, label: Fir with ornaments }
-                - { name: autumn, label: Autumn leaves }
-                - { name: wheat, label: Wheat }
-                - { name: stars, label: Stars }
-                - { name: books, label: Books }
-                - { name: cap, label: Graduation cap }
-                - { name: letters, label: Greek letters }
-                - { name: flag-gr, label: Greek flag }
-                - { name: flag-us, label: American flag }
-          - name: header
-            label: Detail under the menu
-            type: select
-            options:
-              values:
-                - { name: none, label: None }
-                - { name: gold, label: Gold double line }
-                - { name: gr, label: Greek blue-and-white stripes }
-                - { name: us, label: Red, white and blue }
-                - { name: lights, label: String of lights }
-                - { name: frost, label: Frost }
-                - { name: waves, label: Waves }
-          - name: animation
-            label: Default animation
-            type: select
-            options:
-              values:
-                - { name: none, label: None }
-                - { name: snow, label: Snowfall }
-                - { name: leaves, label: Falling leaves }
-                - { name: petals, label: Falling petals }
-                - { name: confetti, label: Gentle confetti }
-                - { name: sparkles, label: Twinkling stars }
-                - { name: hearts, label: Small hearts }
-                - { name: sunlight, label: Sunlight }
-                - { name: water, label: Water droplets }
-          - name: icon
-            label: Greeting icon
-            type: select
-            options:
-              values:
-                - { name: star, label: Star }
-                - { name: cross, label: Cross }
-                - { name: book, label: Book }
-                - { name: cap, label: Graduation cap }
-                - { name: flower, label: Flower }
-                - { name: leaf, label: Leaf }
-                - { name: snowflake, label: Snowflake }
-                - { name: flag-gr, label: Greek flag }
-                - { name: flag-us, label: American flag }
-      - name: schedule
-        label: Automatic schedule
-        description: Each occasion shows between its start and end date (both included). Only the occasions listed here switch on automatically. Preview any occasion first by adding ?season=christmas to the website address.
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{theme}: {start} → {end}"
-        fields:
-          - name: theme
-            label: Occasion
-            type: select
-            options:
-              values: *occasions
-          - name: start
-            label: Start date
-            type: date
-            options: { format: yyyy-MM-dd }
-          - name: end
-            label: End date
-            type: date
-            options: { format: yyyy-MM-dd }
-          - name: message
-            label: Greeting (optional)
-            description: Leave empty to use the occasion's ready-made greeting.
-            type: string
-          - name: animation
-            label: Animation (optional)
-            description: Leave on "Default" to use the setting above.
-            type: select
-            options:
-              values:
-                - { name: auto, label: Default }
-                - { name: none, label: No animation }
-                - { name: snow, label: Snowfall }
-                - { name: leaves, label: Falling leaves }
-                - { name: petals, label: Falling petals }
-                - { name: confetti, label: Gentle confetti }
-                - { name: sparkles, label: Twinkling stars }
-                - { name: hearts, label: Small hearts }
-                - { name: sunlight, label: Sunlight }
-                - { name: water, label: Water droplets }
