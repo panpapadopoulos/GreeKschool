@@ -1,253 +1,217 @@
 occasions:
-  - name: "Autumn 2026"
+  - name: Autumn 2026
     occasion: autumn
     start: 2026-11-01
     end: 2026-11-30
-    greeting: standard
-    message: ""
+    greeting: none
     animation: none
-  - name: "Veterans Day 2026"
+  - name: Veterans Day 2026
     occasion: veterans
     start: 2026-11-11
     end: 2026-11-11
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Thanksgiving 2026"
+  - name: Thanksgiving 2026
     occasion: thanksgiving
     start: 2026-11-23
     end: 2026-11-29
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Christmas 2026"
+  - name: Christmas 2026
     occasion: christmas
     start: 2026-12-01
     end: 2027-01-04
     greeting: standard
-    message: ""
     animation: auto
-  - name: "New Year 2026"
+  - name: New Year 2026
     occasion: newyear
     start: 2026-12-31
     end: 2027-01-02
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Theophany 2027"
+  - name: Theophany 2027
     occasion: theophany
     start: 2027-01-05
     end: 2027-01-07
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Winter 2027"
+  - name: Winter 2027
     occasion: winter
     start: 2027-01-05
     end: 2027-02-28
-    greeting: standard
-    message: ""
+    greeting: none
     animation: none
-  - name: "Martin Luther King Jr. Day 2027"
+  - name: Martin Luther King Jr. Day 2027
     occasion: mlk
     start: 2027-01-18
     end: 2027-01-18
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Three Hierarchs 2027"
+  - name: Three Hierarchs 2027
     occasion: threehierarchs
     start: 2027-01-30
     end: 2027-01-30
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Greek Language Day 2027"
+  - name: Greek Language Day 2027
     occasion: greeklanguage
     start: 2027-02-09
     end: 2027-02-09
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Valentine's Day 2027"
+  - name: Valentine's Day 2027
     occasion: valentine
     start: 2027-02-14
     end: 2027-02-14
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Presidents' Day 2027"
+  - name: Presidents' Day 2027
     occasion: presidents
     start: 2027-02-15
     end: 2027-02-15
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Spring 2027"
+  - name: Spring 2027
     occasion: spring
     start: 2027-03-01
     end: 2027-05-31
     greeting: standard
-    message: ""
     animation: none
-  - name: "Clean Monday 2027"
+  - name: Clean Monday 2027
     occasion: cleanmonday
     start: 2027-03-15
     end: 2027-03-15
     greeting: standard
-    message: ""
     animation: auto
-  - name: "March 25 2027"
+  - name: March 25 2027
     occasion: march25
     start: 2027-03-20
     end: 2027-03-28
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Palm Sunday 2027"
+  - name: Palm Sunday 2027
     occasion: palmsunday
     start: 2027-04-25
     end: 2027-04-25
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Pascha 2027"
+  - name: Pascha 2027
     occasion: easter
     start: 2027-05-02
     end: 2027-05-16
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Feast of St. George 2027"
+  - name: Feast of St. George 2027
     occasion: stgeorge
     start: 2027-05-03
     end: 2027-05-03
     greeting: standard
-    message: ""
     animation: auto
-  - name: "End of the school year 2027"
+  - name: End of the school year 2027
     occasion: endofyear
     start: 2027-05-17
     end: 2027-05-30
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Memorial Day 2027"
+  - name: Memorial Day 2027
     occasion: memorial
     start: 2027-05-31
     end: 2027-05-31
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Summer 2027"
+  - name: Summer 2027
     occasion: summer
     start: 2027-06-01
     end: 2027-08-22
     greeting: standard
-    message: ""
     animation: none
-  - name: "Juneteenth 2027"
+  - name: Juneteenth 2027
     occasion: juneteenth
     start: 2027-06-19
     end: 2027-06-19
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Fourth of July 2027"
+  - name: Fourth of July 2027
     occasion: july4
     start: 2027-07-02
     end: 2027-07-05
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Dormition of the Theotokos 2027"
+  - name: Dormition of the Theotokos 2027
     occasion: dormition
     start: 2027-08-15
     end: 2027-08-15
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Back to school 2027"
+  - name: Back to school 2027
     occasion: backtoschool
     start: 2027-08-23
     end: 2027-09-21
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Labor Day 2027"
+  - name: Labor Day 2027
     occasion: labor
     start: 2027-09-06
     end: 2027-09-06
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Autumn 2027"
+  - name: Autumn 2027
     occasion: autumn
     start: 2027-09-22
     end: 2027-11-30
     greeting: standard
-    message: ""
     animation: none
-  - name: "Columbus Day 2027"
+  - name: Columbus Day 2027
     occasion: columbus
     start: 2027-10-11
     end: 2027-10-11
     greeting: standard
-    message: ""
     animation: auto
-  - name: "OXI Day 2027"
+  - name: OXI Day 2027
     occasion: oxi
     start: 2027-10-21
     end: 2027-10-28
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Greek Flag Day 2027"
+  - name: Greek Flag Day 2027
     occasion: flagday
     start: 2027-10-27
     end: 2027-10-27
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Halloween 2027"
+  - name: Halloween 2027
     occasion: halloween
     start: 2027-10-30
     end: 2027-10-31
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Veterans Day 2027"
+  - name: Veterans Day 2027
     occasion: veterans
     start: 2027-11-11
     end: 2027-11-11
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Thanksgiving 2027"
+  - name: Thanksgiving 2027
     occasion: thanksgiving
     start: 2027-11-22
     end: 2027-11-28
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Christmas 2027"
+  - name: Christmas 2027
     occasion: christmas
     start: 2027-12-01
     end: 2028-01-04
     greeting: standard
-    message: ""
     animation: auto
-  - name: "New Year 2027"
+  - name: New Year 2027
     occasion: newyear
     start: 2027-12-31
     end: 2028-01-02
     greeting: standard
-    message: ""
     animation: auto
-  - name: "Theophany 2028"
+  - name: Theophany 2028
     occasion: theophany
     start: 2028-01-05
     end: 2028-01-07
     greeting: standard
-    message: ""
     animation: auto
